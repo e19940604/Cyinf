@@ -1,0 +1,582 @@
+
+
+/* ==========================================================================
+   Archerwind's custom styles
+   ========================================================================== */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@font-face {
+    font-family: 'Dekar';
+    src: url(../fonts/Dekar.otf);
+}
+
+@font-face {
+    font-family: 'OldStyle';
+    src: url(../fonts/BaskervilleOldFace);
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url(../fonts/RalewayThin.otf);
+}
+
+@font-face {
+    font-family: 'Avenir';
+    src: url(../fonts/Avenir.ttc);
+}
+
+@font-face {
+    font-family: 'avent-re';
+    src: url(../fonts/advent-Re.otf);
+}
+
+@font-face {
+    font-family: 'linecons';
+    src: url(../fonts/linecons.ttf);
+}
+
+header, footer, nav, article, aside, section {
+    display: block;
+}
+
+body {
+    margin: 0 auto;
+    font-family: avenir, lato, Arial, sans-serif;
+    background: url(../img/rain-wide.jpg) no-repeat ;
+    /*background-color: #2d7b77;*/
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header {
+    float: right;
+    height: auto;
+    width: 100%;
+    padding: 10px 0px 5px 50px;
+}
+
+article {
+    font-family: avenir, "微軟正黑體";
+    float: left;
+    width: 100%;
+    color: #fff;
+    padding-left: 48px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+}
+
+article h1 {
+    font-size: 75px;
+    font-family: lato;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+    letter-spacing: 5px;
+    margin-top: -160px;
+}
+
+article h3 {
+    font-family: "微軟正黑體", Arial;
+}
+
+article p {
+    padding-left: 8px;
+}
+
+footer {
+    color: #fff;
+    position: relative;
+    font-family: raleway;
+    font-size: 24px;
+    text-align: center;
+    height: 60px;
+    margin-top: 180px;
+    margin-bottom: 200px;
+}
+
+footer a {
+    font-family: raleway;
+}
+
+.searchFooter {
+    float: none;
+    top: 520px;
+    padding-top: 40px;
+    margin-top: 220px;
+    margin-bottom: 750px;
+}
+
+label {
+    font-family: Arial, "微軟正黑體";
+}
+
+table, th, td, tr {
+    color: #fff;
+    font-size: 14px;
+	font-family: lato, "微軟正黑體";
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+}
+
+a {
+    color: #28aaba;
+    font-family: Arial, "微軟正黑體";
+}
+
+a:hover {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* index define */
+
+.indexHead {
+    margin-top: -110px;
+}
+
+.home {
+    font-family: lato;
+    font-size: 95px;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+    margin-right: 15px;
+}
+
+.homeArea img {
+    position: relative;
+    width: 8%;
+    height: auto;
+    margin-top: -60px;
+}
+
+.titleText {
+    font-family: avenir, lato, raleway;
+    letter-spacing: 2.5px;
+}
+
+/* blockquote defines */
+
+blockquote {
+    letter-spacing: 2px;
+}
+
+blockquote small {
+    color: #fff;
+    font-size: 17px;
+    padding-left: -500px;
+    padding-top: 5px;
+}
+
+/* login defines */
+
+#pinArea {
+    cursor: pointer;
+}
+
+/* by Ding ↓  */
+.selectIdentity{
+    width: 300px;
+    margin: 100px auto;
+}
+
+.selectIdentity p{
+    font-size: 20px;
+}
+
+.selectIdentity button{
+    display: block;
+    width: 300px;
+    height: 60px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#mailBlock input{
+    display: inline-block;
+}
+
+.backBtn{
+    position:relative;
+    z-index: 1;
+    top : 135px;
+    left : 110px;
+    width : 70px;
+    height : 30px;
+    
+}
+/* by Ding ↑  */
+
+.loginForm {
+    margin: 90px auto;
+    width: 80%;
+    height: auto;
+    font-family: avent-re, dekar;
+    letter-spacing: 10px;
+}
+
+.loginForm legend {
+    color: #fff;
+    font-size: 40px;
+    opacity: 0.9;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 6px;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+}
+
+.loginMessage {
+    padding-left: 54%;
+    padding-bottom: 10px;
+    color: red;
+    font-family: "微軟正黑體", lato;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-align: right;
+}
+
+/* register defines */
+
+.holder {
+    font-family: lato;
+}
+
+.registerLaw {
+    width: 80%;
+    margin: 40px auto -30px auto;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+}
+
+.registerLaw h2 {
+    font-size: 40px;
+    letter-spacing: 6px;
+}
+
+.statistic {
+    font-family: avent-re, "微軟正黑體";
+    letter-spacing: 2px;
+    padding-left: 0px;
+    line-height: 28px;
+}
+
+/* logo defines */
+
+.logo {
+    width: 100%;
+    padding-left: 37px;
+    padding-top: 55px;
+    padding-bottom: 10px;
+    letter-spacing: 12px;
+    font-family: raleway;
+    font-size: 78px;
+    color: #fff;
+}
+
+.circleImg a {
+    position: relative;
+    top: -90px;
+    left: 75%;  
+}
+
+.circleImg img {
+	width: 18%;
+    height: auto;
+    z-index: 99;
+}
+
+.circleImg img:hover {
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+    cursor: pointer;
+}
+
+.square {
+    position: relative;
+    top: -190px;
+    width: 101.4%;
+    height: 2px;
+    background-color: #fff;
+    
+}
+
+/* side menu defines */
+
+.side {
+	float: right;
+	min-width: 275px;
+    min-height: 200px;
+	/*box-shadow: 1px 0 rgba(0,0,0,0.2);*/
+}
+
+.container {
+    background: #000;
+    opacity: 0.66;
+    filter: alpha(opacity=66); /* For IE8 and earlier */
+    height: auto;
+	min-height: 1000px;
+    min-width: 400px;
+}
+
+.container > header h1 {
+    font-family: oldstyle;
+	font-size: 60px;
+	line-height: 65px;
+	margin: 0;
+    padding: 0;
+	position: relative;
+	font-weight: 300;
+	color: #555;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+}
+
+.start h3, h2 {
+    color: #fff;
+    font-size: 32px;
+    font-family: avenir, lato, raleway;
+    font-weight: 300;
+    letter-spacing: 2.5px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.start h2 {
+    font-size: 45px;
+    margin-bottom: -100px;
+}
+
+.getting {
+    color: #fff;
+    font-family: avenir, dekar, raleway, lato, "微軟正黑體";
+    letter-spacing: 1.2px;
+}
+
+.getting p {
+    text-align: center;
+    /* change font size */
+    font-size: 15px;
+}
+
+/* getting start circles */
+
+[class *= "step"] {
+    position: relative;
+    width: 30%;
+    height: auto;
+}
+
+.step-left {
+    top: 120px;
+    left: 180px;
+}
+
+.step-right {
+    top: 120px;
+    left: 845px;
+}
+
+/* getting start line */
+
+[class *= "separator"] {
+    width: 570px;
+    height: 2px;
+    background-color: #fff;
+    position: relative;
+    top: 70px;
+    left: 279px;
+}
+
+.scrollspy-example {
+    height: 600px;
+}
+
+.scrollspy-example h3 {
+    font-family: Lato, raleway;
+    letter-spacing: 2.5px;
+}
+
+.scrollspy-example p {
+    font-family: avenir, "微軟正黑體";
+    padding-left: 20px;
+    padding-top: 4px;
+    padding-right: 20px;
+}
+
+.progress {
+    margin: 5px 5px 5px 5px;
+}
+
+.tab-content {
+    height: 0px;
+}
+
+.loadingGif {
+    background-image: url(../img/ajax-loader.gif);
+}
+
+/* font fix */
+
+.textFix {
+    font-family: avenir, lato, raleway, Arial, "微軟正黑體";
+    letter-spacing: 1.8px;
+}
+
+.textFixRaleway {
+    font-family: raleway, Arial;
+    letter-spacing: 1.5px;
+}
+
+/* search page */
+
+#sort_up{
+	background-image : url(../img/up.png);
+	position: relative;
+	float:left;
+	width : 25px;
+	height : 25px;
+
+}
+
+#sort_down{
+	background-image : url(../img/down.png);
+	position: relative;
+	float:left;
+	width : 25px;
+	height : 25px;
+}
+
+.search {
+    position: relative;
+    margin-top: -240px;
+    padding-top: 0;
+}
+
+.courseName img {
+    float: left;
+    position: relative;
+    top: 0px;
+    left: 200px;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.courseName img:hover {
+    opacity: 1;
+}
+
+.professor img {
+    float: left;
+    position: relative;
+    top: 250px;
+    left: 16%;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.professor img:hover {
+    opacity: 1;
+}
+
+.department img {
+    float: left;
+    position: relative;
+    top: 0px;
+    left: 13%;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.department img:hover {
+    opacity: 1;
+}
+
+/* courseDetail define */
+
+.courseDetailContainer {
+    width: 100%;
+    padding-left: 0px;
+    margin: 0 auto;
+}
+
+.courseTable tr, td {
+    text-align: left;
+}
+
+.courseTitle {
+    text-align: center;
+}
+
+.showSearchTable tr, td {
+    text-align: center;
+}
+
+/* rank page */
+
+.panel-group {
+    width: 50%;
+    float: left;
+    padding-top: 20px;
+    padding-right: 5px;
+    padding-bottom: 30px;
+    margin: 0 auto;
+}
+
+.rankTag {
+    padding-left:0px;
+	list-style-type: none;
+    list-style-image: none;
+} 
+
+
+.rankTag a {
+    color: #fff;
+    font-size: 15px;
+}
+
+.rankTag li {
+    display: inline-block;
+    padding-right: 15px;
+}
+
+.rankTag i{
+    color: #fff;
+    padding-right: 10px;
+}
+
+.rankDescription{
+    width: 500px;
+    height: 100px;
+    overflow: auto;
+}
+
+
+
+/* FAQ define */
+
+.question {
+    font-family: avent-re, '微軟正黑體';
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+/* about define */
+
+.pArea {
+    float: left;
+    position: relative;
+    margin-left: 42px;
+    margin-bottom: 30px;
+}
+
+.pArea img:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.nameTitle {
+    color: #000;
+    text-align: center;
+    background-color: #fff;
+    margin-bottom: 6px;
+}
+
+.description {
+    line-height: 30px;
+}
