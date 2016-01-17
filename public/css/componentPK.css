@@ -1,0 +1,33 @@
+.deleteFromPK{
+	display: inline-block;
+	position: relative;
+	width: 19px;
+	height: 19px;
+	border-width: 0px;
+	border-radius: 10px;
+	background-color: #fff;
+	color: #000;
+	-webkit-transform: rotate3d(1,1,0,90deg);
+    -moz-transform: rotate3d(1,1,0,90deg);
+    -ms-transform: rotate3d(1,1,0,90deg);
+    -o-transform: rotate3d(1,1,0,90deg);
+    transform: rotate3d(1,1,0,90deg);
+
+	-moz-transition: all 0.8s;
+	-ms-transition: all 0.8s;
+	-o-transition: all 0.8s;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
+
+.courseName:hover ~ .deleteFromPK , .deleteFromPK:hover {
+	-webkit-transform: rotate3d(1,1,0,0deg);
+    -moz-transform: rotate3d(1,1,0,0deg);
+    -ms-transform: rotate3d(1,1,0,0deg);
+    -o-transform: rotate3d(1,1,0,0deg);
+    transform: rotate3d(1,1,0,0deg);
+}
+
+.deleteFromPK:hover{
+	cursor: pointer;
+}
