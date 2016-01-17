@@ -18,27 +18,20 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         $app = require __DIR__.'/../bootstrap/app.php';
 
+
+
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
 
         return $app;
     }
 
-    protected function initDatabase(){
-        config([
-            'database.default' => 'sqlite',
-            'database.connections.sqlite' => [
-                'driver'    => 'sqlite',
-                'database'  => ':memory:',
-                'prefix'    => '',
-            ],
-        ]);
-
-        Artisan::call('migrate');
+    public function init(){
+        Artisan::call("migrate");
     }
 
-
-    protected function resetDatabase()
-    {
-        Artisan::call('migrate:reset');
+    public function reset(){
+        Artisan::call("migrate:reset");
     }
+
 }

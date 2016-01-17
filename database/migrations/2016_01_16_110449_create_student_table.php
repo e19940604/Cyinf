@@ -32,6 +32,7 @@ class CreateStudentTable extends Migration
             $table->string('thecode');
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 

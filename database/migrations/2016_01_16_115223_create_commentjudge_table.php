@@ -19,8 +19,8 @@ class CreateCommentjudgeTable extends Migration
             $table->tinyInteger('result');
             $table->timestamps();
 
-            //$table->foreign('comment_id')->references('id')->on('commentdetail');
-            //$table->foreign('stu_id')->references('stu_id')->on('student');
+            /*$table->foreign('comment_id')->references('id')->on('commentdetail');
+            $table->foreign('stu_id')->references('stu_id')->on('student');*/
         });
     }
 
