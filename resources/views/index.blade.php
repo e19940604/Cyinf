@@ -7,6 +7,7 @@ $total = mysqli_fetch_array( $result );
 */
 ?>
 @extends('layout')
+
 @section('title' , 'home')
 
 @section('content')
@@ -73,24 +74,47 @@ $total = mysqli_fetch_array( $result );
 
         <br />
 
-        <h3 class="titleText">The Latest Comment / （ Total：<?php echo "wait for total"; ?> ）</h3><br />
+        <h3 class="titleText">The Latest Comment / （ Total：{{ $total }} ）</h3><br />
         <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example" style="height:200px">
-            <div id="refreshArea"></div>
-            </div><!-- /scrollspy -->
+            <div id="refreshArea">
+                <table class="table table-hover showSearchTable">
+                    <thead>
+                        <th>#</th>
+                        <th>Course</th>
+                        <th>Professor</th>
+                        <th>Department</th>
+                        <th>Grade</th>
+                        <th>Judge People</th>
+                        <th>Rank</th>
+                        <th>DateTime</th>
+                        <th>Pin</th>
+                    </thead>
+                    <tbody>
+                    @inject('commentPresenter' , 'Cyinf\Presenters\CommentPresenter')
+                    @foreach( $latest_comments as $key => $comment )
+                        <tr>
+                            {!! $commentPresenter->getCourseTableByCollection( $key + 1 ,$comment ) !!}
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
 
+            </div>
+        </div><!-- /scrollspy -->
+
+        <br />
+
+        <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example" >
+            <h3>Notification /</h3>
+            <p>
+                本網站創立動機發心於提供國立中山大學同學一個課程好壞的查詢管道，並同時提供教授們檢視自己在學生心目中的形象與教學狀況，評分必須經過學校郵箱認證的帳號進行，意味著只有中山的學生能夠評鑑，並且每一個人對每一門課只能評鑑一次，以確保資料客觀性。本站亦提供在每次評鑑時有一次對該課程進行詳細評價說明的機會，但禁止各種涉及色情、暴力、侮辱等攻擊性質的言語，如有發現，該留言將進行刪除，本站以全力控管治安，希望各位中山的同學能夠以客觀的角度來評價每一門課，讓自己與其他同學均能受惠，同時本站不負任何留言項的法律責任。留言均為匿名。<br /><br /><strong>p.s. 評鑑前需註冊會員，但瀏覽課程不受限制。</strong>
+            </p>
             <br />
-
-            <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example" >
-                <h3>Notification /</h3>
-                <p>
-                    本網站創立動機發心於提供國立中山大學同學一個課程好壞的查詢管道，並同時提供教授們檢視自己在學生心目中的形象與教學狀況，評分必須經過學校郵箱認證的帳號進行，意味著只有中山的學生能夠評鑑，並且每一個人對每一門課只能評鑑一次，以確保資料客觀性。本站亦提供在每次評鑑時有一次對該課程進行詳細評價說明的機會，但禁止各種涉及色情、暴力、侮辱等攻擊性質的言語，如有發現，該留言將進行刪除，本站以全力控管治安，希望各位中山的同學能夠以客觀的角度來評價每一門課，讓自己與其他同學均能受惠，同時本站不負任何留言項的法律責任。留言均為匿名。<br /><br /><strong>p.s. 評鑑前需註冊會員，但瀏覽課程不受限制。</strong>
-                </p>
-                <br />
-                <h3>How To Rank /</h3>
-                <p>
-                    每一門課的各項起始分數均為 50%，總評分的起始分數為 1200 分，各項評價與總評分會隨著同學每一次的評價而作更動，總評分的調整幅度不會大以確保單筆資料的影響範圍。再次強調，希望每個中山的同學能夠以客觀的角度來面對每一次的評鑑，一旦評鑑後便不能修改，如果希望這是一個只屬於中山大學不同於其他學校與PTT的課程查詢文化，盼望各位秉持公平正義之精神來為各位的課程與後輩努力，在此感謝大家的支持。
-                </p>
-            </div><!-- /scrollspy -->
+            <h3>How To Rank /</h3>
+            <p>
+                每一門課的各項起始分數均為 50%，總評分的起始分數為 1200 分，各項評價與總評分會隨著同學每一次的評價而作更動，總評分的調整幅度不會大以確保單筆資料的影響範圍。再次強調，希望每個中山的同學能夠以客觀的角度來面對每一次的評鑑，一旦評鑑後便不能修改，如果希望這是一個只屬於中山大學不同於其他學校與PTT的課程查詢文化，盼望各位秉持公平正義之精神來為各位的課程與後輩努力，在此感謝大家的支持。
+            </p>
+        </div><!-- /scrollspy -->
     </article><!-- /article -->
 
     <section class="start">

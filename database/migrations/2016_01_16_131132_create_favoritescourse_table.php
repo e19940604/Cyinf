@@ -17,8 +17,8 @@ class CreateFavoritescourseTable extends Migration
             $table->string('stu_id');
             $table->timestamps();
 
-            //$table->foreign('course_id')->references('id')->on('coursedetail');
-            //$table->foreign('stu_id')->references('stu_id')->on('student');
+            /*$table->foreign('course_id')->references('id')->on('coursedetail');
+            $table->foreign('stu_id')->references('stu_id')->on('student');*/
         });
     }
 
