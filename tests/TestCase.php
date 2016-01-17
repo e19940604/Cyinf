@@ -22,4 +22,23 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $app;
     }
+
+    protected function initDatabase(){
+        config([
+            'database.default' => 'sqlite',
+            'database.connections.sqlite' => [
+                'driver'    => 'sqlite',
+                'database'  => ':memory:',
+                'prefix'    => '',
+            ],
+        ]);
+
+        Artisan::call('migrate');
+    }
+
+
+    protected function resetDatabase()
+    {
+        Artisan::call('migrate:reset');
+    }
 }
