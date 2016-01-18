@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/course/{id}' , 'CourseController@showCourse');
+Route::get('/course/{course}' , 'CourseController@showCourse');
 
 /*
 |--------------------------------------------------------------------------

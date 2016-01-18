@@ -6,9 +6,14 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Cyinf\Comment;
 use Cyinf\Course;
 
-class RouteControllerTest extends TestCase
-{
 
+class CourseRepositoryTest extends TestCase
+{
+    use DatabaseMigrations;
+    /**
+     * @var CourseRepository
+     */
+    protected $repository = null;
     protected $seedRowNumber = 25;
 
     /**
@@ -28,6 +33,7 @@ class RouteControllerTest extends TestCase
         parent::setUp();
         $this->init();
         $this->seedData();
+        $this->repository = $this->app->make( \Cyinf\Repositories\CourseRepository::class);
     }
 
     public function tearDown()
@@ -35,29 +41,12 @@ class RouteControllerTest extends TestCase
         $this->reset();
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testIndex()
+    public function testGetCourseById()
     {
-        $this->call( 'GET' , '/');
-
-        $this->assertResponseOk();
-
-        $this->assertViewHas( [ "total" , "latest_comments" ] );
-    }
-
-    public function testCoursePage()
-    {
-        $id = mt_rand( 0 , $this->seedRowNumber );
-
-        $this->call( 'GET' , '/course/' . $id );
-
-        $this->assertResponseOk();
-
-        $this->assertViewHas( [ "course" , "comments" ] );
-
+        for( $i = 1 ; $i <= $this->seedRowNumber ; ++$i )
+        {
+            $course = $this->repository->getCourseById( $i );
+            $this->assertEquals( $course->id  , $i );
+        }
     }
 }

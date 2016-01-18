@@ -42,7 +42,10 @@
 
         @yield('content')
 
-        @include('includes.footer')
+        <article>
+            @include('includes.footer')
+        </article>
+
 
     </div><!-- /container -->
 </div><!-- /st-container -->
