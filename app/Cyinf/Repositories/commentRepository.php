@@ -10,9 +10,9 @@ class CommentRepository
 
 
     /**
-     * UserRepository constructor.
+     * CommentRepository constructor.
      *
-     * @param User $user
+     * @param Comment $comment
      */
     public function __construct( Comment $comment)
     {

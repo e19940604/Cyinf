@@ -8,7 +8,7 @@ $total = mysqli_fetch_array( $result );
 ?>
 @extends('layout')
 
-@section('title' , 'home')
+
 
 @section('content')
 

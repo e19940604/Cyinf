@@ -5,10 +5,10 @@ var searchURL;
 
 function latestRefresh() 
 {
-    var data = 1;
+    /*var data = 1;
     $.post( "refreshLatestAjax", data, function(result) {
         $("#refreshArea").html( result );
-    } );
+    } );*/
     //setTimeout( latestRefresh(), 15000 );
 }
 

@@ -3,7 +3,7 @@
 
 <!-- Support Old IE Version -->
 <?php // <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-header('X-UA-Compatible: IE=edge,chrome=1');
+// header('X-UA-Compatible: IE=edge,chrome=1');
 ?>
 
 <meta name="description" content="">
