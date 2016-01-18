@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'CommentController@index');
+Route::get('/', 'HomeController@index');
+
+Route::get('/course/{id}' , 'CourseController@showCourse');
 
 /*
 |--------------------------------------------------------------------------
