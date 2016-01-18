@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    <title>FacingCourse - @yield('title')</title>
+    <title>FacingCourse</title>
 
     @include('includes.includingHeader')
 
