@@ -1,11 +1,3 @@
-<?php
-// Count total comment
-/*
-$query = "SELECT COUNT(comment_id) AS total FROM commentdetail";
-$result = mysqli_query( $connect, $query ) or die( 'total error' );
-$total = mysqli_fetch_array( $result );
-*/
-?>
 @extends('layout')
 
 
