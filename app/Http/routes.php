@@ -13,6 +13,7 @@
 
 Route::get('/', 'CommentController@index');
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -25,5 +26,14 @@ Route::get('/', 'CommentController@index');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    
+    Route::group(['middleware' => 'guest'], function () {
+
+		Route::get( '/users/login', function() {
+    		return view( 'usersLogin' );
+		});
+
+		Route::post('/login', 'UserController@login');
+
+	});
 });

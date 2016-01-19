@@ -15,9 +15,22 @@ use Cyinf\Course;
 
 $factory->define( User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
+        'stu_id'       => $faker->regexify('[BMD][0-9]{9}'),
+        'passwd'       => sha1($faker->uuid),
+        'real_name'    => $faker->name,
+        'nick_name'    => $faker->name,
+        'grade'        => $faker->numberBetween($min = 105, $max = 150),
+        'department'   => $faker->numberBetween( 0 , 60 ),
+        'gender'       => $faker->randomElement(array('男','女')),
+        'email'        => $faker->email,
+        'auth'         => $faker->numberBetween(0, 1),
+        'FB_conn'      => $faker->url,
+        'hobby'        => $faker->word,
+        'mobile_num'   => $faker->randomNumber(9),
+        'introduction' => 'B'.$faker->randomNumber(9),
+        'update_date'  => $faker->date,
+        'update_time'  => $faker->time,
+        'thecode'      => $faker->word,
         'remember_token' => str_random(10),
     ];
 });

@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Cyinf\Comment;
 use Cyinf\Course;
-use Cyinf\Repositories\CommentRepository
+use Cyinf\Repositories\CommentRepository;
 
 class CommentRepositoryTest extends TestCase
 {

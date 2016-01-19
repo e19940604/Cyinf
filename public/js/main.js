@@ -62,7 +62,7 @@ function loginAjax()
 {
     var data = $("#loginForm").serialize();
     
-    $.post( "login", data, function(result) {
+    $.post( "/login", data, function(result) {
         if( result == "success" ) {
             $("#loginForm").empty();
             $("#loginForm").append( "<legend>Welcome Back</legend><br /><a href='#' onclick='toHome()'>點擊跳轉...</a>" );
