@@ -21,7 +21,8 @@ class CommentPresenter
                             " + ".
                             DepartmentParser::parse( $postfix );
         }
-        else {
+        else
+        {
             $table_html .= DepartmentParser::parse( $course->course_department );
         }
 

@@ -51,8 +51,10 @@ $factory->define( Course::class , function (Faker\Generator $faker) {
 });
 
 $factory->define( Comment::class, function (Faker\Generator $faker) {
+   $courses = Course::all();
+
    return [
-       'course_id' => $faker->randomDigit,
+       'course_id' => $courses[ $faker->numberBetween( 0 , $courses->count()-1 ) ]->id,
        'commenter' => $faker->randomElement( ['B' , 'M' , 'I'] ). $faker->randomNumber(9),
        'teach_q' => 5 * $faker->numberBetween( 0 , 20 ),
        'time_c' => 5 * $faker->numberBetween( 0 , 20 ),

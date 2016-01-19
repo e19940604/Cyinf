@@ -21,8 +21,8 @@ class CommentRepositoryTest extends TestCase
      */
     protected function seedData()
     {
-        factory( Comment::class , $this->seedRowNumber )->create();
         factory( Course::class , $this->seedRowNumber )->create();
+        factory( Comment::class , $this->seedRowNumber )->create();
     }
 
     /**
