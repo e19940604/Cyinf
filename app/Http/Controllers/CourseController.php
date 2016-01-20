@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Cyinf\Presenters\SearchResultFormatPresenter;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -21,8 +22,7 @@ class CourseController extends Controller
      * CourseController constructor.
      * @param $courseRepository
      */
-    public function __construct( CourseRepository $courseRepository)
-    {
+    public function __construct( CourseRepository $courseRepository){
         $this->courseRepository = $courseRepository;
     }
 
@@ -30,8 +30,7 @@ class CourseController extends Controller
      * @param Course $course
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showCourse( Course $course )
-    {
+    public function showCourse( Course $course ){
 
         $comments = $course->comments->sortBy('date')->groupBy( function( $item , $key ){
             return substr( $item['date'] , 0 , 4 );
@@ -45,5 +44,12 @@ class CourseController extends Controller
         }
 
         return view( 'course' , [ 'course' => $course , 'comments' => $comments ] );
+    }
+
+    public function getSearchResult( SearchResultFormatPresenter $srfp ,  $method , $query_restrict ){
+
+        $result = $this->courseRepository->searchCourse( $method , $query_restrict );
+
+        return $srfp->searchResultFormat( $result );
     }
 }

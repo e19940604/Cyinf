@@ -4,8 +4,9 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    <title>FacingCourse</title>
+    <title>@yield('title' , "Facing Course")</title>
 
+    @yield('style')
     @include('includes.includingHeader')
 
     <noscript>
@@ -27,7 +28,7 @@
     </noscript>
 
 </head>
-<body onload="latestRefresh()">
+<body onload="init()">
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 <![endif]-->
@@ -42,7 +43,7 @@
 
         @yield('content')
 
-        <article>
+        <article class="search-footer">
             @include('includes.footer')
         </article>
 
