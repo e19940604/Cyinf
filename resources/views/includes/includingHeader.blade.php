@@ -27,6 +27,7 @@
 <meta name="msvalidate.01" content="D78A1E4EEADFEB0FB3663F2BFA74B6CE" />
 <!-- google webmaster -->
 <meta name="google-site-verification" content="uTSDW5yrVeH928N82uAxYrtAlD0iIL5KtFL_WgzdY1I" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- FB Sharing View Settings -->
 <meta property="og:title" content="Cyinf" />

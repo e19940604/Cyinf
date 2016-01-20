@@ -11,7 +11,6 @@
 |
 */
 
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -36,6 +35,16 @@ Route::group(['middleware' => ['web']], function () {
 		});
 
 		Route::post('/login', 'UserController@login');
+
+		Route::get('/', 'HomeController@index');
+
+		Route::get('/course/{course}' , 'CourseController@showCourse');
+
+        Route::get('/search' , function(){
+            return view( 'search' );
+        });
+
+        Route::post('/search/{method}/{query_restrict}' , 'CourseController@getSearchResult');
 
 	});
 

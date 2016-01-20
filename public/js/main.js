@@ -2,14 +2,15 @@ var department;
 var oneUI;
 var fourUI;
 var searchURL;
+var courseShow;
 
-function latestRefresh() 
-{
-    /*var data = 1;
-    $.post( "refreshLatestAjax", data, function(result) {
-        $("#refreshArea").html( result );
-    } );*/
-    //setTimeout( latestRefresh(), 15000 );
+function init(){
+    courseShow = $("#courseShow");
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 }
 
 function logoChangeMouseOut() 
@@ -367,99 +368,35 @@ function mPinAjax( $course, $option )
 
 /* by Ding */
 /* THIS SHOULD IMPROVE IN THE FUTURE !!!! */
-function courseSearch( $num , $click )
+function courseSearch()
 {
-    var course = $("#courseForm").serialize();
-    var searchCourse = course.substr(11);
-    if( searchCourse )
-        saveCourse( searchCourse );
-    
-    var data = "courseName=" + $tmpCourse + "&num=" + $num + "&click=" + $click;
-    
-    $.post( "courseAjax", data, function(result) {
-        $("#courseShow").empty();
-        $("#courseShow").append( result );
-        $("#courseInput").val('');
-    location.href = "search#searching"; 
+    var courseName = $("#courseForm").serialize().substr(11);
 
+    var url = "/search/course/" + courseName;
+
+    $.post( url , null , function(result) {
+        courseShow.empty();
+        courseShow.append( result );
+        $('#courseInput').val('');
+        location.href = "search#searching";
     });
-    
-        var update_th = $("th");
-    var this_th = update_th.eq($num);
-    var img_up = "<i class='glyphicon glyphicon-chevron-up'></i>";
-    var img_down = "<i class='glyphicon glyphicon-chevron-down'></i>";
-    
-    $("th i").remove();
-    
-    
-    if($click == 1){
-        this_th.append(img_up);
-        this_th.attr("onclick","courseSearch(" + $num + ",0)");
-    }
-    else if($click == 0){
-        this_th.append(img_down);
-        this_th.attr("onclick","courseSearch(" + $num + ",1)");
-    }
-    else{
-        $("th").eq(4).append(img_down);
-        for( i = 1 ; i <= 6 ; i++ ){
-            $("th").eq(i).attr("onclick" ,"courseSearch(" + i + ",1)");
-        }
-    }
 }
 
-function saveCourse( searchCourse )
-{
-    $tmpCourse = searchCourse;
-}
 
 /* THIS SHOULD IMPROVE IN THE FUTURE !!!! */
-function professorSearch(  $num , $click )
+function professorSearch()
 {
-    var professor = $("#professorForm").serialize();
-    var searchProfessor = professor.substr(14);
-    if( searchProfessor )
-        saveProfessor(searchProfessor);
+    var professor = $("#professorForm").serialize().substr(14);
+
+    var url = "/search/professor/" + professor;
     
-    var data = "professorName=" + $tmpProfessor + "&num=" + $num + "&click=" + $click;
-    
-    $.post( "professorAjax", data, function(result) {
-        $("#courseShow").empty();
-        $("#courseShow").append( result );
+    $.post( url , null, function(result) {
+        courseShow.empty();
+        courseShow.append( result );
         $("#professorInput").val('');
-	location.href = "search#searching";
-    
+	    location.href = "search#searching";
     } );
-    
-    var update_th = $("th");
-    var this_th = update_th.eq($num);
-    var img_up = "<i class='glyphicon glyphicon-chevron-up'></i>";
-    var img_down = "<i class='glyphicon glyphicon-chevron-down'></i>";
-    
-    $("th i").remove();
-    
-    
-    if($click == 1){
-        this_th.append(img_up);
-        this_th.attr("onclick","professorSearch(" + $num + ",0)");
-    }
-    else if($click == 0){
-        this_th.append(img_down);
-        this_th.attr("onclick","professorSearch(" + $num + ",1)");
-    }
-    else{
-        $("th").eq(4).append(img_down);
-        for( i = 1 ; i <= 6 ; i++ ){
-            $("th").eq(i).attr("onclick" ,"professorSearch(" + i + ",1)");
-        }
-    }
 }
-
-function saveProfessor( searchProfessor )
-{
-    $tmpProfessor = searchProfessor;
-}
-
 
 function mDepartmentSearch( $grade ) 
 {
@@ -470,38 +407,15 @@ function mDepartmentSearch( $grade )
     location.href = "mSearchResult?department=" + department + "&grade=" + $grade + "&type=3";
 }
 
-function departmentSearch( $grade , $num , $click )
+function departmentSearch( grade )
 {
-    var i;
-    var data = "department=" + department + "&grade=" + $grade + "&num=" + $num + "&click=" + $click;
+    var dep_grade = department + "," + grade;
+    var url = "/search/department/" + dep_grade;
  
-    $.post( "departmentAjax", data, function(result) {
-        $("#courseShow").empty();
-        $("#courseShow").append( result );
+    $.post( url , null, function(result) {
+        courseShow.empty();
+        courseShow.append( result );
     } );
-    
-    var update_th = $("th");
-    var this_th = update_th.eq($num);
-    var img_up = "<i class='glyphicon glyphicon-chevron-up'></i>";
-    var img_down = "<i class='glyphicon glyphicon-chevron-down'></i>";
-    
-    $("th i").remove();
-    
-    
-    if($click == 1){
-        this_th.append(img_up);
-        this_th.attr("onclick","departmentSearch(" + $grade + "," + $num + ",0)");
-    }
-    else if($click == 0){
-        this_th.append(img_down);
-        this_th.attr("onclick","departmentSearch(" + $grade + "," + $num + ",1)");
-    }
-    else{
-        $("th").eq(4).append(img_down);
-        for( i = 1 ; i <= 6 ; i++ ){
-            $("th").eq(i).attr("onclick" ,"departmentSearch(" + $grade + "," + i + ",1)");
-        }
-    }
 }
 
 function courseJudgeAjax() 

@@ -26,6 +26,21 @@ class CoursePresenter
     }
 
     /**
+     * return grade name by number
+     *
+     * @param $num
+     * @return string
+     */
+    public function getGradeNameByNum( $num ){
+        if( $num == 5 )
+            return "研究所";
+        else if( $num == 0 )
+            return "通識";
+        else
+            return $num;
+    }
+
+    /**
      * return class name by percent
      *
      * @param $percentage
@@ -86,6 +101,13 @@ class CoursePresenter
         }
     }
 
+    /**
+     * check specify year has comment
+     *
+     * @param $collection
+     * @param $year
+     * @return string
+     */
     public function checkCommentExist( $collection , $year ){
 
 

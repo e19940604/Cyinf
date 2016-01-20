@@ -1,17 +1,10 @@
-<?php
-// Count total comment
-/*
-$query = "SELECT COUNT(comment_id) AS total FROM commentdetail";
-$result = mysqli_query( $connect, $query ) or die( 'total error' );
-$total = mysqli_fetch_array( $result );
-*/
-?>
 @extends('layout')
+@inject( 'coursePresenter' , 'Cyinf\Presenters\CoursePresenter' )
 
-
+@section('title' , $course->course_nameEN )
 
 @section('content')
-    @inject( 'coursePresenter' , 'Cyinf\Presenters\CoursePresenter' )
+
     <article role="main">
         <h1 style="width:900px">{{ $course->course_nameEN  }} /</h1><br />
         <div class="back-to-search">

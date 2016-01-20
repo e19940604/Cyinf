@@ -20,8 +20,7 @@ class HomeController extends Controller
      * CommentController constructor.
      * @param CommentRepository $commentRepository
      */
-    public function __construct(CommentRepository $commentRepository)
-    {
+    public function __construct(CommentRepository $commentRepository){
         $this->commentRepository = $commentRepository;
     }
 
@@ -30,8 +29,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function index()
-    {
+    protected function index(){
         $total = $this->commentRepository->countTotalComment();
         $latest_comments = $this->commentRepository->latestComment( 10 );
 
@@ -40,4 +38,5 @@ class HomeController extends Controller
             'latest_comments' => $latest_comments
         ]);
     }
+
 }
