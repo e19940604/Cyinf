@@ -41,7 +41,7 @@ class UserService
         return true;
 	}
 
-	public function loginUser($stu_id, $password){
+	public function userLogin($stu_id, $password){
 
 		if($this->vaildUserDataFormat(['stu_id' => $stu_id, 'password' => $password]) !== true)
 			return false;
@@ -50,8 +50,17 @@ class UserService
 		
 		if($user == NULL) return false;
 
-		Auth::login($user, true);
+		Auth::login($user);
 
 		return true;
+	}
+
+	public function userLogout(){
+		if(Auth::check()){
+			Auth::logout();
+			return true;
+		}
+
+		return false;
 	}
 }
