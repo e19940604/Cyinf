@@ -18,11 +18,16 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
-    	if($this->userService->loginUser($request->get('stu_id'), $request->get('password'))){
+    	if($this->userService->userLogin($request->get('stu_id'), $request->get('password'))){
     		return 'success';
     	}
     	else{
     		return 'fail';
     	}
+    }
+
+    public function logout(){
+        $this->userService->userLogout();
+        return redirect('/');
     }
 }

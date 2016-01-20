@@ -44,7 +44,7 @@ class UserServiceTest extends TestCase
 
 	}
 
-	public function testLoginUser(){
+	public function testUserLogin(){
 
 		$correct_pwd  = 'test_pwd';
 		$wrong_pwd    = 'wrong_test_pwd';
@@ -53,13 +53,13 @@ class UserServiceTest extends TestCase
 		$user->passwd = sha1($correct_pwd);
     	$user->save();
 
-    	$target = $this->UserService->loginUser($user->stu_id, $correct_pwd);
+    	$target = $this->UserService->userLogin($user->stu_id, $correct_pwd);
     	$this->assertTrue($target);
 
-    	$target = $this->UserService->loginUser($user->stu_id, $wrong_pwd);
+    	$target = $this->UserService->userLogin($user->stu_id, $wrong_pwd);
     	$this->assertFalse($target);
 
-    	$target = $this->UserService->loginUser('null', $wrong_pwd);
+    	$target = $this->UserService->userLogin('null', $wrong_pwd);
     	$this->assertFalse($target);
 	}
 	

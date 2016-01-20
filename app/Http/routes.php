@@ -23,6 +23,10 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
+
+	Route::get('/', 'HomeController@index');
+
+	Route::get('/course/{course}' , 'CourseController@showCourse');
     
     Route::group(['middleware' => 'guest'], function () {
 
@@ -42,5 +46,11 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::post('/search/{method}/{query_restrict}' , 'CourseController@getSearchResult');
 
+	});
+
+	Route::group(['middleware' => 'auth'], function () {
+
+		Route::get('/users/logout', 'UserController@logout');
+		
 	});
 });

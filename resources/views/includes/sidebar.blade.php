@@ -15,14 +15,8 @@
         <li><a class="icon icon-lab" href="faq">F.A.Q</a></li>
         <li><a class="icon icon-mail" href="https://docs.google.com/forms/d/1LMkwDuMIwNF9aZ4yq9nTvVUmUKphklhxQP1cIpnHd6U/viewform" target="_blank">Contact</a></li>
         <li><a class="icon icon-photo" href="about">About</a></li>
-        <?php
-        if ( isset($_SESSION['stu_id']) ) {
-            echo '<li><a class="dr-icon dr-icon-switch" href="logout">&nbsp;&nbsp;&nbsp;Logout</a></li>';
-        }
-        else {
-            echo '<li><a class="dr-icon dr-icon-switch" href="loginView">&nbsp;&nbsp;&nbsp;Login</a></li>';
-        }
-        ?>
+        @inject('sidebarPresenter', 'Cyinf\Presenters\SidebarPresenter')
+        {!! $sidebarPresenter->viewLogInOrOut() !!}
     </ul>
 </nav>
 
