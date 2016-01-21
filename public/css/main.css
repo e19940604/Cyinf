@@ -580,3 +580,11 @@ blockquote small {
 .description {
     line-height: 30px;
 }
+
+.error_field {
+    border: inherit;
+}
+
+.error_field:focus {
+    border: 1px solid red;
+}

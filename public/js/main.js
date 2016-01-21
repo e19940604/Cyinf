@@ -124,23 +124,37 @@ function registerAjax( $register )
         location.href = "register";
     } 
     
-	datas = target.serialize() + "&type=" + $register;
+	datas = target.serialize();
     var login = "#loginMessage" + $register;
-    $.post( "registerAjax", datas, function(json) {
-        
-        $.each( json.data, function() {
+    $.post( "/register", datas, function(json) {
+
+            if ( json.status == "fail" ) {
+                $("#registerBtn").attr("disabled",false);
+                $(login).empty();
+                $(login).html( json.message );
+                $("#"+json.filed).addClass('error_field');
+                $("#"+json.filed).focus();
+            }
+            else if (json.status == "success" ) {
+                //$("#registerBack").hide();
+                $(".registerLaw").empty();
+                target.empty();
+                target.html( json.message );
+            }
+
+        /*$.each( json.data, function() {
             if ( this['status'] == "fail" ) {
                 $("#registerBtn").attr("disabled",false);
                 $(login).empty();
                 $(login).html( this['message'] );
             }
             else if ( this['status'] == "success" ) {
-                $("#registerBack").hide();
+                //$("#registerBack").hide();
                 $(".registerLaw").empty();
                 target.empty();
                 target.html( this['message'] );
             }
-        } );
+        } );*/
         
     }, "json" );
 }

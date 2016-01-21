@@ -23,4 +23,9 @@ class UserRepository
 			$user = NULL;
 		return $user;
 	}
+
+	public function setUser($userData){
+		$this->user->unguard();
+		return $this->user->create($userData);
+	}
 }

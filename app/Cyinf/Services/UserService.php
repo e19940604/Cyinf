@@ -20,33 +20,39 @@ class UserService
 
 		$rule = [
 			'stu_id'     => 'regex:/[BMD][0-9]{9}/',
+			'email'      => 'email',
 			'password'   => 'min:4',
+			'password_check'  => 'same:password',
+			'real_name'  => 'between:1,100',
+			'nick_name'  => 'between:1,100',
 			'grade'      => 'integer|between:105,150',
 			'department' => 'integer|between:0,60',
 	        'gender'     => 'in:男,女',
-	        'email'      => 'email',
 	        'auth'       => 'integer|between:0,2'
 		];
 
 		foreach ($required as $value) {
 			if(isset($rule[$value])) $rule[$value] = 'required|'.$rule[$value];
+			else $rule[$value] = 'required';
 		}
 
 		$validator = Validator::make($userData, $rule);
 
 		if($validator->fails()){
-            return $validator->errors()->first();
+            return ['filed' => array_keys($validator->failed())[0], 'errorMsg' => $validator->errors()->first()];
         }
 
         return true;
 	}
 
-	public function userLogin($stu_id, $password){
+	public function userLogin($userData){
 
-		if($this->vaildUserDataFormat(['stu_id' => $stu_id, 'password' => $password]) !== true)
+		$required = ['stu_id', 'password'];
+
+		if($this->vaildUserDataFormat($userData, $required) !== true)
 			return false;
 
-		$user = $this->userRepository->getUserWithCheckPwd($stu_id, $password);
+		$user = $this->userRepository->getUserWithCheckPwd($userData['stu_id'], $userData['password']);
 		
 		if($user == NULL) return false;
 
@@ -62,5 +68,28 @@ class UserService
 		}
 
 		return false;
+	}
+
+	public function userRegister($userData){
+
+		$required = ['stu_id', 'email', 'password', 'password_check', 'real_name', 'nick_name', 'department', 'grade', 'gender'];
+
+		$vaild_result = $this->vaildUserDataFormat($userData, $required);
+		if($vaild_result !== true)
+			return $vaild_result;
+
+		if($this->userRepository->getUser($userData['stu_id']) != NULL)
+			return ['filed' => 'registered', 'errorMsg' => $userData['stu_id'].' has registered.'];
+
+		$userData['passwd']  = sha1($userData['password']);
+		$userData['auth']    = 0;
+		$userData['thecode'] = sha1($userData['stu_id'].\Carbon\Carbon::now());
+		unset($userData['password']);
+		unset($userData['password_check']);
+
+		$this->userRepository->setUser($userData);
+		(new EmailService )->sendRegisterMail($userData['stu_id'].'@student.nsysu.edu.tw', $userData['real_name'], \Hash::make($userData['thecode']));
+		
+		return true;
 	}
 }

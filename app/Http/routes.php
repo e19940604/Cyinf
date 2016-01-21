@@ -27,24 +27,22 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'HomeController@index');
 
 	Route::get('/course/{course}' , 'CourseController@showCourse');
+
+	Route::get('/course/{course}' , 'CourseController@showCourse');
+
+    Route::get('/search' , function(){
+        return view( 'search' );
+    });
+
+    Route::post('/search/{method}/{query_restrict}' , 'CourseController@getSearchResult');
     
     Route::group(['middleware' => 'guest'], function () {
 
-		Route::get( '/users/login', function() {
-    		return view( 'usersLogin' );
-		});
+		Route::get('/users/login',    function () { return view('usersLogin'); });
+		Route::get('/users/register', function () { return view('usersRegister'); });
 
 		Route::post('/login', 'UserController@login');
-
-		Route::get('/', 'HomeController@index');
-
-		Route::get('/course/{course}' , 'CourseController@showCourse');
-
-        Route::get('/search' , function(){
-            return view( 'search' );
-        });
-
-        Route::post('/search/{method}/{query_restrict}' , 'CourseController@getSearchResult');
+		Route::post('/register', 'UserController@register');
 
 	});
 
