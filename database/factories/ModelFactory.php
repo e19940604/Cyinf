@@ -51,26 +51,27 @@ $factory->define( Course::class , function (Faker\Generator $faker) {
 });
 
 $factory->define( Comment::class, function (Faker\Generator $faker) {
-   $courses = Course::all();
+    $courses = Course::all()->pluck('id');
+    $users = User::all()->pluck('stu_id');
 
-   return [
-       'course_id' => $courses[ $faker->numberBetween( 0 , $courses->count()-1 ) ]->id,
-       'commenter' => $faker->randomElement( ['B' , 'M' , 'I'] ). $faker->randomNumber(9),
-       'teach_q' => 5 * $faker->numberBetween( 0 , 20 ),
-       'time_c' => 5 * $faker->numberBetween( 0 , 20 ),
-       'sign_d' => 5 * $faker->numberBetween( 0 , 20 ),
-       'test_d' => 5 * $faker->numberBetween( 0 , 20 ),
-       'homework_d' => 5 * $faker->numberBetween( 0 , 20 ),
-       'grade_d' => 5 * $faker->numberBetween( 0 , 20 ),
-       'TA_r' => 5 * $faker->numberBetween( 0 , 20 ),
-       'practical_r' => 5 * $faker->numberBetween( 0 , 20 ),
-       'rollCall_r' => 5 * $faker->numberBetween( 0 , 20 ),
-       'nutrition_r' => 5 * $faker->numberBetween( 0 , 20 ),
-       'date' => $faker->date(),
-       'time' => $faker->time(),
-       'description' => $faker->sentence(),
-       'read' => 0,
-       'love' => $faker->randomDigit,
-       'dislike' => $faker->randomDigit
-   ];
+    return [
+        'course_id' => $courses->random(),
+        'commenter' => $users->random(),
+        'teach_q' => 5 * $faker->numberBetween( 0 , 20 ),
+        'time_c' => 5 * $faker->numberBetween( 0 , 20 ),
+        'sign_d' => 5 * $faker->numberBetween( 0 , 20 ),
+        'test_d' => 5 * $faker->numberBetween( 0 , 20 ),
+        'homework_d' => 5 * $faker->numberBetween( 0 , 20 ),
+        'grade_d' => 5 * $faker->numberBetween( 0 , 20 ),
+        'TA_r' => 5 * $faker->numberBetween( 0 , 20 ),
+        'practical_r' => 5 * $faker->numberBetween( 0 , 20 ),
+        'rollCall_r' => 5 * $faker->numberBetween( 0 , 20 ),
+        'nutrition_r' => 5 * $faker->numberBetween( 0 , 20 ),
+        'date' => $faker->date(),
+        'time' => $faker->time(),
+        'description' => $faker->sentence(),
+        'read' => 0,
+        'love' => $faker->randomDigit,
+        'dislike' => $faker->randomDigit
+    ];
 });

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Cyinf\Comment;
 use Cyinf\Course;
 use Cyinf\Repositories\CommentRepository;
+use Cyinf\User;
 
 class CommentRepositoryTest extends TestCase
 {
@@ -19,8 +20,8 @@ class CommentRepositoryTest extends TestCase
     /**
      * Seeding data
      */
-    protected function seedData()
-    {
+    protected function seedData(){
+        factory( User::class , $this->seedRowNumber )->create();
         factory( Course::class , $this->seedRowNumber )->create();
         factory( Comment::class , $this->seedRowNumber )->create();
     }
@@ -28,16 +29,14 @@ class CommentRepositoryTest extends TestCase
     /**
      * Setup
      */
-    public function setUp()
-    {
+    public function setUp(){
         parent::setUp();
         $this->init();
         $this->seedData();
         $this->repository = $this->app->make( \Cyinf\Repositories\CommentRepository::class);
     }
 
-    public function tearDown()
-    {
+    public function tearDown(){
         $this->reset();
     }
 
@@ -46,8 +45,7 @@ class CommentRepositoryTest extends TestCase
      *
      * @return void
      */
-    public function testCountTotalComment()
-    {
+    public function testCountTotalComment(){
         $total_comments = $this->repository->countTotalComment();
         $this->assertEquals( $this->seedRowNumber , $total_comments );
     }
@@ -55,8 +53,7 @@ class CommentRepositoryTest extends TestCase
     /**
      * test for get latest 10 comment
      */
-    public function testLatestComment()
-    {
+    public function testLatestComment(){
         $latest_comments = $this->repository->latestComment( 10 );
         $prev = null;
 
@@ -64,12 +61,20 @@ class CommentRepositoryTest extends TestCase
         {
             if( $key == 0 )
                 $prev = $comment;
-            else
-            {
+            else {
                 $this->assertGreaterThanOrEqual( $comment->id , $prev->id );
                 $prev = $comment;
             }
         }
+    }
+
+    public function testCheckCourseCommented(){
+
+        $course = Course::all()->random();
+
+
+
+
     }
 
 }

@@ -5,6 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Cyinf\Comment;
 use Cyinf\Course;
+use Cyinf\User;
 
 class RouteControllerTest extends TestCase
 {
@@ -16,8 +17,8 @@ class RouteControllerTest extends TestCase
     /**
      * Seeding data
      */
-    protected function seedData()
-    {
+    protected function seedData(){
+        factory( User::class , $this->seedRowNumber )->create();
         factory( Course::class , $this->seedRowNumber )->create();
         factory( Comment::class , $this->seedRowNumber )->create();
     }
@@ -25,15 +26,13 @@ class RouteControllerTest extends TestCase
     /**
      * Setup
      */
-    public function setUp()
-    {
+    public function setUp(){
         parent::setUp();
         $this->init();
         $this->seedData();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(){
         $this->reset();
     }
 
