@@ -71,9 +71,39 @@ class CommentRepositoryTest extends TestCase
     public function testCheckCourseCommented(){
 
         $course = Course::all()->random();
+        $user = factory( User::class , 1 )->create();
 
+        $this->assertEquals( false , $this->repository->checkCourseCommented( $user->stu_id , $course->id ) );
 
+        factory( Comment::class , 1 )->create([ 'course_id' => $course->id , 'commenter' => $user->stu_id ]);
 
+        $this->assertEquals( true , $this->repository->checkCourseCommented( $user->stu_id , $course->id ) );
+
+    }
+
+    public function testCreateComment(){
+
+        $comment = factory( Comment::class , 1 )->make();
+
+        $comment_req = [
+            'teach' => $comment->teach_q,
+            'practical' => $comment->practical_r,
+            'TA' => $comment->TA_r,
+            'nutrition' => $comment->nutrition_r,
+            'test' => $comment->test_d,
+            'homework' => $comment->homework_d,
+            'grade' => $comment->grade_d,
+            'time' => $comment->time_c,
+            'roll' => $comment->rollCall_r,
+            'sign' => $comment->sign_d,
+            'comments' => $comment->description
+        ];
+
+        $result = $this->repository->createComment( $comment->course_id , $comment->commenter , $comment_req  );
+
+        $new_comment = Comment::find( $result->id );
+
+        $this->assertEquals( $comment->course_id , $new_comment->course_id );
 
     }
 

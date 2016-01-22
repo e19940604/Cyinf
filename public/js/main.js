@@ -418,32 +418,9 @@ function departmentSearch( grade )
     } );
 }
 
-function courseJudgeAjax() 
+function courseJudgeAjax()
 {
-    var data = $("#commentDetails").serialize();
-    
-    $.post( "judgeResult", data, function(json) {
-        
-        $.each( json.data, function() {
-            if ( this['status'] == "fail" ) {
-                $("#loginMessage").empty();
-                $("#loginMessage").html( this['message'] );
-            }
-            else if ( this['status'] == "already" ) {
-                alert(this['message']);
-                location.href = "courseDetail?id=" + $("#course_id").val();
-            }
-            else if ( this['status'] == "login" ) {
-                alert(this['message']);
-                location.href = "courseDetail?id=" + $("#course_id").val();
-            }
-            else if ( this['status'] == "success" ) {
-                alert(this['message']);
-                location.href = "courseDetail?id=" + $("#course_id").val();
-            }
-        } );
-        
-    }, "json" );
+    $("#commentDetails").submit();
 }
 
 function mCourseJudgeAjax() 

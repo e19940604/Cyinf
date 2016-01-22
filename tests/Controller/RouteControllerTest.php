@@ -56,7 +56,7 @@ class RouteControllerTest extends TestCase
 
         $this->assertResponseOk();
 
-        $this->assertViewHas( [ "course" , "comments" ] );
+        $this->assertViewHas( [ "course" , "comments" , "is_commented" ] );
 
     }
 
@@ -72,6 +72,20 @@ class RouteControllerTest extends TestCase
             $this->assertInternalType( "string" ,  $result->content() );
         }
 
-
     }
+
+    public function testShowCourseJudgePage(){
+
+        $course = Course::all()->random();
+        $user = factory( User::class , 1 )->create();
+        auth()->login( $user );
+
+        $this->call( 'GET' , "/course/judge/" . $course->id );
+
+        $this->assertResponseOk();
+
+        $this->assertViewHas( 'course' );
+    }
+
+
 }

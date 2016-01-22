@@ -121,4 +121,48 @@ class CoursePresenter
             return "";
         }
     }
+
+    public function judgePassiveBtnGenerator( $i ){
+
+        if ( ($i+1) == 1 || ($i+1) == 2 ) {
+            return "btn-danger";
+        }
+        else if ( ($i+1) == 3 || ($i+1) == 4 ) {
+            return "btn-warning";
+        }
+        else if ( ($i+1) == 5 || ($i+1) == 6 ) {
+            return "btn-success";
+        }
+        else {
+            return "btn-primary";
+        }
+    }
+
+    public function judgeNegativeBtnGenerator( $i ){
+        if ( ($i+1) == 1 || ($i+1) == 2 ) {
+            return "btn-primary";
+        }
+        else if ( ($i+1) == 3 || ($i+1) == 4 ) {
+            return "btn-success";
+        }
+        else if ( ($i+1) == 5 || ($i+1) == 6 ) {
+            return "btn-warning";
+        }
+        else {
+            return "btn-danger";
+        }
+    }
+
+    public function getCommentBtn( $course_id , $is_commented ){
+
+
+        if( $is_commented ){
+            return '<a href="#"><button type="button" class="btn btn-success btn-xs" disabled="disabled">已完成評鑑</button></a>';
+        }
+        else{
+            return '<a href="/course/judge/' . $course_id . '"><button type="button" class="btn btn-primary btn-xs">我要評鑑</button></a>';
+        }
+
+
+    }
 }

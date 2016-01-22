@@ -1,6 +1,7 @@
 @extends('layout')
 @inject( 'coursePresenter' , 'Cyinf\Presenters\CoursePresenter' )
 
+
 @section('title' , $course->course_nameEN )
 
 @section('content')
@@ -42,7 +43,7 @@
                 <th><i class="glyphicon glyphicon-map-marker"></i> &nbsp;教室位置</th>
                 <th><i class="glyphicon glyphicon-heart"></i> &nbsp;&nbsp;&nbsp;Pin&nbsp;&nbsp;</th>
                 <th><i class="glyphicon glyphicon-repeat"></i> &nbsp;評鑑狀況</th>
-                <th><i class="glyphicon glyphicon-tower"></i> &nbsp;加入比較</th>
+
             </tr>
             </thead>
             <tbody>
@@ -54,11 +55,7 @@
                 <!-- todo fix pin function -->
                 <td id='pinArea'><a href='#searching' class='glyphicon glyphicon-pushpin' onclick='pinAjax()'></a></td>
                 <!-- todo fix comment function -->
-                <td class="coursTitle"><a href="#"><button type="button" class="btn btn-success btn-xs" disabled="disabled">已完成評鑑</button></a></td>
-
-                <!-- todo fix pk function -->
-                <td class="courseTitle"><button type="button" id="PKbtn" class="btn btn-warning btn-xs" onclick="deleteFromPK( ' . $_GET['id'] .  ')">從P.K.列表中移除</button></td>
-
+                <td class="coursTitle">{!!  $coursePresenter->getCommentBtn( $course->id ,$is_commented ) !!}</td>
 
             </tr>
             </tbody>
@@ -238,6 +235,13 @@
 
 @section('scriptArea')
     <script  type="text/javascript">
+
+        @if(  session()->has('success') )
+            swal( "恭喜！" , {!! '"' . session('success') . '"' !!} , "success");
+        @elseif(  session()->has('error'))
+            swal( "錯誤！" ,  {!! '"' . session('error') . '"' !!} , "error");
+        @endif
+
 
     </script>
 @endsection
