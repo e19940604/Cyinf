@@ -5,6 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Cyinf\Comment;
 use Cyinf\Course;
+use Cyinf\User;
 
 class RouteControllerTest extends TestCase
 {
@@ -16,8 +17,8 @@ class RouteControllerTest extends TestCase
     /**
      * Seeding data
      */
-    protected function seedData()
-    {
+    protected function seedData(){
+        factory( User::class , $this->seedRowNumber )->create();
         factory( Course::class , $this->seedRowNumber )->create();
         factory( Comment::class , $this->seedRowNumber )->create();
     }
@@ -25,15 +26,13 @@ class RouteControllerTest extends TestCase
     /**
      * Setup
      */
-    public function setUp()
-    {
+    public function setUp(){
         parent::setUp();
         $this->init();
         $this->seedData();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(){
         $this->reset();
     }
 
@@ -57,7 +56,7 @@ class RouteControllerTest extends TestCase
 
         $this->assertResponseOk();
 
-        $this->assertViewHas( [ "course" , "comments" ] );
+        $this->assertViewHas( [ "course" , "comments" , "is_commented" ] );
 
     }
 
@@ -73,6 +72,20 @@ class RouteControllerTest extends TestCase
             $this->assertInternalType( "string" ,  $result->content() );
         }
 
-
     }
+
+    public function testShowCourseJudgePage(){
+
+        $course = Course::all()->random();
+        $user = factory( User::class , 1 )->create();
+        auth()->login( $user );
+
+        $this->call( 'GET' , "/course/judge/" . $course->id );
+
+        $this->assertResponseOk();
+
+        $this->assertViewHas( 'course' );
+    }
+
+
 }

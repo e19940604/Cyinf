@@ -28,14 +28,12 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/course/{course}' , 'CourseController@showCourse');
 
-	Route::get('/course/{course}' , 'CourseController@showCourse');
-
     Route::get('/search' , function(){
         return view( 'search' );
     });
 
     Route::post('/search/{method}/{query_restrict}' , 'CourseController@getSearchResult');
-    
+
     Route::group(['middleware' => 'guest'], function () {
 
 		Route::get('/users/login',    function () { return view('usersLogin'); });
@@ -44,11 +42,15 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/login', 'UserController@login');
 		Route::post('/register', 'UserController@register');
 
+
 	});
 
 	Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('/users/logout', 'UserController@logout');
-		
+
+        Route::get('/course/judge/{course}' , 'CourseController@showCourseJudgePage');
+
+        Route::post('/course/judge/{course}' , 'CourseController@courseJudge');
 	});
 });

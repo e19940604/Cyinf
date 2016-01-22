@@ -12,4 +12,6 @@ class Comment extends Model
     {
         return $this->belongsTo('Cyinf\Course');
     }
+
+    protected $guarded = [ 'id' ];
 }

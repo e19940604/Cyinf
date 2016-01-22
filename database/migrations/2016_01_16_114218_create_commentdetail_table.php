@@ -30,9 +30,9 @@ class CreateCommentdetailTable extends Migration
             $table->string('date');
             $table->string('time');
             $table->string('description');
-            $table->tinyInteger('read');
-            $table->tinyInteger('love');
-            $table->tinyInteger('dislike');
+            $table->tinyInteger('read')->default(0);
+            $table->tinyInteger('love')->default(0);
+            $table->tinyInteger('dislike')->default(0);
             $table->timestamps();
 
             /*$table->foreign('course_id')->references('id')->on('coursedetail');

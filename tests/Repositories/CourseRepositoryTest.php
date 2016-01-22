@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Cyinf\Comment;
 use Cyinf\Course;
-
+use Cyinf\User;
 
 class CourseRepositoryTest extends TestCase
 {
@@ -20,8 +20,8 @@ class CourseRepositoryTest extends TestCase
      * Seeding data
      */
     protected function seedData(){
-
-        factory( Course::class , $this->seedRowNumber )->create([]);
+        factory( User::class , $this->seedRowNumber )->create();
+        factory( Course::class , $this->seedRowNumber )->create();
         factory( Comment::class , $this->seedRowNumber )->create();
     }
 
