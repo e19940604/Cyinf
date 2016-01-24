@@ -3,6 +3,7 @@ namespace Cyinf\Presenters;
 
 use Cyinf\DepartmentParser;
 use Carbon\Carbon;
+
 class CoursePresenter
 {
     /**

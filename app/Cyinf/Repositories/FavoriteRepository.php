@@ -18,4 +18,8 @@ class FavoriteRepository
         $this->favorite = $favorite;
     }
 
+    public function getFavoriteByUser($user_id){
+        return $this->favorite->where('stu_id', $user_id)->get();
+    }
+
 }

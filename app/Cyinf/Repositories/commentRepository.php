@@ -88,4 +88,8 @@ class CommentRepository
             ]);
     }
 
+    public function getUserComment($stu_id){
+        return $this->comment->where('commenter', $stu_id)->get();
+    }
+
 }

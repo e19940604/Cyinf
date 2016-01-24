@@ -68,46 +68,8 @@
                 <label for="department" class="col-sm-2 control-label">系所</label>
                 <div class="col-sm-10">
                     <select class="form-control holder" name="department" id="department">
-                        <option value="18">中文系（CL）</option>
-                        <option value="19">外文系（DFLL）</option>
-                        <option value="21">音樂系（MUSI）</option>
-                        <option value="23">劇藝系（TA）</option>
-                        <option value="24">生科系（BIOS）</option>
-                        <option value="26">化學系（CHE）</option>
-                        <option value="27">物理系（PHYS）</option>
-                        <option value="28">應數系（MATH）</option>
-                        <option value="29">電機系（EE）</option>
-                        <option value="32">機電系（MEME）</option>
-                        <option value="33">資工系（CSE）</option>
-                        <option value="34">光電系（EO）</option>
-                        <option value="35">材光系（MOES）</option>
-                        <option value="37">企管系（BM）</option>
-                        <option value="38">財管系（FM）</option>
-                        <option value="39">資管系（MIS）</option>
-                        <option value="42">政經系（PE）</option>
-                        <option value="46">社會系（SOC）</option>
-                        <option value="50">海工系（MAEV）</option>
-                        <option value="51">海資系（MBR）</option>
-                        <option value="60">海科系（OO）</option>
-                        <option value="22">哲學碩（PHIL）</option>
-                        <option value="25">生醫碩（IMBS）</option>
-                        <option value="30">電力碩（IMPE）</option>
-                        <option value="31">通訊碩（ICE）</option>
-                        <option value="36">環工碩（ENVE）</option>
-                        <option value="40">人管所（HRM）</option>
-                        <option value="41">傳管所（ICM）</option>
-                        <option value="43">公事碩（PAM）</option>
-                        <option value="44">政治碩（IPS）</option>
-                        <option value="45">經濟碩（ECON）</option>
-                        <option value="47">教育碩（IOE）</option>
-                        <option value="48">亞太碩（CAPS）</option>
-                        <option value="53">海地化碩（IMGC）</option>
-                        <option value="54">海事碩（MA）</option>
-                        <option value="55">海下物碩（UTAO）</option>
-                        <!--
-                        <option value="18">中文系（CL）</option-->
-                        
-                        
+                        @inject('departmentPresenter', 'Cyinf\Presenters\DepartmentPresenter')
+                        {!! $departmentPresenter->viewDepartmentOption() !!}
                     </select>
                 </div>
             </div>

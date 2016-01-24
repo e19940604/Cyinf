@@ -20,8 +20,13 @@ class CourseRepository
         $this->course = $course;
     }
 
-    public function getCourseById( $id ){
-        return $this->course->findOrFail( $id );
+    public function getCourseById($id){
+        if(is_array($id)){
+            return $this->course->whereIn('id', $id)->orderBy('current_rank', 'DESC')->get();
+        }
+        else{
+            return $this->course->findOrFail( $id );
+        }
     }
 
 
@@ -48,8 +53,5 @@ class CourseRepository
         return $searchClass->query( $restrict );
 
     }
-
-
-
 
 }

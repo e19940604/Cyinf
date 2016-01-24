@@ -42,12 +42,13 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/login', 'UserController@login');
 		Route::post('/register', 'UserController@register');
 
-
 	});
 
 	Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('/users/logout', 'UserController@logout');
+
+		Route::get('/users/profile', function () { return view('usersProfile'); });
 
         Route::get('/course/judge/{course}' , 'CourseController@showCourseJudgePage');
 

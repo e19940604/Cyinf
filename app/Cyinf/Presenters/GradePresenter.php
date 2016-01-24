@@ -10,7 +10,7 @@ class GradePresenter
 
 	function __construct(){
 		if(\Auth::guard('web')->check()){
-			$this->user_grade = Auth::user()->grade;
+			$this->user_grade = \Auth::user()->grade;
 		}
 		else{
 			$this->user_grade = 0;
