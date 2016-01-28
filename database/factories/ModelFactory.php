@@ -2,6 +2,7 @@
 use Cyinf\User;
 use Cyinf\Comment;
 use Cyinf\Course;
+use Cyinf\Favorite;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -73,5 +74,11 @@ $factory->define( Comment::class, function (Faker\Generator $faker) {
         'read' => 0,
         'love' => $faker->randomDigit,
         'dislike' => $faker->randomDigit
+    ];
+});
+
+
+$factory->define( Favorite::class , function (Faker\Generator $faker) {
+    return [
     ];
 });

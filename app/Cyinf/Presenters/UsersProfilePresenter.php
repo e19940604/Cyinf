@@ -59,13 +59,9 @@ class UsersProfilePresenter
 			$html .= '<td>'.$this->coursePresenter->getGradeNameByNum($value->course_grade);
 			$html .= '<td>'.$value->judge_people.'</td>';
 			$html .= '<td>'.$value->current_rank.'</td>';
-			if($pin == NULL){
-				$html .= '<td id="pinArea"'.$value->course_id.'"><a href="#searching" class="glyphicon glyphicon-pushpin" onclick="pinAjax('. $value->course_id.', 1)"></a></td>';
 
-			}
-			else{
-				$html .= '<td id="pinArea"'.$value->course_id.'"><a href="#searching" class="glyphicon glyphicon-ok" onclick="pinAjax('. $value->course_id.', 0)"></a></td>';
-			}
+			$html .= '<td id="pinArea' . $value->id . '">' . $this->coursePresenter->getPinBtn(  $value->id ) . '</td>';
+
 			$html .= '</tr>';
 		}
 

@@ -3,6 +3,7 @@ namespace Cyinf\Presenters;
 
 use Cyinf\DepartmentParser;
 use Carbon\Carbon;
+use Auth;
 
 class CoursePresenter
 {
@@ -163,7 +164,17 @@ class CoursePresenter
         else{
             return '<a href="/course/judge/' . $course_id . '"><button type="button" class="btn btn-primary btn-xs">我要評鑑</button></a>';
         }
-
-
     }
+
+    public function getPinBtn( $course_id ){
+        if( Auth::check() ){
+            $user = Auth::getUser();
+            $courses_id = $user->courses()->get()->pluck('id')->toArray();
+            if( in_array( $course_id , $courses_id ))
+                return "<a href='#searching' class='glyphicon glyphicon-ok' onclick='pinAjax(" . $course_id . ", 0)'></a>";
+        }
+
+        return "<a href='#searching' class='glyphicon glyphicon-pushpin' onclick='pinAjax(" . $course_id . ", 1)'></a>";
+    }
+
 }

@@ -53,5 +53,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/course/judge/{course}' , 'CourseController@showCourseJudgePage');
 
         Route::post('/course/judge/{course}' , 'CourseController@courseJudge');
+
+		Route::post('/pin/{course_id}/{status}' , 'UserController@pin');
+
+		Route::get( '/favorites' , 'CourseController@showFavorite');
 	});
 });

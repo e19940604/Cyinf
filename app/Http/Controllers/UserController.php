@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cyinf\Services\PinService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,10 +12,12 @@ use Cyinf\Services\UserService;
 class UserController extends Controller
 {
 	protected $userService;
+    protected $pinService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService , PinService $pinService )
     {
         $this->userService = $userService;
+        $this->pinService = $pinService;
     }
 
     public function login(Request $request){
@@ -39,5 +42,18 @@ class UserController extends Controller
         else{
             return response()->json(['status' => 'fail', 'message' => $result['errorMsg'], 'filed' => $result['filed']]);
         }
+    }
+
+    public function pin( $course_id , $status ){
+        $result = [];
+        if( $this->pinService->pinCourse( $course_id , $status ) ){
+            $result['status'] = "success";
+            $status == 0 ? $result['msg'] = "取消課程釘選。" : $result['msg'] = "完成課程釘選。";
+        }
+        else{
+            $result['status'] = "failed";
+            $status == 0 ? $result['msg'] = "並未釘選該課程。" : $result['msg'] = "重複課程釘選。";
+        }
+        return response()->json( $result );
     }
 }
