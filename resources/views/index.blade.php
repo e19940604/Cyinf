@@ -90,10 +90,19 @@ $total = mysqli_fetch_array( $result );
                         <th>Pin</th>
                     </thead>
                     <tbody>
-                    @inject('commentPresenter' , 'Cyinf\Presenters\CommentPresenter')
-                    @foreach( $latest_comments as $key => $comment )
+                    @inject('coursePresenter' , 'Cyinf\Presenters\CoursePresenter')
+                    @foreach( $courses as $key => $course )
+
                         <tr>
-                            {!! $commentPresenter->getCourseTableByCollection( $key + 1 ,$comment ) !!}
+                            <td>{{ intval( $key + 1)  }}</td>
+                            <td><a href="/course/{{ $course->id }}">{{ $course->course_nameCH }}</a></td>
+                            <td>{{ $course->professor }}</td>
+                            <td>{!!  $coursePresenter->getDepartmantNameByCode( $course->course_department ) !!}</td>
+                            <td>{{ $coursePresenter->getGradeNameByNum( $course->course_grade ) }}</td>
+                            <td>{{ $course->judge_people }}</td>
+                            <td>{{ $course->current_rank }}</td>
+                            <td>{{  $last_comments[$key]->date . " - " . $last_comments[$key]->time  }}</td>
+                            <td id="pinArea{{ $course->id }}">{!! $coursePresenter->getPinBtn( $course->id ) !!}</td>
                         </tr>
                     @endforeach
                     </tbody>

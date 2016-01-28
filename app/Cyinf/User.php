@@ -29,4 +29,8 @@ class User extends Authenticatable
     protected $hidden = [
         'passwd', 'remember_token',
     ];
+
+    public function courses(){
+        return $this->belongsToMany( 'Cyinf\Course' , "favoritescourse" , 'stu_id' , 'course_id' );
+    }
 }

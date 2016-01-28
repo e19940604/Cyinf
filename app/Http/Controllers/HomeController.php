@@ -32,10 +32,15 @@ class HomeController extends Controller
     protected function index(){
         $total = $this->commentRepository->countTotalComment();
         $latest_comments = $this->commentRepository->latestComment( 10 );
+        $courses = [];
+        foreach( $latest_comments as $comment ){
+            array_push( $courses , $comment->course );
+        }
 
         return view( 'index' , [
             'total' => $total ,
-            'latest_comments' => $latest_comments
+            'courses' => $courses,
+            'last_comments' => $latest_comments
         ]);
     }
 

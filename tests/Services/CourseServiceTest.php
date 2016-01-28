@@ -65,7 +65,7 @@ class CourseServiceTest extends TestCase
 
         $comment = factory( Comment::class , 1 )->create( ['course_id' => $course->id , 'teach_q' => 100 ]);
 
-        $this->courseService->UpdateCurrentRank( $course , $comment->toArray() );
+        $this->courseService->UpdateCurrentRank( $course , $comment );
 
         $course = Course::find( $course->id );
 

@@ -87,5 +87,4 @@ class RouteControllerTest extends TestCase
         $this->assertViewHas( 'course' );
     }
 
-
 }

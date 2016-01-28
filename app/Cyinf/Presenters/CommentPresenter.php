@@ -2,10 +2,13 @@
 namespace Cyinf\Presenters;
 
 use Cyinf\DepartmentParser;
+use Auth;
 
 class CommentPresenter
 {
     public function getCourseTableByCollection( $counter , $comment ){
+
+
         $course = $comment->course;
 
         $table_html = '<td>' . $counter.  '</td>'.
@@ -38,6 +41,7 @@ class CommentPresenter
         $table_html .= '</td><td>' . $course->judge_people . '</td>';
         $table_html .= '<td>' . $course->current_rank . '</td>';
         $table_html .= '<td>' . $comment->date . ' - ' . $comment->time . '</td>';
+
 
         $table_html .= "<td id='pinArea".$course->id."'><a href='#searching' class='glyphicon glyphicon-pushpin' onclick='pinAjax(". $course->id .", 1)'></a></td>";
         return $table_html;

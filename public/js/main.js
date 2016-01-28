@@ -268,69 +268,75 @@ function commentJudge ( $course, $comment, $option )
     }, "json" );
 }
 
-function favoriteAjax( $course ) 
+function favoriteAjax( course )
 {
-    var data = "id=" + $course;
-    
-    $.post( "favoriteAjax", data, function(json) {
-        
-        $.each( json.data, function() {
-            if( this['status'] == "fail" ) {
-                alert(this['message']);
+    var url = "/pin/" + course + "/0";
+
+    $.ajax( url ,{
+        type: "post",
+        dataType: "json",
+        content: null,
+        statusCode: {
+            401: function() {
+                swal({
+                    title: "請先登入",
+                    text: "釘選前請先登入。",
+                    type: "warning",
+                }, function(){
+                    location.href = "/users/login";
+                });
+
             }
-            else if ( this['status'] == "success" ) {
-                $("#courseArea"+$course).remove();
-            }
-        } );
-        
-    }, "json" );
+        },
+        success: function( data ){
+            $("#courseArea"+course).remove();
+        }
+    });
 }
 
-function pinAjax( $course, $option ) 
+function pinAjax( course, option )
 {
-    var data = "id=" + $course;
-    var success = "<a href='#searching' class='glyphicon glyphicon-ok' onclick='pinAjax(" + $course + ", 0)'></a>";
-    var cancel = "<a href='#searching' class='glyphicon glyphicon-pushpin' onclick='pinAjax(" + $course + ", 1)'></a>";
-    
-    $(this).html("<img src='../img/ajax-loader.gif' alt='loading...' />");
-    
-    if ( $option == 1 ) {
-        $.post( "pinAjax", data, function(json) {
+    var clickedItem = this;
+    var url = "/pin/" + course + "/" + option;
 
-            $.each( json.data, function() {
-                if ( this['status'] == "fail" ) {
-                    alert(this['message']);
-                }
-                else if ( this['status'] == "hack" ) {
-                    alert(this['message']);
-                }
-                else if ( this['status'] == "success" ) {
-                    $("#pinArea"+$course).empty();
-                    $("#pinArea"+$course).html( success );
-                }
-            } );
-            
-        }, "json" );
-    }
-    else if ( $option == 0 ) {
-        $.post( "unPinAjax", data, function(json) {
+    var success = "<a href='#searching' class='glyphicon glyphicon-ok' onclick='pinAjax(" + course + ", 0)'></a>";
+    var cancel = "<a href='#searching' class='glyphicon glyphicon-pushpin' onclick='pinAjax(" + course + ", 1)'></a>";
+    var pined_course = $("#pinArea"+course);
 
-            $.each( json.data, function() {
-                if ( this['status'] == "fail" ) {
-                    alert(this['message']);
-                }
-                else if ( this['status'] == "hack" ) {
-                    alert(this['message']);
-                }
-                else if ( this['status'] == "success" ) {
-                    $("#pinArea"+$course).empty();
-                    $("#pinArea"+$course).html( cancel );
-                }
-            } );
-            
-        }, "json" );
-    }
+    console.log(clickedItem );
+    $.ajax( url ,{
+        type: "post",
+        dataType: "json",
+        content: null,
+        statusCode: {
+            401: function() {
+                swal({
+                    title: "請先登入",
+                    text: "釘選前請先登入。",
+                    type: "warning",
+                }, function(){
+                    location.href = "/users/login";
+                });
 
+            }
+        },
+        success: function( data ){
+            if( data.status == "success" ){
+                console.log( "XD") ;
+                pined_course.empty();
+                if( option == 1)
+                    pined_course.html( success );
+                else
+                    pined_course.html( cancel );
+
+                swal( "ＯＫ" , data.msg , "success");
+            }
+            else{
+                swal( "錯誤" , data.msg , "error");
+            }
+
+        }
+    });
 }
 
 function mPinAjax( $course, $option ) 

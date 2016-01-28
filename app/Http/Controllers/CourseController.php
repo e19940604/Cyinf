@@ -81,6 +81,11 @@ class CourseController extends Controller
         return view( 'courseJudge' , [ 'course' => $course ] );
     }
 
+    /**
+     * @param Request $request
+     * @param Course $course
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function courseJudge( Request $request , Course $course ){
 
         $currentUser = Auth::getUser();
@@ -105,5 +110,11 @@ class CourseController extends Controller
                 return redirect()->back()->with( [ 'error' => '尚有欄位沒填寫喔！'] );
             }
         }
+    }
+
+    public function showFavorite(){
+        $user = Auth::getUser();
+        $favorites = $user->courses()->get();
+        return view('favorite' , [ 'favorites' => $favorites ]);
     }
 }

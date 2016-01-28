@@ -53,7 +53,7 @@
                 <td class="courseTitle">{{ $course->time2 }}</td>
                 <td class="courseTitle">{{ $course->place }}</td>
                 <!-- todo fix pin function -->
-                <td id='pinArea'><a href='#searching' class='glyphicon glyphicon-pushpin' onclick='pinAjax()'></a></td>
+                <td id="pinArea{{ $course->id }}">{!! $coursePresenter->getPinBtn( $course->id ) !!}</td>
                 <!-- todo fix comment function -->
                 <td class="coursTitle">{!!  $coursePresenter->getCommentBtn( $course->id ,$is_commented ) !!}</td>
 
