@@ -4,11 +4,10 @@ namespace Cyinf;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Commentjudge extends Model
+class CommentJudge extends Model
 {
-    protected $table = 'commentjudge';
+    protected $table = "commentjudge";
 
-    public function comment(){
-    	return $this->belongsTo('Cyinf\Comment');
-    }
+    protected $guarded = [];
+
 }

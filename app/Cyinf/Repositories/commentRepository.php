@@ -92,4 +92,21 @@ class CommentRepository
         return $this->comment->where('commenter', $stu_id)->get();
     }
 
+    public function updateCourseLove( $comment_id , $option ){
+        $comment = $this->comment->find( $comment_id );
+        if( $option == 1 ){
+            $comment->update([
+                'love' => $comment->love + 1
+            ]);
+        }
+        else{
+            $comment->update([
+                'dislike' => $comment->dislike + 1
+            ]);
+        }
+
+        return $comment;
+
+    }
+
 }

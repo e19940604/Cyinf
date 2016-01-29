@@ -12,4 +12,6 @@ class Course extends Model
     {
         return $this->hasMany('Cyinf\Comment');
     }
+
+    protected $guarded = [];
 }

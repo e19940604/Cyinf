@@ -3,6 +3,7 @@
 namespace Cyinf\Repositories;
 
 use Cyinf\Commentjudge;
+use Illuminate\Support\Facades\Auth;
 
 class CommentjudgeRepository {
 
@@ -29,4 +30,20 @@ class CommentjudgeRepository {
 						   ->keyBy('result')
 						   ->transform(function($item, $key){return $item->counter;});
 	}
+
+	public function addCommentJudgeRecord( $comment_id , $option ){
+        return $this->commentjudge
+            ->create([
+                'comment_id' => $comment_id,
+                'stu_id' => Auth::getUser()->stu_id,
+                'result' => $option
+            ]);
+    }
+
+    public function isJudged( $comment_id ){
+        return $this->commentjudge
+            ->where( 'comment_id' , $comment_id )
+            ->where( 'stu_id' , Auth::getUser()->stu_id )
+            ->first() !== null;
+    }
 }

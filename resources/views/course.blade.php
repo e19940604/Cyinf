@@ -214,11 +214,11 @@
                     <br />
                     <p>
                         <span class="textFixRaleway">{{ $comment->date . '   ' . $comment->time  }}</span> &nbsp;&nbsp;&nbsp;
-                        <!-- todo fix love and dislike function -->
+
                         <span class="textFixRaleway" id="loveArea{{ $comment->id }}">{{ $comment->love }}</span>
-                        <a class="glyphicon glyphicon-thumbs-up" onclick="commentJudge({{ $course->id }},{{ $comment->id }}, 1)"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="glyphicon glyphicon-thumbs-up" onclick="commentJudge({{ $comment->id }}, 1)"></a>&nbsp;&nbsp;&nbsp;&nbsp;
                         <span class="textFixRaleway" id="dislikeArea{{ $comment->id }}">{{ $comment->dislike }}</span>
-                        <a class="glyphicon glyphicon-thumbs-down" onclick="commentJudge({{ $course->id }},{{ $comment->id }}, 0)"></a>
+                        <a class="glyphicon glyphicon-thumbs-down" onclick="commentJudge({{ $comment->id }}, 0)"></a>
                     </p>
                     <p>{{ $comment->description }}</p>
                     @endforeach

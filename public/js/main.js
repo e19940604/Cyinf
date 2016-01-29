@@ -240,10 +240,47 @@ function memberAjax()
     }, "json" );
 }
 
-function commentJudge ( $course, $comment, $option ) 
+function commentJudge ( comment, option )
 {
-    var data = "id=" + $course + "&comment=" + $comment + "&option=" + $option;
+    var url = "/love/" + comment + "/" + option;
+    var like = $("#loveArea" + comment);
+    var dislike = $("#dislikeArea" + comment);
 
+    $.ajax( url ,{
+        type: "post",
+        dataType: "json",
+        content: null,
+        statusCode: {
+            401: function() {
+                swal({
+                    title: "請先登入",
+                    text: "釘選前請先登入。",
+                    type: "warning",
+                }, function(){
+                    location.href = "/users/login";
+                });
+
+            }
+        },
+        success: function( data ){
+            if( data.status == "success" ){
+                if ( option == 1 ) {
+                    var count = document.getElementById('loveArea'+comment).innerHTML;
+                    like.empty();
+                    like.html( (parseInt( count, 10 ) + 1) );
+                }
+                else {
+                    var count = document.getElementById('dislikeArea'+comment).innerHTML;
+                    dislike.empty();
+                    dislike.html( (parseInt( count, 10 ) + 1) );
+                }
+            }
+            else{
+                swal( "" , data.msg , "warning");
+            }
+        }
+    });
+    /*
     $.post( "loveAjax", data, function(json) {
         $.each( json.data, function() {
             if ( this['status'] == "fail" ) {
@@ -265,7 +302,7 @@ function commentJudge ( $course, $comment, $option )
                 }
             }
         } );
-    }, "json" );
+    }, "json" );*/
 }
 
 function favoriteAjax( course )

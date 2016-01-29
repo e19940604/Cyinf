@@ -107,4 +107,14 @@ class CommentRepositoryTest extends TestCase
 
     }
 
+    public function testUpdateCommentLike(){
+
+        $comment = factory( Comment::class , 1 )->create();
+
+        $result = $this->repository->updateCourseLove( $comment->id , 1);
+
+        $this->assertEquals( $comment->love , $result->love );
+        $this->assertEquals( $comment->dislike , $result->dislike );
+    }
+
 }

@@ -57,5 +57,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/pin/{course_id}/{status}' , 'UserController@pin');
 
 		Route::get( '/favorites' , 'CourseController@showFavorite');
+
+		Route::post( '/love/{comment_id}/{option}' , 'CommentController@loveComment' );
 	});
 });
