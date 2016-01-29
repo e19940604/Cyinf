@@ -67,4 +67,14 @@ class UserController extends Controller
             return response()->json(['status' => 'fail', 'message' => $result['errorMsg']]);
         }
     }
+
+    public function resendActiveMail(Request $request){
+        $result = $this->userService->userUpdate($request->all());
+        if($result === true){
+            return 'Send active mail success.';
+        }
+        else{
+            return $result['errorMsg'];
+        }
+    }
 }

@@ -101,7 +101,7 @@ class UserService
 
 		$user = $this->userRepository->getUser($userData['stu_id']);
 		if($user == NULL)
-			return ['errorMsg' => 'Bad stu id .'];
+			return ['errorMsg' => 'Bad request.'];
 
 		$updateVaildFiled = ['email', 'real_name', 'nick_name', 'department', 'grade'];
 
@@ -115,6 +115,25 @@ class UserService
 			return true;
 
 		return ['errorMsg' => 'Some thing wrong, try again later'];
+	}
+
+	public function resendActiveMail($userData){
+		$required = ['stu_id'];
+		$vaild_result = $this->vaildUserDataFormat($userData, $required);
+		if($vaild_result !== true)
+			return $vaild_result;
+
+		$user = $this->userRepository->getUser($userData['stu_id']);
+		if($user == NULL)
+			return ['errorMsg' => 'Bad request.'];
+
+		if($user->auth != 0)
+			return ['errorMsg' => 'Bad request.'];
+
+		(new EmailService )->sendRegisterMail($user->stu_id.'@student.nsysu.edu.tw', $use->real_name, \Hash::make($user->thecode));
+
+		return true;
+
 	}
 
 }
