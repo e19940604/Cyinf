@@ -50,6 +50,8 @@ Route::group(['middleware' => ['web']], function () {
 
 		Route::get('/users/profile', function () { return view('usersProfile'); });
 
+		Route::post('/users/update', 'UserController@update');
+
         Route::get('/course/judge/{course}' , 'CourseController@showCourseJudgePage');
 
         Route::post('/course/judge/{course}' , 'CourseController@courseJudge');

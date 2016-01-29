@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="studnet_id" class="col-sm-2 control-label">學號</label>
                 <div class="col-sm-10">
-                    <label class="radio-inline" style="padding-left:0px; letter-spacing: 3px;">
+                    <label class="radio-inline" id ="studnet_id" style="padding-left:0px; letter-spacing: 3px;">
                     {!! \Auth::user()->stu_id !!}
                     </label>
                 </div>

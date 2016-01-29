@@ -28,4 +28,8 @@ class UserRepository
 		$this->user->unguard();
 		return $this->user->create($userData);
 	}
+
+	public function updateUser(User $user, $userData){
+		return $user->update($userData);
+	}
 }

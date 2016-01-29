@@ -103,5 +103,14 @@ class UserServiceTest extends TestCase
 		$target = $this->userService->userRegister($user);
 		$this->assertEquals('registered', $target['filed']);
 	}
+
+	public function testUserUpdate(){
+		$user = factory(User::class, 1)->make();
+		$user->save();
+
+		$target = $this->userService->userUpdate(['stu_id' => $user->stu_id, 'email' => 'change@example.com']);
+		$this->assertTrue($target);
+
+	}
 	
 }

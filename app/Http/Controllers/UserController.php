@@ -44,16 +44,26 @@ class UserController extends Controller
         }
     }
 
-    public function pin( $course_id , $status ){
+
+    public function pin( $course_id , $status )
+    {
         $result = [];
-        if( $this->pinService->pinCourse( $course_id , $status ) ){
+        if ($this->pinService->pinCourse($course_id, $status)) {
             $result['status'] = "success";
             $status == 0 ? $result['msg'] = "取消課程釘選。" : $result['msg'] = "完成課程釘選。";
-        }
-        else{
+        } else {
             $result['status'] = "failed";
             $status == 0 ? $result['msg'] = "並未釘選該課程。" : $result['msg'] = "重複課程釘選。";
         }
-        return response()->json( $result );
+        return response()->json($result);
+    }
+    public function update(Request $request){
+        $result = $this->userService->userUpdate($request->all());
+        if($result === true){
+            return response()->json(['status' => 'success', 'message' => 'Update success.']);
+        }
+        else{
+            return response()->json(['status' => 'fail', 'message' => $result['errorMsg']]);
+        }
     }
 }
