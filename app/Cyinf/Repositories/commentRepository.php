@@ -34,11 +34,9 @@ class CommentRepository
      * @return mixed
      */
     public function latestComment( $number ){
-        return $this->comment->query()
-            ->distinct('course_id')
-            ->with('course')
+        return $this->comment
             ->orderBy('id' , 'desc')
-            ->limit( $number )
+            ->take(10)
             ->get();
     }
 

@@ -220,7 +220,7 @@
                         <span class="textFixRaleway" id="dislikeArea{{ $comment->id }}">{{ $comment->dislike }}</span>
                         <a class="glyphicon glyphicon-thumbs-down" onclick="commentJudge({{ $comment->id }}, 0)"></a>
                     </p>
-                    <p>{{ $comment->description }}</p>
+                    <p>{!!   nl2br( $comment->description ) !!}</p>
                     @endforeach
 
                 </div><!-- /scrollspy -->
