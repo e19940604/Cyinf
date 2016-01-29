@@ -25,7 +25,7 @@ function countDirect( $sec )
 
 function toHome() 
 {
-    location.href = "search#slide-main";
+    location.href = "/search#slide-main";
 }
 
 function mobileOnclick( $target )
@@ -221,22 +221,12 @@ function mMemberAjax()
 function memberAjax() 
 {
     var data = $("#memberForm").serialize();
-    $.post( "memberUpdateAjax", data, function(json) {
-
-        $.each( json.data, function() {
-            if ( this['status'] == "fail" ) {
-                $("#loginMessage").empty();
-                $("#loginMessage").html( this['message'] );
-            }
-            else if ( this['status'] == "login" ) {
-                alert(this['message']);
-                location.href = "loginView";
-            }
-            else if ( this['status'] == "success" ) {
-                location.reload();
-                alert("更新成功!");
-            }
-        } );
+    data = data + "&stu_id=" + $("#studnet_id").html().trim();
+    $.post( "/users/update", data, function(json) {
+        if ( json.status == "fail"  || json.status == "success") {
+            $("#loginMessage").empty();
+            $("#loginMessage").html( json.message );
+        }
     }, "json" );
 }
 

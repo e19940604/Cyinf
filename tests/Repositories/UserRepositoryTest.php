@@ -56,4 +56,13 @@ class UserRepositoryTest extends TestCase
     	$target = $this->UserRepository->getUserWithCheckPwd('null', $fail_pwd);
     	$this->assertNull($target);
     }
+
+    public function testUserUpdate(){
+        $user = factory(User::class, 1)->make();
+        $user->save();
+
+        $target = $this->UserRepository->updateUser($user, ['email' => 'change@example.com']);
+
+        $this->assertTrue($target);
+    }
 }

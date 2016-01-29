@@ -93,4 +93,28 @@ class UserService
 		return true;
 	}
 
+	public function userUpdate($userData){
+		$required = ['stu_id'];
+		$vaild_result = $this->vaildUserDataFormat($userData, $required);
+		if($vaild_result !== true)
+			return $vaild_result;
+
+		$user = $this->userRepository->getUser($userData['stu_id']);
+		if($user == NULL)
+			return ['errorMsg' => 'Bad stu id .'];
+
+		$updateVaildFiled = ['email', 'real_name', 'nick_name', 'department', 'grade'];
+
+		$updateData = [];
+		
+		foreach ($userData as $key => $value) {
+			if(isset($updateVaildFiled[$key])) $updateVaildFiled[$key] = $value;
+		}
+
+		if($this->userRepository->updateUser($user, $updateData))
+			return true;
+
+		return ['errorMsg' => 'Some thing wrong, try again later'];
+	}
+
 }

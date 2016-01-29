@@ -56,4 +56,14 @@ class UserController extends Controller
         }
         return response()->json( $result );
     }
+
+    public function update(Request $request){
+        $result = $this->userService->userUpdate($request->all());
+        if($result === true){
+            return response()->json(['status' => 'success', 'message' => 'Update success.']);
+        }
+        else{
+            return response()->json(['status' => 'fail', 'message' => $result['errorMsg']]);
+        }
+    }
 }
