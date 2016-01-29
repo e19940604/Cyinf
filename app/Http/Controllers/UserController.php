@@ -55,8 +55,9 @@ class UserController extends Controller
             $result['status'] = "failed";
             $status == 0 ? $result['msg'] = "並未釘選該課程。" : $result['msg'] = "重複課程釘選。";
         }
-        return response()->json($result);
+        return response()->json( $result );
     }
+
     public function update(Request $request){
         $result = $this->userService->userUpdate($request->all());
         if($result === true){

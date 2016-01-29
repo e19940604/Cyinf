@@ -32,7 +32,13 @@ Route::group(['middleware' => ['web']], function () {
         return view( 'search' );
     });
 
+    Route::get('/faq' , function(){ return view('faq'); });
+
+    Route::get('/about' , function(){ return view('about'); });
+
     Route::post('/search/{method}/{query_restrict}' , 'CourseController@getSearchResult');
+
+    Route::get('/rank' , 'HomeController@showRank');
 
     Route::group(['middleware' => 'guest'], function () {
 
@@ -59,5 +65,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/pin/{course_id}/{status}' , 'UserController@pin');
 
 		Route::get( '/favorites' , 'CourseController@showFavorite');
+
+		Route::post( '/love/{comment_id}/{option}' , 'CommentController@loveComment' );
 	});
 });

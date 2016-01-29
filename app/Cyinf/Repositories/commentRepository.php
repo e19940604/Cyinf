@@ -34,11 +34,9 @@ class CommentRepository
      * @return mixed
      */
     public function latestComment( $number ){
-        return $this->comment->query()
-            ->distinct('course_id')
-            ->with('course')
+        return $this->comment
             ->orderBy('id' , 'desc')
-            ->limit( $number )
+            ->take(10)
             ->get();
     }
 
@@ -90,6 +88,23 @@ class CommentRepository
 
     public function getUserComment($stu_id){
         return $this->comment->where('commenter', $stu_id)->get();
+    }
+
+    public function updateCourseLove( $comment_id , $option ){
+        $comment = $this->comment->find( $comment_id );
+        if( $option == 1 ){
+            $comment->update([
+                'love' => $comment->love + 1
+            ]);
+        }
+        else{
+            $comment->update([
+                'dislike' => $comment->dislike + 1
+            ]);
+        }
+
+        return $comment;
+
     }
 
 }

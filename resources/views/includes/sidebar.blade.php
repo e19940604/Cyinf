@@ -1,11 +1,9 @@
 <nav class="st-menu st-effect-1" id="menu-1">
     <h2 class="dr-icon dr-icon-menu">&nbsp;MENU</h2>
     <ul>
-        <?php
-        if ( isset($_SESSION['nick']) ) {
-            echo "<li style='font-family:微軟正黑體'><a>" . $_SESSION['nick'] . "</a></li>";
-        }
-        ?>
+        @if( \Auth::check() )
+            <li style="font-family:微軟正黑體"><a>{{ \Auth::getUser()->nick_name }}</a></li>
+        @endif
         <li><a class="icon icon-shop" href="/">Home</a></li>
         <li><a class="icon icon-study" href="/search#slide-main">Search</a></li>
         <li><a class="icon icon-heart" href="/favorites">Favorite Class</a></li>
