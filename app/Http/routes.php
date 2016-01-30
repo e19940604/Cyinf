@@ -40,11 +40,17 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/rank' , 'HomeController@showRank');
 
+    Route::get('/users/active/{code}', 'UserController@active');
+
     Route::group(['middleware' => 'guest'], function () {
 
 		Route::get('/users/login',    function () { return view('usersLogin'); });
 		Route::get('/users/register', function () { return view('usersRegister'); });
-
+		Route::get('/users/forget',   function () { return view('userForget'); });
+		Route::post('/users/forget/{stu_id}', 'Password_resetsController@forget');
+		Route::get('/users/resetForgetPassword/{token}', 'Password_resetsController@resetForgetPasswordView');
+		Route::post('/users/resetForgetPassword/{token}', 'Password_resetsController@resetForgetPassword');
+		
 		Route::post('/login', 'UserController@login');
 		Route::post('/register', 'UserController@register');
 

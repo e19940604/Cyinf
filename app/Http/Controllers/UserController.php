@@ -77,4 +77,15 @@ class UserController extends Controller
             return $result['errorMsg'];
         }
     }
+
+    public function active(Request $request, $code){
+        $result = $this->userService->userActive($code);
+        if($result === true){
+            return redirect('/users/profile');
+        }
+        else{
+            return redirect('/');
+        }
+    }
+
 }

@@ -32,4 +32,5 @@ class UserRepository
 	public function updateUser(User $user, $userData){
 		return $user->update($userData);
 	}
+
 }

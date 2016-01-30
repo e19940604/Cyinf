@@ -534,64 +534,28 @@ function resentmail(){
 	} );
 }
 
-function forgetAjax( $type ) 
+function forgetAjax() 
 {
-    if( $type == 1 )
-        target = $("#forgetForm");
-    else if( $type == 2 )
-        target = $("#teacherForm");
-    else if( $type == 3 )
-        target = $("#othersForm");
-    else{
-        location.href = "register";
-    } 
     
-	datas = target.serialize() + "&type=" + $type;
-    var login = "#loginMessage" + $type;
-    
-    if( $type == 1){
-        $("#sentPasswd").attr("disabled",true);
-    
-        $.post( "forgetAjax", datas, function(json) {
-            
-            $.each( json.data, function() {
-                if ( this['status'] == "fail" ) {
-                    $("#sentPasswd").attr("disabled",false);
-                    $(login).empty();
-                    $(login).html( this['message'] );
-                }
-                else if ( this['status'] == "success" ) {
-                    $(target).empty();
-                    $("#registerBack").hide();
-                    $(target).html( this['message'] );
-                }
-            } );
-            
-        }, "json" );
-    }
-    else if( $type == 2 || $type == 3){
-        alert(datas);
-        $.post( "forgetOthersAjax", datas, function(json) {
-            
-            $.each( json.data, function() {
-                if ( this['status'] == "fail" ) {
-                    $("#sentPasswd").attr("disabled",false);
-                    $(login).empty();
-                    $(login).html( this['message'] );
-                }
-                else if ( this['status'] == "success" ) {
-                    $(target).empty();
-                    goResetPwd( this['email']);
-                    $("#resetForm").show();
-                    $("#registerBack").hide();
-                }
-            } );
-            
-        }, "json" );
-    }
-    else{
-        location.href = "register";
-    }
+    var stu_id = $("#forgetForm #stu_id").val().trim();
+
+
+    $("#sentPasswd").attr("disabled",true);
+
+    $.post( "/users/forget/"+stu_id, "avoid_deprecated=true", function(json) {
+        
+        if ( json.status == "fail" ) {
+            $("#sentPasswd").attr("disabled", false);
+            $("#loginMessage").empty();
+            $("#loginMessage").html( json.message );
+        }
+        else if ( json.status == "success" ) {
+            $("#forgetForm").empty();
+            $("#forgetForm").html( json.message );
+        }
+        
+    }, "json" );
+
 }
 
 function goResetPwd( $email ){
@@ -697,6 +661,25 @@ function deleteFromPKonPage( courseID ){
                 location.reload();
         });
     } , "json");
+}
+
+function resetForgetPassword(){
+    var data = $("#forgetForm").serialize();
+    $("#forgetReset").attr("disabled", true);
+    $.post(location.href, data, function(json){
+
+        if(json.status == 'success'){
+            $("#forgetForm").empty();
+            $("#forgetForm").html(json.message);
+            setTimeout(function(){location.href = "/users/login"}, 1000);
+        }
+        else{
+            $("#forgetReset").attr("disabled", false);
+            $("#loginMessage").empty();
+            $("#loginMessage").html(json.message);
+        }
+
+    }, "json")
 }
 
 /* moving page */

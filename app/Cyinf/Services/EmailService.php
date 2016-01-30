@@ -21,13 +21,25 @@ use \Mail;
 class EmailService 
 {
 	public function sendRegisterMail($usermail, $username, $thecode){
-		$link = url('users/auth?code='.$thecode);
+		$link = url('/users/active/'.$thecode);
 
 		Mail::queue(
 			'emails.RegisterEmail',
 			['username' => $username, 'link' => $link],
 			function ($message) use($usermail) {
 				$message->to($usermail)->subject('Facing Course Authentication');
+			}
+		);
+	}
+
+	public function sendForgetPasswordMail($usermail, $username, $token){
+		$link = url('/users/resetForgetPassword/'.$token);
+
+		Mail::queue(
+			'emails.ResetPasswordEmail',
+			['username' => $username, 'link' => $link],
+			function ($message) use($usermail) {
+				$message->to($usermail)->subject('Facing Course Reset Password');
 			}
 		);
 	}

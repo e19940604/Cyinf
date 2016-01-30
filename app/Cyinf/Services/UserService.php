@@ -81,16 +81,20 @@ class UserService
 		if($this->userRepository->getUser($userData['stu_id']) != NULL)
 			return ['filed' => 'registered', 'errorMsg' => $userData['stu_id'].' has registered.'];
 
-		$userData['passwd']  = sha1($userData['password']);
+		$userData['passwd']  = $this->toPasswordFormat($userData['password']);
 		$userData['auth']    = 0;
-		$userData['thecode'] = sha1($userData['stu_id'].\Carbon\Carbon::now());
+		$userData['thecode'] = sha1($userData['stu_id'].\Carbon\Carbon::now().'facing-course@cyinf:active');
 		unset($userData['password']);
 		unset($userData['password_check']);
 
 		$this->userRepository->setUser($userData);
-		(new EmailService )->sendRegisterMail($userData['stu_id'].'@student.nsysu.edu.tw', $userData['real_name'], \Hash::make($userData['thecode']));
+		(new EmailService )->sendRegisterMail($userData['stu_id'].'@student.nsysu.edu.tw', $userData['real_name'], $userData['thecode']);
 		
 		return true;
+	}
+
+	public function toPasswordFormat($string){
+		return sha1($string);
 	}
 
 	public function userUpdate($userData){
@@ -130,10 +134,23 @@ class UserService
 		if($user->auth != 0)
 			return ['errorMsg' => 'Bad request.'];
 
-		(new EmailService )->sendRegisterMail($user->stu_id.'@student.nsysu.edu.tw', $use->real_name, \Hash::make($user->thecode));
+		(new EmailService )->sendRegisterMail($user->stu_id.'@student.nsysu.edu.tw', $use->real_name, $user->thecode);
 
 		return true;
 
+	}
+
+	public function userActive($thecode){
+
+		$user = User::where('thecode', $thecode)->first();
+		if($user == NULL || $user->auth != 0)
+			return false;
+
+		$user->auth = 1;
+		$user->save();
+		Auth::login($user);
+
+		return true;
 	}
 
 }

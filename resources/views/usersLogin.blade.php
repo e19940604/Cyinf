@@ -24,8 +24,8 @@
                 <div class="form-group">
                     <div class="col-sm-offset-10 col-sm-10">
                         
-                        <a href="register" style="letter-spacing:1px; margin-left:-85px;">Register</a>
-                        <a href="forget" style="letter-spacing:1px; margin-left: -2px;">忘記密碼</a>
+                        <a href="/users/register" style="letter-spacing:1px; margin-left:-85px;">Register</a>
+                        <a href="/users/forget" style="letter-spacing:1px; margin-left: -2px;">忘記密碼</a>
                         <button type="button" class="btn" onclick="loginAjax()" >Log In</button>
                     </div>
                 </div>
