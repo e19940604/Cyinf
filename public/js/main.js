@@ -13,9 +13,13 @@ function init(){
     });
 }
 
+function logoChangeMouseOver(){
+    $("#logo").attr( "src", "/img/facing-white.png" );
+}
+
 function logoChangeMouseOut() 
 {
-    $("#logo").attr( "src", "img/facing-white.png" );
+    $("#logo").attr( "src", "/img/facing-white.png" );
 }
 
 function countDirect( $sec ) 
