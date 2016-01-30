@@ -9,7 +9,7 @@
         <li><a class="icon icon-heart" href="/favorites">Favorite Class</a></li>
         <li><a class="icon icon-data" href="/rank">Rank</a></li>
         <!--<li><a class="icon icon-news" href="coursePK">Course P.K.</a></li> -->
-        <li><a class="icon icon-lock" href="/users/profile">Profile</a></li>
+        <li><a class="icon icon-user" href="/users/profile">Profile</a></li>
         <li><a class="icon icon-lab" href="/faq">F.A.Q</a></li>
         <li><a class="icon icon-mail" href="https://docs.google.com/forms/d/1LMkwDuMIwNF9aZ4yq9nTvVUmUKphklhxQP1cIpnHd6U/viewform" target="_blank">Contact</a></li>
         <li><a class="icon icon-photo" href="/about">About</a></li>

@@ -65,19 +65,20 @@
             </div>
             <div class="form-group">
                 <label for="auth" class="col-sm-2 control-label">認證</label>
-                <div class="col-sm-10">                    
+                <div class="col-sm-8">                    
                     <label class="radio-inline" style="padding-left:0px; letter-spacing: 3px;">
                     
                     @if(Auth::user()->auth == 0)
                     	未認證會員（ Limited ） <br>
-                    	<span id="resent" ><a onclick="resentmail({!! \Auth::user()->email !!}) " >重新寄送驗證信 ( Resent Confirmed Mail ) </a></span></br>
+                    	<span id="resent" ><a onclick="resentmail() " >重新寄送驗證信 ( Resent Confirmed Mail ) </a></span></br>
                     	如果還是收不到驗證信請參考 <a href="faq">F.A.Q頁面</a> 第二項
                     @else
                     	中山會員（ Authenticated )
                     @endif
-
+                    <div id="mailMessage" class="loginMessage" style="padding-left: 0%; text-align: left;"></div>
                     </label>
                 </div>
+                
             </div>
             
             <div id="loginMessage" class="loginMessage"></div>

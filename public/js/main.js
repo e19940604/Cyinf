@@ -25,7 +25,7 @@ function countDirect( $sec )
 
 function toHome() 
 {
-    location.href = "/search#slide-main";
+    location.href = "/";
 }
 
 function mobileOnclick( $target )
@@ -66,7 +66,8 @@ function loginAjax()
     $.post( "/login", data, function(result) {
         if( result == "success" ) {
             $("#loginForm").empty();
-            $("#loginForm").append( "<legend>Welcome Back</legend><br /><a href='#' onclick='toHome()'>點擊跳轉...</a>" );
+            $("#loginForm").append( "<legend>Welcome Back</legend><br />" );
+            setTimeout(toHome, 1000);
         }
         else if ( result == "fail" ) {
             var message = '* Wrong Information. Try Again.';
@@ -520,16 +521,16 @@ function rankAjax( $number )
 	} );
 }
 
-function resentmail( $id , $realname ){
+function resentmail(){
     
     var message;
     message = "<p>sending mail</p>";
-    $("#resent").empty();
-    $("#resent").append(message);
-	var data = "resent_id=" + $id + "&resent_real=" + $realname;
-	$.post( "sentactivemail" , data , function( result ){
-			$('#resent').empty();
-			$('#resent').append( result );
+    $("#mailMessage").empty();
+    $("#mailMessage").append(message);
+	var data = "stu_id=" + $("#studnet_id").html().trim();
+	$.post( "/users/resendActiveMail" , data , function( result ){
+			$('#mailMessage').empty();
+			$('#mailMessage').append( result );
 	} );
 }
 

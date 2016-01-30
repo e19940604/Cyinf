@@ -58,6 +58,8 @@ Route::group(['middleware' => ['web']], function () {
 
 		Route::post('/users/update', 'UserController@update');
 
+		Route::post('/users/resendActiveMail', 'UserController@resendActiveMail');
+
         Route::get('/course/judge/{course}' , 'CourseController@showCourseJudgePage');
 
         Route::post('/course/judge/{course}' , 'CourseController@courseJudge');
