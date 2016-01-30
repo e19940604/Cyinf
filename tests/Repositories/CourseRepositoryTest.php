@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Cyinf\Comment;
 use Cyinf\Course;
 use Cyinf\User;
+use Cyinf\Repositories\CourseRepository;
 
 class CourseRepositoryTest extends TestCase
 {
@@ -84,5 +85,10 @@ class CourseRepositoryTest extends TestCase
     }
 
 
+    public function testGetLikeTop(){
+
+        $result = $this->repository->getLikeTop( 10 );
+
+    }
 
 }

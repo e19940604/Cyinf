@@ -9,7 +9,7 @@
     <article role="main">
         <h1 style="width:900px">{{ $course->course_nameEN  }} /</h1><br />
         <div class="back-to-search">
-            <a href="search#slide-3" style="font-size:16px">Back To Search &nbsp;<i class="glyphicon glyphicon-circle-arrow-left"></i></a>
+            <a href="/search#slide-3" style="font-size:16px">Back To Search &nbsp;<i class="glyphicon glyphicon-circle-arrow-left"></i></a>
         </div>
         <table class="table table-hover">
             <thead>

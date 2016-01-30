@@ -177,4 +177,19 @@ class CoursePresenter
         return "<a href='#searching' class='glyphicon glyphicon-pushpin' onclick='pinAjax(" . $course_id . ", 1)'></a>";
     }
 
+    public function depNameMap( $dep ){
+        $map = [
+            'universe' => '通識博雅',
+            'service' => '服務學習',
+            'cross' => '跨院選修',
+            'pipe' => '管學院',
+            'technology' => '工學院',
+            'science' => '理學院',
+            'arts' => '文學院',
+            'social' => '社科院',
+            'ocean' => '海科院'
+        ];
+        return $map[ $dep ];
+    }
+
 }
