@@ -588,25 +588,22 @@ function resetOthers(){
 /* by yao-ming */
 
 function goReset(){
-	location.href = "resetPassword";
+	location.href = "/users/changepwd";
 }
 
 function resetPassword(){
 	var data = $("#resetForm").serialize();
 
-    $.post( "resetPasswordFunc", data, function(json) {
-		$.each( json.data, function() {
-            if ( this['status'] == "fail" ) {
-                $("#loginMessage").empty();
-                $("#loginMessage").html( this['message'] );
-            }else if ( this['status'] == "login" ) {
-                alert(this['message']);
-                location.href = "loginView";
-            }
-            else if ( this['status'] == "success" ) {
-                location.href = "logout";
-            }
-        } );
+    $.post( location.href , data, function(json) {
+		if(json.status == 'success'){
+            $("#resetForm").empty();
+            $("#resetForm").html("<h3>更新成功(Update success)</h3>");
+            setTimeout(function(){location.href = '/users/profile';}, 1000);
+        }
+        else if(json.status == "fail"){
+            $("#loginMessage").empty();
+            $("#loginMessage").html(json.message);
+        }
     } , "json" );
 }
 

@@ -29,7 +29,7 @@ class Password_resetsController extends Controller
     public function resetForgetPasswordView($token){
     	$result = $this->password_resetsService->check($token);
     	if($result === true){
-    		return view('/userResetForgetPassword');
+    		return view('/usersResetForgetPassword');
     	}
     	else{
     		return redirect('/');

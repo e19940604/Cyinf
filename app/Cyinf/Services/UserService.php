@@ -153,4 +153,21 @@ class UserService
 		return true;
 	}
 
+	public function userChangePassword($userData){
+		
+		$vaild_result = $this->vaildUserDataFormat($userData, ['old_password', 'password', 'password_check']);
+		if($vaild_result !== true)
+			return $vaild_result;
+
+		$user = Auth::user();
+
+		if($this->toPasswordFormat($userData['old_password']) !== $user->passwd)
+			return ['errorMsg' => 'Wrong authentication.'];
+
+		$user->passwd = $this->toPasswordFormat($userData['password']);
+		$user->save();
+
+		return true;
+	}
+
 }

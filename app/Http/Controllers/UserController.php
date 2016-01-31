@@ -88,4 +88,14 @@ class UserController extends Controller
         }
     }
 
+    public function changepwd(Request $request){
+        $result = $this->userService->userChangePassword($request->all());
+        if($result === true){
+            return response()->json(['status' => 'success']);
+        }
+        else{
+            return response()->json(['status' => 'fail', 'message' => $result['errorMsg']]);
+        }
+    }
+
 }
