@@ -21,17 +21,18 @@ class CreateStudentTable extends Migration
             $table->tinyInteger('department');
             $table->enum('gender' , [ '男' , '女' ]);
             $table->string('email')->unique();
-            $table->string('FB_conn');
-            $table->string('hobby');
-            $table->string('mobile_num');
-            $table->string('introduction');
-            $table->string('update_date');
-            $table->string('update_time');
+            $table->string('FB_conn')->default('');
+            $table->string('hobby')->default('');
+            $table->string('mobile_num')->default('');
+            $table->string('introduction')->default('');
+            $table->string('update_date')->default('');
+            $table->string('update_time')->default('');
 
             $table->tinyInteger('auth');
-            $table->string('thecode');
+            $table->string('thecode')->default('');
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 

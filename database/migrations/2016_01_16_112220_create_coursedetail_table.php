@@ -13,10 +13,10 @@ class CreateCoursedetailTable extends Migration
     public function up()
     {
         Schema::create('coursedetail', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->increments('id');
             $table->string('course_nameCH');
             $table->string('course_nameEN');
-            $table->tinyInteger('course_department');
+            $table->string('course_department');
             $table->string('professor');
             $table->tinyInteger('unit');
             $table->tinyInteger('course_grade');
@@ -37,6 +37,7 @@ class CreateCoursedetailTable extends Migration
             $table->string('place');
 
             $table->timestamps();
+
         });
     }
 
