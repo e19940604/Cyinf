@@ -123,4 +123,76 @@ class CourseService
 
     }
 
+    public function addCourse($courseData){
+
+        //check auth
+        if(!\Hash::check(env('APP_KEY'), $courseData['apikey']))
+            return false;
+
+        
+        $data =  json_decode( $courseData['data'] , true );
+
+        $course = explode( "\n" , $data['course'] );
+        $data['course_nameCH'] = $course[0];
+        $data['course_nameEN'] = $course[1];
+        unset($data['courseData']);
+
+        $days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        $time1 = array();
+        $time2 = array();
+
+        foreach ($days as $key => $value) {
+            $time = $data['time'.($key+1)];
+            if(ord($time) != 194);
+            array_push( $time1 , 'Mon' );
+            array_push( $time2 , $time );
+        }
+        
+        $data['time1'] = implode( "," , $time1 );
+        $data['time2'] = implode( "," , $time2 );
+
+        unset($data['time3']); unset($data['time4']); unset($data['time4']);
+        unset($data['time6']); unset($data['time7']);
+
+        if( $department >= 10 && $department <= 16 )
+            $course = $this->courseRepository->getCourse($data['course_nameCH'], $data['professor']);
+        else
+            $course = $this->courseRepository->getCourse($data['course_nameCH'], $data['professor'], $data['course_department']);
+
+        if($course != NULL){
+            $course->time1 = $data['time1'];
+            $course->time2 = $data['time2'];
+            $course->place = $data['place'];
+
+            if( $data['course_department'] >= 10 && $data['course_department'] <= 16 && strlen($course['course_department']) <= 2 && $course['course_department'] != $data['course_department']){
+                $data['course_department'] = $course['course_department'].','.$data['course_department'];
+            }
+
+            $course->save();
+        }
+        else{
+            
+            $initData = [
+                'current_rank' => 1200, 
+                'judge_people' => 0, 
+                'teach_quality' => 50, 
+                'time_cost' => 50,
+                'sign_dif' => 50, 
+                'test_dif' => 50, 
+                'homework_dif' => 50, 
+                'grade_dif' => 50, 
+                'TA_rank' => 50, 
+                'practical_rank' => 50, 
+                'roll_freq' => 50, 
+                'nutrition_rank => 50'
+            ];
+
+            $data = array_merge($data, $initData);
+            $this->courseRepository->create($data);
+
+            return true;
+        }
+
+    }
+
 }

@@ -117,4 +117,11 @@ class CourseController extends Controller
         $favorites = $user->courses()->get();
         return view('favorite' , [ 'favorites' => $favorites ]);
     }
+
+    public function addCourse(Request $request){
+        if($this->courseService->addCourse($request->all()))
+            return "success";
+        else
+            return "fail";
+    }
 }

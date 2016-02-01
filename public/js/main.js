@@ -426,7 +426,7 @@ function courseSearch()
 
     var url = "/search/course/" + courseName;
 
-    $.post( url , null , function(result) {
+    $.post( url , "avoid_deprecated=true" , function(result) {
         courseShow.empty();
         courseShow.append( result );
         $('#courseInput').val('');
@@ -442,7 +442,7 @@ function professorSearch()
 
     var url = "/search/professor/" + professor;
     
-    $.post( url , null, function(result) {
+    $.post( url , "avoid_deprecated=true", function(result) {
         courseShow.empty();
         courseShow.append( result );
         $("#professorInput").val('');
@@ -464,7 +464,7 @@ function departmentSearch( grade )
     var dep_grade = department + "," + grade;
     var url = "/search/department/" + dep_grade;
  
-    $.post( url , null, function(result) {
+    $.post( url , "avoid_deprecated=true", function(result) {
         courseShow.empty();
         courseShow.append( result );
     } );
