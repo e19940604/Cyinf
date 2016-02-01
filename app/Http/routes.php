@@ -42,6 +42,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/users/active/{code}', 'UserController@active');
 
+    Route::post('/addCourse', 'CourseController@addCourse');
+
     Route::group(['middleware' => 'guest'], function () {
 
 		Route::get('/users/login',    function () { return view('usersLogin'); });

@@ -133,4 +133,17 @@ class CourseRepository
             ->take( $number )
             ->get();
     }
+
+    public function getCourse($course_nameCH, $professor, $course_department = NULL){
+        $courseBuilder =  $this->course->where('course_nameCH', $course_nameCH)->where('professor', $professor);
+        if($course_department != NULL)
+            $courseBuilder = $courseBuilder->where('course_department', $course_department);
+        return $courseBuilder->first();
+    }
+
+    public function create($courseData){
+        $this->course->ungrad();
+        return $this->course->create($courseData);
+    }
+
 }
