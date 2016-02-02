@@ -107,16 +107,16 @@ class CourseService
         }
 
         $course->current_rank = $rank;
-        $course->teach_quality = $c->sum('teach_q') / $total_comment;
-        $course->time_cost = $c->sum('time_c') / $total_comment;
-        $course->sign_dif = $c->sum('sign_d') / $total_comment;
-        $course->test_dif = $c->sum('test_d') / $total_comment;
-        $course->homework_dif = $c->sum('homework_d') / $total_comment;
-        $course->grade_dif = $c->sum('grade_d') / $total_comment;
-        $course->TA_rank = $c->sum('TA_r') / $total_comment;
-        $course->practical_rank = $c->sum('practical_r') / $total_comment;
-        $course->roll_freq = $c->sum('rollCall_r') / $total_comment;
-        $course->nutrition_rank = $c->sum('nutrition_r')/ $total_comment;
+        $course->teach_quality = ( $c->sum('teach_q') + 50 ) / ( $total_comment + 1 );
+        $course->time_cost = ( $c->sum('time_c') + 50 ) / ( $total_comment + 1 );
+        $course->sign_dif = ( $c->sum('sign_d') + 50 ) / ( $total_comment + 1 );
+        $course->test_dif = ( $c->sum('test_d') + 50 ) / ( $total_comment + 1 );
+        $course->homework_dif = ( $c->sum('homework_d') + 50 ) / ( $total_comment + 1 );
+        $course->grade_dif = ( $c->sum('grade_d') + 50 ) / ( $total_comment + 1 );
+        $course->TA_rank = ( $c->sum('TA_r') + 50 ) / ( $total_comment + 1 );
+        $course->practical_rank = ( $c->sum('practical_r') + 50 ) / ( $total_comment + 1 );
+        $course->roll_freq = ( $c->sum('rollCall_r') + 50 ) / ( $total_comment + 1 );
+        $course->nutrition_rank = ( $c->sum('nutrition_r') + 50 ) / ( $total_comment + 1 );
         $course->judge_people = $total_comment;
 
         $course->save();
