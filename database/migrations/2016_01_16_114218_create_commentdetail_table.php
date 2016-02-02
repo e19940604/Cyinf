@@ -29,7 +29,7 @@ class CreateCommentdetailTable extends Migration
             $table->tinyInteger('nutrition_r');
             $table->string('date');
             $table->string('time');
-            $table->string('description');
+            $table->text('description');
             $table->tinyInteger('read')->default(0);
             $table->tinyInteger('love')->default(0);
             $table->tinyInteger('dislike')->default(0);
