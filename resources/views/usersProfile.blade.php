@@ -110,7 +110,7 @@
                     </tr>
                 </thead>
                 <tbody id="courseShow">
-                	@inject('usersProfilePresenter', 'Cyinf\Presenters\usersProfilePresenter')
+                	@inject('usersProfilePresenter', 'Cyinf\Presenters\UsersProfilePresenter')
                     {!! $usersProfilePresenter->viewUserCommentCourses() !!}
                 </tbody>
             </table>
