@@ -41,8 +41,7 @@ class AutoRefreshCourse extends Command
      */
     public function handle()
     {   
-        $this->line('Start refresh course');
         $this->courseService->autoAddCourse($this->argument('D0'), $this->output);
-        $this->line('End refresh course');
+        $this->line();
     }
 }
