@@ -133,11 +133,12 @@ class CourseService
             $course->time2 = $data['time2'];
             $course->place = $data['place'];
 
+            if($data['course_department'] < 10 || $data['course_department'] > 16){
+                $course->course_grade = $data['course_grade'];
+            }
+
             if( $data['course_department'] >= 10 && $data['course_department'] <= 16 && strlen($course->course_department) <= 2 && $course->course_department != $data['course_department']){
                 $course->course_department = $course->course_department.','.$data['course_department'];
-            }
-            else{
-                $course->course_grade = $data['course_grade'];
             }
 
             $course->save();
