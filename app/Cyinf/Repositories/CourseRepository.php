@@ -142,7 +142,7 @@ class CourseRepository
     }
 
     public function create($courseData){
-        $this->course->ungrad();
+        $this->course->unguard();
         return $this->course->create($courseData);
     }
 
