@@ -82,5 +82,3 @@ Route::group(['middleware' => ['web']], function () {
 	});
 });
 
-Route::any('{any}', function(){ return view('404');});
-
