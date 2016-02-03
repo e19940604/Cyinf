@@ -81,3 +81,4 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post( '/love/{comment_id}/{option}' , 'CommentController@loveComment' );
 	});
 });
+
