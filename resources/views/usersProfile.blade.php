@@ -115,6 +115,26 @@
                 </tbody>
             </table>
         </div>
+        <h3 style="width:85%; margin: 0 auto"><span class="textFix">Recommendation Course /</span></h3><br />
+        <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example" style="width:85%; margin: 0 auto">
+            <table class="table table-hover showSearchTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Course</th>
+                        <th>Professor</th>
+                        <th>Department</th>
+                        <th>Grade</th>
+                        <th>Judge People</th>
+                        <th>Rank</th>
+                        <th>Pin</th>
+                    </tr>
+                </thead>
+                <tbody id="recommendation">
+                    {!! $usersProfilePresenter->viewRecommendation() !!}
+                </tbody>
+            </table>
+        </div>
 		<div class="statistic" style="width:85%; margin: 0 auto">
             <h3><span class="textFix">Personal Statistics /</span></h3>
             <ul>
