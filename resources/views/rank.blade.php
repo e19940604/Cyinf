@@ -51,7 +51,7 @@
                         <td>{{ $course->professor  }}</td>
                         <td>{{ $coursePresenter->getDepartmantNameByCode( $course->course_department) }}</td>
                         <td>{{ $coursePresenter->getGradeNameByNum( $course->course_grade ) }}</td>
-                        <td><div class=\"rankDescription\">{{ $course->description }}</div></td>
+                        <td><div class=\"rankDescription\">{!!  nl2br( $course->description ) !!}</div></td>
                         <td>{{ $course->love }}</td>
                         <td>{{ $course->dislike }}</td>
                         <td>{{ $course->current_rank }}</td>
