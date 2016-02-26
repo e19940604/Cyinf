@@ -16,7 +16,8 @@ class CourseSearchByRule implements CourseSearchInterface {
     //{rule,rule}
     //department de:[]
     //grage      gr:[]
-    //time       ti:[]
+    //time1      ti1:[]
+    //time2      ti2:[]
     //place      pl:[]
     //dimensions di:[]
     
@@ -28,9 +29,9 @@ class CourseSearchByRule implements CourseSearchInterface {
     	'de'  => 'course_department', 
     	'gr'  => 'course_grade',
         'ti1' => 'time1',
-    	'ti2' => 'time2', 
-    	'pl'  => 'place', 
-    	'di'  => 'course_dimensions'
+        'ti2' => 'time2', 
+        'pl'  => 'place', 
+        'di'  => 'course_dimensions'
     ];
 
     /**
@@ -70,7 +71,7 @@ class CourseSearchByRule implements CourseSearchInterface {
     	$data = json_decode($query_string, true);
     	if(!empty($data)){
     		foreach ($data as $key => $value) {
-    			if(!in_array($key, $this->accept_rule))
+    			if(!in_array($key, $this->accept_rule) || empty($data[$key]))
     				unset($data[$key]);
     		}
     	}
