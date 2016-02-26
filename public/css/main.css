@@ -452,7 +452,7 @@ blockquote small {
     float: left;
     position: relative;
     top: 0px;
-    left: 200px;
+    left: 10%;
     opacity: 0.8;
     filter: alpha(opacity=80); /* For IE8 and earlier */
 }
@@ -465,7 +465,7 @@ blockquote small {
     float: left;
     position: relative;
     top: 250px;
-    left: 16%;
+    left: 10%;
     opacity: 0.8;
     filter: alpha(opacity=80); /* For IE8 and earlier */
 }
@@ -478,13 +478,43 @@ blockquote small {
     float: left;
     position: relative;
     top: 0px;
-    left: 13%;
+    left: 10%;
     opacity: 0.8;
     filter: alpha(opacity=80); /* For IE8 and earlier */
 }
 
 .department img:hover {
     opacity: 1;
+}
+
+.advance img {
+    float: left;
+    position: relative;
+    top: 250px;
+    left: 10%;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.advance img:hover {
+    opacity: 1;
+}
+
+.advancelabel {
+    color: #999;
+    letter-spacing: 6px;
+    font-size: 18px;
+}
+
+.add-rule-icon {
+    color: #666;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.add-rule-icon :hover {
+    color: #999;
+    cursor: pointer; 
 }
 
 /* courseDetail define */

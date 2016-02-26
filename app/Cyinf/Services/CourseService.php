@@ -141,6 +141,10 @@ class CourseService
                 $course->course_department = $course->course_department.','.$data['course_department'];
             }
 
+            if(isset($data['course_dimensions'])){
+                $course->course_dimensions = $data['course_dimensions'];
+            }
+
             $course->save();
         }
         else{
@@ -161,9 +165,8 @@ class CourseService
             ];
             
             $data = array_merge($data, $initData);
-            $this->courseRepository->create($data);
+            $course = $this->courseRepository->create($data);
         }
-
     }
 
     public function autoAddCourse($D0, \Symfony\Component\Console\Output\OutputInterface $output){
@@ -263,6 +266,8 @@ class CourseService
             60 => "M509"            //case 60: echo '海科系（OO）'; break;
         ];
 
+        $this->initCourse();
+
         $bar = new \Symfony\Component\Console\Helper\ProgressBar($output, count($NormalD1Collect) + count($SpecialD1Collect));
         $bar->start();
 
@@ -274,18 +279,24 @@ class CourseService
         }
 
         foreach ($SpecialD1Collect as $course_department => $D1) {
-            $this->fectch($D0, $D1, $course_department);
+            $this->fectch($D0, $D1, $course_department, true);
             $bar->advance();
         }
 
         $bar->finish();
     }
 
-    private function fectch($D0, $D1, $course_department){
+    private function fectch($D0, $D1, $course_department, $is_special = false){
         $days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         $page = 1;
         $basicUrl = "http://selcrs.nsysu.edu.tw/menu1/dplycourse.asp?D0=".$D0."&D1=".$D1."&TYP=1";
         $flag = true;
+        $need_course_dimensions_department = [7];
+        $convert_course_dimensions = [
+            '一' => 1, '二' => 2, '三' => 3, 
+            '四' => 4, '五' => 5, '六' => 6
+        ];
+
         while($flag){
             $url = $basicUrl."&page=".$page;
             $html = new \Htmldom($url);
@@ -314,6 +325,20 @@ class CourseService
                     }
                 }
 
+                if(in_array($data['course_department'], $need_course_dimensions_department)){
+                    @$course_dimensions = $tr->children[3]->plaintext;
+                    foreach ($convert_course_dimensions as $key => $value) {
+                        if(mb_stripos($course_dimensions, $key, 0, 'UTF-8') !== FALSE){
+                            $data['course_dimensions'] = $value;
+                            break;
+                        }
+                    }
+                }
+
+                if($is_special && $data['course_department'] >= 18){
+                    $data['course_grade'] = 5;
+                }
+
                 if(array_search("", $data) !== false)
                     continue;
 
@@ -326,6 +351,10 @@ class CourseService
             if(mb_stripos($trCollect[$totalTr - 2]->plaintext, "下一頁", 0, 'UTF-8') === FALSE)
                 $flag = false;
         }
+    }
+
+    private function initCourse(){
+        $this->courseRepository->initCourse();
     }
 
 }

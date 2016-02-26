@@ -17,7 +17,7 @@ class DepartmentPresenter
 			$this->user_department = \Auth::user()->department;
 		}
 		else{
-			$this->user_department = 0;
+			$this->user_department = -1;
 		}
 	}
 
@@ -31,5 +31,16 @@ class DepartmentPresenter
 
 		return $html;
 
+	}
+
+	public function viewAllDepartmentOption(){
+		$html = '';
+		$total = count(DepartmentParser::$department_map);
+
+		for ($value = 0; $value < $total; ++$value) {
+			$html .= '<option value="'.$value.'"'.(($this->user_department == $value) ? 'selected' : '').' >'.$this->department_parser->parse($value).'</option>';
+		}
+
+		return $html;
 	}
 }

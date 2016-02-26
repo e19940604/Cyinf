@@ -3,7 +3,7 @@ namespace Cyinf;
 
 class DepartmentParser
 {
-    static private $department_map = [
+    static public $department_map = [
 			0 =>'國語文',
 			1 =>'英文初級',
 			2 =>'英文中級',

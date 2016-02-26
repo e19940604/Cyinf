@@ -37,6 +37,11 @@
                         <img src="img/department-white.png" title="Department" alt="Department"/>
                     </div>
                 </a>
+                <a href="#slide-4">
+                    <div class="advance">
+                        <img src="img/advance-white.png" title="Advance search" alt="Advance search"/>
+                    </div>
+                </a>
             </div>
         </div>
 
@@ -192,12 +197,175 @@
             </div>
         </div>
 
+        <!-- Slide 4 and Sub-slides -->
+        <div class="cn-slide cn-slide-sub professorEnter" id="slide-4">
+            <a href="#slide-main" class="textFix cn-back">BACK /</a>
+            <a href="#slide-main"><img src="img/advance.png" title="professorName" /></a>
+            <form class="form-horizontal" role="advance-Search" action="#searching" id="advanceForm">
+
+                <div class="form-group" id="add-rule">
+                    <div class="col-sm-offset-9 col-sm-2">
+                        <span class="add-rule-icon" onclick="addRule();"><i class="fa fa-plus-circle fa-3x"></i></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-10 col-sm-2">
+                        <button type="button" id="advance" class="btn" onclick="advanceSearch()" >GO!</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </section>
 
 @endsection
 
 @section('scriptArea')
     <script  type="text/javascript">
+
+        rule = {};
+
+        function addRule(){
+            html = '<div class="form-group">'+
+                        '<label for="rule" class="col-sm-offset-1 col-sm-2 control-label advancelabel">條件</label>'+
+                        '<div class="col-sm-3">'+
+                            '<select class="form-control holder rule-key">'+
+                                '<option value=""></option>'+
+                                '<option value="de">系所</option>'+
+                                '<option value="ti1">星期</option>'+
+                                '<option value="ti2">節次</option>'+
+                                '<option value="gr">年級</option>'+
+                                '<option value="pl">教室(大樓)</option>'+
+                                '<option value="di">向度(博雅)</option>'+
+                            '</select>'+
+                        '</div>'+
+                        '<div class="col-sm-3">'+
+                            '<select class="form-control holder rule-value">'+
+                                '<option value=""></option>'+
+                            '</select>'+
+                        '</div>'+
+                        '<div class="col-sm-2">'+
+                            '<span class="add-rule-icon remove-rule" ><i class="fa fa-minus-circle fa-3x"></i></span>'+
+                        '</div>'+
+                    '</div>';
+            $("#add-rule").before(html);
+        }
+
+        $("#advanceForm").on("change", ".rule-key", function(){
+            value  = $(this).val();
+            target = $(this).parent().next().children(".rule-value");
+            html = '<option value=""></option>';
+
+            switch(value){
+                case "de":  html += getDeHtml(); break;
+                case "ti1": html += getTi1Html();break;
+                case "ti2": html += getTi2Html();break;
+                case "gr":  html += getGrHtml(); break;
+                case "pl":  html += getPlHtml(); break;
+                case "di":  html += getDiHtml(); break;
+            }
+
+            target.html(html);
+
+        });
+
+        $("#advanceForm").on("change", ".rule-value", function(){
+            rule_value = $(this).val();
+            rule_key   = $(this).parent().prev().children(".rule-key").val();
+            
+            if(!(rule_key in rule)){
+                rule[rule_key] = [rule_value];
+            }
+            else {
+                if($.inArray(rule_value, rule[rule_key]) >= 0){
+                    swal( "" , "重複條件" , "warning");
+                }
+                else{
+                    rule[rule_key].push(rule_value);
+                }
+            }
+        });
+
+        $("#advanceForm").on("click", ".remove-rule", function(){
+            rule_key   = $(this).parent().prev().prev().children(".rule-key").val();
+            rule_value = $(this).parent().prev().children(".rule-value").val();
+
+            if(rule_key in rule){
+                found = $.inArray(rule_value, rule[rule_key]);
+                if(found >=0 ){
+                    rule[rule_key].splice(found, 1);
+                }
+            }
+
+            $(this).parent().parent().remove();
+        });
+
+        function getDeHtml(){
+            @inject('departmentPresenter', 'Cyinf\Presenters\DepartmentPresenter')
+            return '{!! $departmentPresenter->viewAllDepartmentOption() !!}';
+        }
+
+        function getTi1Html(){
+            ti1 = ["Mon", "Tue" ,"Wed", "Thu", "Fri", "Sat", "Sun"];
+            html = '';
+            ti1.forEach(function(day){
+                html += '<option value="'+day+'">'+day+'</option>'
+            }, html);
+            return html;
+        }
+
+        function getTi2Html(){
+            ti2 = ["A", "1" ,"2", "3", "4", "B", "5", "6", "7", "8", "9", "C", "D", "E", "F"];
+            html = '';
+            ti2.forEach(function(time){
+                html += '<option value="'+time+'">'+time+'</option>'
+            }, html);
+            return html;
+        }
+
+        function getGrHtml(){
+            gr = ["一年級", "二年級", "三年級", "四年級", "研究所"];
+            html = '';
+            gr.forEach(function(grade, index){
+                html += '<option value="'+(index+1)+'">'+grade+'</option>'
+            }, html);
+            return html;
+        }
+
+        function getPlHtml(){
+            pl = [
+                "社SS", "管CM", "理SC", "理BI", "理PH", "理CH",
+                "工EN", "工MS", "工EV", "工EC", "通GE",
+                "海ME", "海MA", "海MB", "文FA", "文LA"
+            ];
+
+            html = '';
+            pl.forEach(function(place){
+                html += '<option value="'+place+'">'+place+'</option>'
+            }, html);
+            return html;
+        }
+
+        function getDiHtml(){
+            di = ["向度一", "向度二", "向度三", "向度四", "向度五", "向度六"];
+            html = '';
+            di.forEach(function(dimensions, index){
+                html += '<option value="'+(index+1)+'">'+dimensions+'</option>'
+            }, html);
+            return html;
+        }
+
+        function advanceSearch(){
+
+            var url = "/search/rule/" + JSON.stringify(rule);
+
+            $.post( url , "avoid_deprecated=true", function(result) {
+                courseShow.empty();
+                courseShow.append( result );
+                location.href = "search#searching";
+            } );
+        }
 
     </script>
 @endsection
