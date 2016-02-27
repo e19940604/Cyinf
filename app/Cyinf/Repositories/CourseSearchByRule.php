@@ -71,7 +71,7 @@ class CourseSearchByRule implements CourseSearchInterface {
     	$data = json_decode($query_string, true);
     	if(!empty($data)){
     		foreach ($data as $key => $value) {
-    			if(!in_array($key, $this->accept_rule) || empty($data[$key]))
+    			if(!in_array($key, $this->accept_rule) || !is_array($data[$key]))
     				unset($data[$key]);
     		}
     	}

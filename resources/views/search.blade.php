@@ -237,7 +237,7 @@
                                 '<option value="ti2">節次</option>'+
                                 '<option value="gr">年級</option>'+
                                 '<option value="pl">教室(大樓)</option>'+
-                                '<option value="di">向度(博雅)</option>'+
+                                '<option value="di">向度(通識教育)</option>'+
                             '</select>'+
                         '</div>'+
                         '<div class="col-sm-3">'+
