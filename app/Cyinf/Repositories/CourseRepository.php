@@ -46,6 +46,9 @@ class CourseRepository
             case "professor":
                 $searchClass = new CourseSearchByProfessor( $this->course );
                 break;
+            case "rule":
+                $searchClass = new CourseSearchByRule( $this->course );
+                break;
             default:
                 $searchClass = new CourseSearchByName( $this->course );
         }
@@ -144,6 +147,10 @@ class CourseRepository
     public function create($courseData){
         $this->course->unguard();
         return $this->course->create($courseData);
+    }
+
+    public function initCourse(){
+        $this->course->update(['time1' => '', 'time2' => '', 'place' => '']);
     }
 
 }

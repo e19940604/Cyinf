@@ -44,6 +44,7 @@
 <link rel="stylesheet" href={{ asset("css/component.css") }} />
 <link rel="stylesheet" href={{ asset("css/componentMenu.css") }} />
 <link rel="stylesheet" href={{ asset("css/icons.css") }} />
+<link rel="stylesheet" href={{ asset("css/font-awesome.min.css") }} />
 <link rel="stylesheet" href={{ asset("css/main.css") }}>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href={{ asset("css/slideFrame-style.css") }} />

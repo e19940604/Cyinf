@@ -470,6 +470,7 @@ function departmentSearch( grade )
     } );
 }
 
+
 function courseJudgeAjax()
 {
     $("#commentDetails").submit();
