@@ -46,7 +46,7 @@ class RouteControllerTest extends TestCase
 
         $this->assertResponseOk();
 
-        $this->assertViewHas( [ "total" , "latest_comments" ] );
+        $this->assertViewHas( [ "total" , "last_comments" ] );
     }
 
     public function testCoursePage(){

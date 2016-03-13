@@ -48,6 +48,7 @@ $factory->define( Course::class , function (Faker\Generator $faker) {
        'time1' => $faker->dayOfWeek,
        'time2' => $faker->randomElement(['234' , '567' , '12' , '34' , '56' , '78' , 'CDE' ]),
        'place' => $faker->cityPrefix,
+       'course_dimensions' => 1
    ];
 });
 

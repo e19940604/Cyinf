@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateCourseTable extends Migration
+class UpdateCourseTableForDefaultValue extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class UpdateCourseTable extends Migration
      */
     public function up()
     {
-        /*Schema::table('coursedetail', function (Blueprint $table) {
-            $table->integer('course_dimensions');
-        });*/
+        Schema::table('coursedetail', function (Blueprint $table) {
+            $table->integer('course_dimensions')->default(0);
+        });
     }
 
     /**

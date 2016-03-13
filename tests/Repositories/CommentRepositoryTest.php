@@ -113,7 +113,7 @@ class CommentRepositoryTest extends TestCase
 
         $result = $this->repository->updateCourseLove( $comment->id , 1);
 
-        $this->assertEquals( $comment->love , $result->love );
+        $this->assertEquals( $comment->love + 1 , $result->love );
         $this->assertEquals( $comment->dislike , $result->dislike );
     }
 

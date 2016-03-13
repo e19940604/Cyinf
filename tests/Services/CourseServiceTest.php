@@ -61,15 +61,16 @@ class CourseServiceTest extends TestCase
 
         $comment1 = factory( Comment::class , 1 )->create( [ 'course_id' => $course->id , 'teach_q' => 30 ] );
         $comment2 = factory( Comment::class , 1 )->create( [ 'course_id' => $course->id ,'teach_q' => 100 ] );
-
-
         $comment = factory( Comment::class , 1 )->create( ['course_id' => $course->id , 'teach_q' => 100 ]);
 
         $this->courseService->UpdateCurrentRank( $course , $comment );
+        $this->courseService->UpdateCurrentRank( $course , $comment1 );
+        $this->courseService->UpdateCurrentRank( $course , $comment2 );
 
         $course = Course::find( $course->id );
 
-        $this->assertEquals( $course->teach_quality , ($comment1->teach_q + $comment2->teach_q + $comment->teach_q) / 3 );
+
+        $this->assertEquals( $course->teach_quality , ( $comment1->teach_q + $comment2->teach_q + $comment->teach_q + 50 ) / 4 );
 
     }
 }
