@@ -8,6 +8,7 @@
 
     @yield('style')
     @include('includes.includingHeader')
+    @include('includes.cyinfCss')
 
     <noscript>
         <style>

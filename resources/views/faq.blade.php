@@ -1,7 +1,16 @@
 @extends('layout')
 
 @section('title' , "Favorite Courses" )
+@section('style')
+<style type="text/css">
+    article{
+        color: #333 !important;
+    }
+</style>
+@endsection
+
 @inject( 'coursePresenter' , 'Cyinf\Presenters\CoursePresenter' )
+
 
 @section('content')
     <article role="main">

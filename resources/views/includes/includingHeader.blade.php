@@ -7,7 +7,7 @@
 ?>
 
 <meta name="description" content="">
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 
 <!-- Search Keywords -->
 <meta name="keywords" content="facingcourse" />
@@ -37,18 +37,16 @@
 <meta property="og:site_name" content="Cyinf" />
 <meta property="fb:admins" content="470348216350824" />
 
-<link rel="icon" href={{ asset("img/shortIcon.png") }}>
+
 <link rel="stylesheet" href={{ asset("css/normalize.css") }}>
-<link rel="stylesheet" href={{ asset("css/bootstrap.min.css") }}>
-<link rel="stylesheet" href={{ asset("css/bootstrap-theme.min.css") }}>
-<link rel="stylesheet" href={{ asset("css/component.css") }} />
-<link rel="stylesheet" href={{ asset("css/componentMenu.css") }} />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <link rel="stylesheet" href={{ asset("css/icons.css") }} />
 <link rel="stylesheet" href={{ asset("css/font-awesome.min.css") }} />
-<link rel="stylesheet" href={{ asset("css/main.css") }}>
+
 <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href={{ asset("css/slideFrame-style.css") }} />
 <link rel="stylesheet" href={{ asset("css/docs.css") }}>
 <link rel="stylesheet" href={{ asset("css/style12.css") }}>
-<link rel="stylesheet" href={{ asset("css/componentPK.css") }}>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">

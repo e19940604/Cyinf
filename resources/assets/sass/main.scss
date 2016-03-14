@@ -1,0 +1,258 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+/* color */
+$light-blue: #8BB4FF;
+$blue: #6993E9;
+$dark-blue: #5471D7;
+$light-orange: #FD9F5B;
+$orange: #EB7338;
+$bg-orange: #FF8C39;
+$dark-orange: #E36127;
+$light-pink: #FD96AD;
+$pink: #F67093;
+$dark-pink: #DC4E6D;
+$white: #FBFBFB;
+$mi: #EAD1C2;
+$dark-mi: #D0A197;
+$light-black: #423e3e;
+$black: #352f2f;
+$dark-black: #262022;
+
+.light-blue{
+    color: $light-blue;
+}
+
+.blue{
+    color: $blue;
+}
+
+.dark-blue{
+    color: $dark-blue;
+}
+
+.light-orange{
+    color: $light-orange; 
+}
+
+.orange{
+    color: $orange;
+}
+
+.bg-orange{
+    color: $bg-orange;
+}
+
+.dark-orange{
+    color: $dark-orange;
+}
+
+.light-pink{
+    color: $light-pink;
+}
+
+.pink{
+    color: $pink;
+}
+
+.dark-pink{
+    color: $dark-pink;
+}
+
+.white{
+    color: $white;
+}
+
+.mi{
+    color: $mi;
+}
+
+.dark-mi{
+    color: $dark-mi;
+}
+
+.light-black{
+    color: $light-black;
+}
+
+.black{
+    color: $black;
+}
+
+.dark-black{
+    color: $dark-black;
+}
+
+/* global */
+a {
+    color: $light-blue;
+}
+
+a:hover{
+    color: $blue;
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Noto Sans TC', sans-serif , Arial , Heltevica;
+}
+
+
+.desk-only{
+    display: none;
+}
+
+/* header */
+
+
+header{
+    background-color: $light-black;
+    border-bottom: 1px solid #979797;
+    box-shadow: 0px 2px 4px 0px rgba(38,32,34,0.53);
+    color: $white;
+    position: relative;
+    padding: 10px 0 10px 0;
+
+    #hd-container{
+        position: relative;
+        height: auto;
+
+        #title-wrap{
+            width: 135px;
+
+            img{
+                width: 25px;
+                vertical-align: bottom;
+                float: left;
+            }
+            h3{
+                text-align: center;
+                font-family: Helvetica;
+                font-size: 25px;
+                line-height: 25px;
+                margin: 0;
+            }
+        }
+
+        #profile{
+            position: absolute;
+            height: 100%;
+            top: -5px;
+            right: 0;
+
+            ul{
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+                overflow: auto;
+
+                li{
+                    font-size: 25px;
+                    float: left;
+                    margin-right: calc( 5px + 3vw );
+                    vertical-align: middle;
+                    line-height: 40px;
+                }
+            }
+        }
+    }
+}
+
+footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background-color: $light-black;
+    border-bottom: 1px solid #979797;
+    box-shadow: 0px -2px 4px 0px rgba(38,32,34,0.53);
+    padding: 10px 0 10px 0 ;
+    text-align: center;
+
+    div {
+        *{
+            line-height: 20px;
+        }
+        h5 {
+            color: $white;
+            font-size: 10px;
+            letter-spacing: 1px;
+            margin: 0;
+
+            a {
+                color: $white;
+            }
+        }
+    }
+}
+
+@media screen and ( max-device-width: 900px ){
+
+    #title-wrap{
+        margin: 0 auto;
+    }
+}
+
+@media screen and( min-width: 900px ) {
+    .desk-only{
+        display: initial;
+    }
+
+    .m-only{
+        display: none;
+    }
+
+    header {
+
+        height: calc( 30px + 5vw );
+
+        #hd-container{
+            position: absolute;
+            width:  calc(100% - ( 10vw  - 25px ) * 2);
+            left: 50%;
+            top: 50%;
+            margin-left: calc( ( (10vw  - 25px) * 2  - 100% ) / 2  );
+            margin-top: -20px;
+
+            #title-wrap{
+                width: 145px;
+
+                img{
+                    width: 35px;
+                }
+
+                h3{
+                    font-size: 25px;
+                    line-height: 40px;
+                    margin: 0;
+                }
+            }
+
+            #profile{
+                ul{
+                    li{
+                        margin-right: 5px;
+                        margin-left: 5px;
+                    }
+
+                    #fb-icon img{
+                        width: 30px;
+                    }
+
+                    #fb-name a{
+                        font-size: 18px;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+
+    footer{
+        padding: 15px 0 15px 0;
+        div {
+            h5 {
+                opacity: 60%;
+                font-size: 14px;
+            }
+        }
+    }
+}

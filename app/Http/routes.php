@@ -24,6 +24,7 @@
 
 Route::group(['middleware' => ['web']], function () {
 
+    /* Cyinf Facing Course */
 	Route::get('/', 'HomeController@index');
 
 	Route::get('/course/{course}' , 'CourseController@showCourse');
@@ -44,6 +45,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('/api/updateRecommendation', 'RecommendationController@update');
 
+    /* Cyinf Curriculum */
+    Route::get('/curriculum' , 'CurriculumController@index');
+
     Route::group(['middleware' => 'guest'], function () {
 
 		Route::get('/users/login',    function () { return view('usersLogin'); });
@@ -59,6 +63,7 @@ Route::group(['middleware' => ['web']], function () {
 	});
 
 	Route::group(['middleware' => 'auth'], function () {
+
 
 		Route::get('/users/logout', 'UserController@logout');
 
@@ -81,6 +86,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get( '/favorites' , 'CourseController@showFavorite');
 
 		Route::post( '/love/{comment_id}/{option}' , 'CommentController@loveComment' );
+        
 	});
 });
 
