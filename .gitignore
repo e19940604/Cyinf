@@ -8,3 +8,4 @@ _ide_helper.php
 .idea/
 .DS_store
 */.DS_store
+gulpfile.js
