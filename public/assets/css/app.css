@@ -1,0 +1,165 @@
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+/* color */
+.light-blue {
+  color: #8BB4FF; }
+
+.blue {
+  color: #6993E9; }
+
+.dark-blue {
+  color: #5471D7; }
+
+.light-orange {
+  color: #FD9F5B; }
+
+.orange {
+  color: #EB7338; }
+
+.bg-orange {
+  color: #FF8C39; }
+
+.dark-orange {
+  color: #E36127; }
+
+.light-pink {
+  color: #FD96AD; }
+
+.pink {
+  color: #F67093; }
+
+.dark-pink {
+  color: #DC4E6D; }
+
+.white {
+  color: #FBFBFB; }
+
+.mi {
+  color: #EAD1C2; }
+
+.dark-mi {
+  color: #D0A197; }
+
+.light-black {
+  color: #423e3e; }
+
+.black {
+  color: #352f2f; }
+
+.dark-black {
+  color: #262022; }
+
+/* global */
+a {
+  color: #8BB4FF; }
+
+a:hover {
+  color: #6993E9;
+  text-decoration: none; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif , Arial , Heltevica; }
+
+.desk-only {
+  display: none; }
+
+/* header */
+header {
+  background-color: #423e3e;
+  border-bottom: 1px solid #979797;
+  box-shadow: 0px 2px 4px 0px rgba(38, 32, 34, 0.53);
+  color: #FBFBFB;
+  position: relative;
+  padding: 10px 0 10px 0; }
+  header #hd-container {
+    position: relative;
+    height: auto; }
+    header #hd-container #title-wrap {
+      width: 135px; }
+      header #hd-container #title-wrap img {
+        width: 25px;
+        vertical-align: bottom;
+        float: left; }
+      header #hd-container #title-wrap h3 {
+        text-align: center;
+        font-family: Helvetica;
+        font-size: 25px;
+        line-height: 25px;
+        margin: 0; }
+    header #hd-container #profile {
+      position: absolute;
+      height: 100%;
+      top: -5px;
+      right: 0; }
+      header #hd-container #profile ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        overflow: auto; }
+        header #hd-container #profile ul li {
+          font-size: 25px;
+          float: left;
+          margin-right: calc( 5px + 3vw);
+          vertical-align: middle;
+          line-height: 40px; }
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #423e3e;
+  border-bottom: 1px solid #979797;
+  box-shadow: 0px -2px 4px 0px rgba(38, 32, 34, 0.53);
+  padding: 10px 0 10px 0;
+  text-align: center; }
+  footer div * {
+    line-height: 20px; }
+  footer div h5 {
+    color: #FBFBFB;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin: 0; }
+    footer div h5 a {
+      color: #FBFBFB; }
+
+@media screen and (max-device-width: 900px) {
+  #title-wrap {
+    margin: 0 auto; } }
+
+@media screen and (min-width: 900px) {
+  .desk-only {
+    display: initial; }
+  .m-only {
+    display: none; }
+  header {
+    height: calc( 30px + 5vw); }
+    header #hd-container {
+      position: absolute;
+      width: calc(100% - ( 10vw  - 25px ) * 2);
+      left: 50%;
+      top: 50%;
+      margin-left: calc( ( (10vw  - 25px) * 2  - 100% ) / 2);
+      margin-top: -20px; }
+      header #hd-container #title-wrap {
+        width: 145px; }
+        header #hd-container #title-wrap img {
+          width: 35px; }
+        header #hd-container #title-wrap h3 {
+          font-size: 25px;
+          line-height: 40px;
+          margin: 0; }
+      header #hd-container #profile ul li {
+        margin-right: 5px;
+        margin-left: 5px; }
+      header #hd-container #profile ul #fb-icon img {
+        width: 30px; }
+      header #hd-container #profile ul #fb-name a {
+        font-size: 18px;
+        color: #FBFBFB; }
+  footer {
+    padding: 15px 0 15px 0; }
+    footer div h5 {
+      opacity: 60%;
+      font-size: 14px; } }
+
+/*# sourceMappingURL=app.css.map */
