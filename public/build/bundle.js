@@ -52,122 +52,10 @@
 	/*
 	 * Layout.blade component
 	 */
-	var SideBar = React.createClass({
-	    displayName: 'SideBar',
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { id: 'profile' },
-	            React.createElement(
-	                'ul',
-	                null,
-	                React.createElement(
-	                    'li',
-	                    { id: 'note' },
-	                    React.createElement('i', { className: 'fa fa-bell-o' })
-	                ),
-	                React.createElement(
-	                    'li',
-	                    { id: 'm-sidebtn', className: 'm-only' },
-	                    React.createElement('i', { className: 'fa fa-bars' })
-	                ),
-	                React.createElement(
-	                    'li',
-	                    { className: 'desk-only' },
-	                    ' | '
-	                ),
-	                React.createElement(
-	                    'li',
-	                    { id: 'fb-icon', className: 'desk-only' },
-	                    React.createElement(
-	                        'a',
-	                        { href: '#' },
-	                        React.createElement('img', { src: this.props.pic })
-	                    )
-	                ),
-	                React.createElement(
-	                    'li',
-	                    { className: 'desk-only' },
-	                    ' | '
-	                ),
-	                React.createElement(
-	                    'li',
-	                    { id: 'fb-name', className: 'desk-only' },
-	                    React.createElement(
-	                        'a',
-	                        { href: '#' },
-	                        this.props.name
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-
-	var Header = React.createClass({
-	    displayName: 'Header',
-
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            profile_pic: "./img/no-user-image.gif",
-	            profile_name: "連結 FB"
-	        };
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { id: 'hd-container' },
-	            React.createElement(
-	                'div',
-	                { id: 'title-wrap' },
-	                React.createElement('img', { id: 'logo', src: './curr/img/icon_c.svg' }),
-	                React.createElement(
-	                    'h3',
-	                    null,
-	                    'urriculum'
-	                )
-	            ),
-	            React.createElement(SideBar, { pic: this.state.profile_pic, name: this.state.profile_name })
-	        );
-	    }
-	});
-
-	var Footer = React.createClass({
-	    displayName: 'Footer',
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: 'container' },
-	            React.createElement(
-	                'h5',
-	                null,
-	                'Copyright © Cyinf Studio 2015 ',
-	                React.createElement(
-	                    'p',
-	                    { className: 'desk-only' },
-	                    ' |  ',
-	                    React.createElement(
-	                        'a',
-	                        { href: '#', className: 'desk-only footer-link' },
-	                        React.createElement('i', { className: 'fa fa-commenting-o' }),
-	                        ' 意見與反饋'
-	                    ),
-	                    '  | ',
-	                    React.createElement(
-	                        'a',
-	                        { href: '#', className: 'desk-only footer-link' },
-	                        React.createElement('i', { className: 'fa fa-question' }),
-	                        ' 使用教學'
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
+	var Header = __webpack_require__(159);
+	var Footer = __webpack_require__(160);
+	ReactDOM.render(React.createElement(Header, null), document.getElementById("header"));
+	ReactDOM.render(React.createElement(Footer, null), document.getElementById("footer"));
 
 	/*
 	 * every page content component
@@ -176,9 +64,6 @@
 	/*
 	 * modal up component
 	 */
-
-	ReactDOM.render(React.createElement(Header, null), document.getElementById("header"));
-	ReactDOM.render(React.createElement(Footer, null), document.getElementById("footer"));
 
 /***/ },
 /* 1 */
@@ -19780,6 +19665,143 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var SideBar = React.createClass({
+	    displayName: "SideBar",
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            { id: "profile" },
+	            React.createElement(
+	                "ul",
+	                null,
+	                React.createElement(
+	                    "li",
+	                    { id: "note" },
+	                    React.createElement("i", { className: "fa fa-bell-o" })
+	                ),
+	                React.createElement(
+	                    "li",
+	                    { id: "m-sidebtn", className: "m-only" },
+	                    React.createElement("i", { className: "fa fa-bars" })
+	                ),
+	                React.createElement(
+	                    "li",
+	                    { className: "desk-only" },
+	                    " | "
+	                ),
+	                React.createElement(
+	                    "li",
+	                    { id: "fb-icon", className: "desk-only" },
+	                    React.createElement(
+	                        "a",
+	                        { href: "#" },
+	                        React.createElement("img", { src: this.props.pic })
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    { className: "desk-only" },
+	                    " | "
+	                ),
+	                React.createElement(
+	                    "li",
+	                    { id: "fb-name", className: "desk-only" },
+	                    React.createElement(
+	                        "a",
+	                        { href: "#" },
+	                        this.props.name
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	var Header = React.createClass({
+	    displayName: "Header",
+
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            profile_pic: "./img/no-user-image.gif",
+	            profile_name: "連結 FB"
+	        };
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            { id: "hd-container" },
+	            React.createElement(
+	                "div",
+	                { id: "title-wrap" },
+	                React.createElement("img", { id: "logo", src: "./curr/img/icon_c.svg" }),
+	                React.createElement(
+	                    "h3",
+	                    null,
+	                    "urriculum"
+	                )
+	            ),
+	            React.createElement(SideBar, { pic: this.state.profile_pic, name: this.state.profile_name })
+	        );
+	    }
+	});
+
+	module.exports = Header;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Footer = React.createClass({
+	    displayName: "Footer",
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            { className: "container" },
+	            React.createElement(
+	                "h5",
+	                null,
+	                "Copyright © Cyinf Studio 2015 ",
+	                React.createElement(
+	                    "p",
+	                    { className: "desk-only" },
+	                    " |  ",
+	                    React.createElement(
+	                        "a",
+	                        { href: "#", className: "desk-only footer-link" },
+	                        React.createElement("i", { className: "fa fa-commenting-o" }),
+	                        " 意見與反饋"
+	                    ),
+	                    "  | ",
+	                    React.createElement(
+	                        "a",
+	                        { href: "#", className: "desk-only footer-link" },
+	                        React.createElement("i", { className: "fa fa-question" }),
+	                        " 使用教學"
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Footer;
 
 /***/ }
 /******/ ]);
