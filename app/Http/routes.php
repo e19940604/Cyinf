@@ -45,9 +45,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('/api/updateRecommendation', 'RecommendationController@update');
 
-    /* Cyinf Curriculum */
-    Route::get('/curriculum' , 'CurriculumController@index');
-
     Route::group(['middleware' => 'guest'], function () {
 
 		Route::get('/users/login',    function () { return view('usersLogin'); });
@@ -90,3 +87,8 @@ Route::group(['middleware' => ['web']], function () {
 	});
 });
 
+Route::group(['middleware' => ['web']], function () {
+    /* Cyinf Curriculum */
+    Route::get('/curriculum' , 'CurriculumController@index');
+
+});
