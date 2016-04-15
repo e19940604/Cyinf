@@ -1,1 +1,1 @@
-<link rel="stylesheet" href={{ asset("Curr/css/main.css") }}>
+<link rel="stylesheet" href={{ asset("Curr/css/app.css") }}>

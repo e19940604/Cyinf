@@ -1,0 +1,312 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+/* color */
+.light-blue {
+  color: #8BB4FF; }
+
+.blue {
+  color: #6993E9; }
+
+.dark-blue {
+  color: #5471D7; }
+
+.light-orange {
+  color: #FD9F5B; }
+
+.orange {
+  color: #EB7338; }
+
+.bg-orange {
+  color: #FF8C39; }
+
+.dark-orange {
+  color: #E36127; }
+
+.light-pink {
+  color: #FD96AD; }
+
+.pink {
+  color: #F67093; }
+
+.dark-pink {
+  color: #DC4E6D; }
+
+.white {
+  color: #FBFBFB; }
+
+.mi {
+  color: #EAD1C2; }
+
+.dark-mi {
+  color: #D0A197; }
+
+.light-black {
+  color: #423e3e; }
+
+.black {
+  color: #352f2f; }
+
+.dark-black {
+  color: #262022; }
+
+/* global */
+a {
+  color: #8BB4FF; }
+
+a:hover {
+  color: #6993E9;
+  text-decoration: none; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif , Arial , Heltevica; }
+
+.desk-only {
+  display: none; }
+
+/* header */
+header {
+  background-color: #423e3e;
+  border-bottom: 1px solid #979797;
+  box-shadow: 0px 2px 4px 0px rgba(38, 32, 34, 0.53);
+  color: #FBFBFB;
+  position: relative;
+  padding: 10px 0 10px 0; }
+  header #hd-container {
+    position: relative;
+    height: auto; }
+    header #hd-container #title-wrap {
+      width: 135px; }
+      header #hd-container #title-wrap img {
+        width: 25px;
+        vertical-align: bottom;
+        float: left; }
+      header #hd-container #title-wrap h3 {
+        text-align: center;
+        font-family: Helvetica;
+        font-size: 25px;
+        line-height: 25px;
+        margin: 0; }
+    header #hd-container #profile {
+      position: absolute;
+      height: 100%;
+      top: -5px;
+      right: 0; }
+      header #hd-container #profile ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        overflow: auto; }
+        header #hd-container #profile ul li {
+          font-size: 25px;
+          float: left;
+          margin-right: calc( 5px + 3vw);
+          vertical-align: middle;
+          line-height: 40px; }
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #423e3e;
+  border-bottom: 1px solid #979797;
+  box-shadow: 0px -2px 4px 0px rgba(38, 32, 34, 0.53);
+  padding: 10px 0 10px 0;
+  text-align: center; }
+  footer div * {
+    line-height: 20px; }
+  footer div h5 {
+    color: #FBFBFB;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin: 0; }
+    footer div h5 a {
+      color: #FBFBFB; }
+
+@media screen and (max-device-width: 900px) {
+  #title-wrap {
+    margin: 0 auto; } }
+
+@media screen and (min-width: 900px) {
+  .desk-only {
+    display: initial; }
+  .m-only {
+    display: none; }
+  header {
+    height: 100px; }
+    header #hd-container {
+      position: absolute;
+      width: calc(100% - ( 10vw  - 25px ) * 2);
+      left: 50%;
+      top: 50%;
+      margin-left: calc( ( (10vw  - 25px) * 2  - 100% ) / 2);
+      margin-top: -20px; }
+      header #hd-container #title-wrap {
+        width: 145px; }
+        header #hd-container #title-wrap img {
+          width: 35px; }
+        header #hd-container #title-wrap h3 {
+          font-size: 25px;
+          line-height: 40px;
+          margin: 0; }
+      header #hd-container #profile ul li {
+        margin-right: 5px;
+        margin-left: 5px; }
+      header #hd-container #profile ul #fb-icon img {
+        width: 30px; }
+      header #hd-container #profile ul #fb-name a {
+        font-size: 18px;
+        color: #FBFBFB; }
+  footer {
+    padding: 15px 0 15px 0; }
+    footer div h5 {
+      opacity: 60%;
+      font-size: 14px; } }
+
+::-webkit-scrollbar {
+  display: block; }
+
+.blueClass {
+  background-color: #8BB4FF; }
+
+#container {
+  margin-top: 20px; }
+
+#curriculum {
+  width: 300px;
+  height: 70vh;
+  margin: 0 auto; }
+  #curriculum #table-scroll {
+    overflow: auto;
+    margin-top: 60px;
+    height: inherit; }
+  #curriculum td:first-child, #curriculum th:first-child {
+    border-left: none;
+    color: #352f2f;
+    width: 18px;
+    min-width: 18px; }
+  #curriculum td, #curriculum th {
+    color: #FBFBFB;
+    text-align: center;
+    border-left: 1px solid #423e3e;
+    min-width: 40px;
+    width: 40px;
+    height: 40px; }
+  #curriculum thead {
+    z-index: 2; }
+    #curriculum thead tr {
+      position: absolute;
+      top: 76px; }
+      #curriculum thead tr th:first-child {
+        min-width: 18px; }
+      #curriculum thead tr th {
+        color: #352f2f;
+        border-bottom: 1px solid #352f2f;
+        min-width: 40px;
+        height: 30px;
+        font-weight: 300; }
+  #curriculum tbody tr {
+    border-bottom: 1px solid #FBFBFB;
+    overflow: hidden; }
+    #curriculum tbody tr td {
+      font-size: 12px;
+      padding: 0 2px 0 2px; }
+
+@media screen and (min-width: 470px) and (max-width: 680px) {
+  #curriculum {
+    width: 470px; }
+    #curriculum td:first-child, #curriculum th:first-child {
+      border-left: none;
+      color: #352f2f;
+      width: 20px;
+      min-width: 20px; }
+    #curriculum td, #curriculum th {
+      width: 60px;
+      height: 40px; }
+    #curriculum tbody tr td {
+      font-size: 12px; }
+    #curriculum thead tr th {
+      height: 30px; } }
+
+@media screen and (min-width: 680px) and (max-width: 900px) {
+  #curriculum {
+    width: 680px; }
+    #curriculum td:first-child, #curriculum th:first-child {
+      border-left: none;
+      color: #352f2f;
+      width: 20px;
+      min-width: 20px; }
+    #curriculum td, #curriculum th {
+      width: 90px;
+      height: 40px; }
+    #curriculum tbody tr td {
+      font-size: 14px; }
+    #curriculum thead tr th {
+      height: 30px; } }
+
+@media screen and (min-width: 900px) {
+  #curriculum {
+    width: 900px; }
+    #curriculum td:first-child, #curriculum th:first-child {
+      border-left: none;
+      color: #352f2f;
+      width: 30px;
+      min-width: 30px; }
+    #curriculum td, #curriculum th {
+      width: 120px;
+      height: 60px; }
+    #curriculum tbody tr td {
+      font-size: 16px; }
+    #curriculum thead tr th {
+      height: 35px; }
+  #curriculum {
+    height: 60vh; }
+    #curriculum #table-scroll {
+      margin-top: 80px; }
+    #curriculum td:first-child:before, #curriculum th:first-child:before {
+      content: ""; }
+    #curriculum th:before {
+      content: "星期"; }
+    #curriculum thead tr {
+      top: 145px; } }
+
+@media screen and (min-width: 1120px) {
+  #curriculum {
+    width: 1120px; }
+    #curriculum td:first-child, #curriculum th:first-child {
+      border-left: none;
+      color: #352f2f;
+      width: 40px;
+      min-width: 40px; }
+    #curriculum td, #curriculum th {
+      width: 150px;
+      height: 90px; }
+    #curriculum tbody tr td {
+      font-size: 20px; }
+    #curriculum thead tr th {
+      height: 45px; }
+  #curriculum #table-scroll {
+    margin-top: 80px; }
+  #curriculum thead tr {
+    top: 135px; } }
+
+@media screen and (min-width: 1440px) {
+  #curriculum {
+    width: 1250px; }
+    #curriculum td:first-child, #curriculum th:first-child {
+      border-left: none;
+      color: #352f2f;
+      width: 40px;
+      min-width: 40px; }
+    #curriculum td, #curriculum th {
+      width: 165px;
+      height: 90px; }
+    #curriculum tbody tr td {
+      font-size: 20px; }
+    #curriculum thead tr th {
+      height: 45px; }
+  #curriculum #table-scroll {
+    margin-top: 80px; }
+  #curriculum thead tr {
+    top: 135px; } }
+
+/*# sourceMappingURL=app.css.map */

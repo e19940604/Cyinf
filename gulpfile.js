@@ -14,8 +14,8 @@ var gulp    = require('gulp');
 elixir(function(mix) {
     /* compileing sass */
     mix.sass([
-        'main.scss'
-    ], 'public/Curr/css/main.css');
+        'curriculum.scss'
+    ], 'public/Curr/css/app.css');
     /* executing phpunit test */
     mix.phpUnit();
 });

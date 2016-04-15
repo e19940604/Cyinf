@@ -1,0 +1,160 @@
+@import "main.scss";
+@mixin tableBoxSize( $tableWidth: 300px , $firstWidth: 18px , $tdWidth: 40px , $fontSize: 12px , $tdHeight: 40px , $thHeight: 30px , $tableHeight: 70vh){
+    #curriculum{
+        width: $tableWidth;
+
+        td:first-child , th:first-child{
+            border-left: none;
+            color: $black;
+            width: $firstWidth;
+            min-width: $firstWidth;
+        }
+        td, th{
+            width: $tdWidth;
+            height: $tdHeight;
+        }
+        tbody {
+            tr{
+                td{
+                    font-size: $fontSize;  
+                }
+            }   
+        }
+
+        thead{
+            tr{
+                th{
+                    height: $thHeight;
+                }
+            }
+        }
+    }
+}
+
+::-webkit-scrollbar { 
+    display: block; 
+}
+
+.blueClass{
+    background-color: $light-blue;
+}
+
+#container{
+    margin-top: 20px;
+}
+
+#curriculum{
+    width: 300px;
+    height: 70vh;
+    margin: 0 auto;
+
+    #table-scroll{
+        overflow: auto;
+        margin-top:60px;
+        height: inherit;
+    }
+    td:first-child , th:first-child{
+        border-left: none;
+        color: $black;
+        width: 18px;
+        min-width: 18px;
+    }
+
+    td , th{
+        color: $white;
+        text-align: center;
+        border-left: 1px solid $light-black;
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+    }
+
+    thead {
+        z-index: 2;
+        tr{
+            position: absolute;
+            top: 76px;
+            
+
+            th:first-child{
+                min-width: 18px;
+            }
+            th {
+                color: $black;
+                border-bottom: 1px solid $black;
+                min-width: 40px;
+                height: 30px;
+                font-weight: 300;
+            }
+        }
+    }
+
+    tbody {
+        tr{
+            border-bottom: 1px solid $white;
+            overflow: hidden;
+            td{
+                font-size: 12px;    
+                padding: 0 2px 0 2px;
+            }
+        }   
+    }
+}
+
+@media screen and ( min-width: 470px ) and ( max-width: 680px ){
+    @include tableBoxSize( 470px , 20px , 60px );
+}
+
+@media screen and ( min-width: 680px ) and ( max-width: 900px ){
+    @include tableBoxSize( 680px , 20px , 90px , 14px);
+}
+
+@media screen and ( min-width: 900px ){
+    @include tableBoxSize( 900px , 30px , 120px , 16px , 60px , 35px);
+
+    #curriculum{
+        height: 60vh;
+
+        #table-scroll{
+            margin-top: 80px;
+        }
+        td:first-child:before , th:first-child:before{
+            content: "";
+        }
+        th:before{
+            content: "星期";
+        }
+        thead{
+            tr{
+                top: 145px;
+            }
+        }
+    }
+}
+@media screen and ( min-width: 1120px ){
+    @include tableBoxSize( 1120px , 40px , 150px , 20px , 90px , 45px);
+    #curriculum{
+        #table-scroll{
+            margin-top: 80px;
+        }
+        thead{
+            tr{
+                top: 135px;
+            }
+        }
+    }
+}
+
+@media screen and ( min-width: 1440px ){
+    @include tableBoxSize( 1250px , 40px , 165px , 20px , 90px , 45px);
+    #curriculum{
+        #table-scroll{
+            margin-top: 80px;
+        }
+        thead{
+            tr{
+                top: 135px;
+            }
+        }
+    }
+}
