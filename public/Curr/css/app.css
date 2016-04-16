@@ -309,4 +309,37 @@ footer {
   #curriculum thead tr {
     top: 135px; } }
 
+.courseDetail-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .courseDetail-container .content {
+    width: 75%;
+    height: auto;
+    margin-top: 50px; }
+    .courseDetail-container .content .title {
+      font-size: 24px;
+      color: #423e3e;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #423e3e; }
+    .courseDetail-container .content .list {
+      width: 100%;
+      height: 20px;
+      font-size: 16px; }
+      .courseDetail-container .content .list .icon {
+        max-width: 10%;
+        max-height: 20px;
+        padding-right: 10px; }
+      .courseDetail-container .content .list .desc {
+        width: 25%;
+        padding-right: 5%; }
+      .courseDetail-container .content .list .content {
+        width: 50%; }
+
 /*# sourceMappingURL=app.css.map */

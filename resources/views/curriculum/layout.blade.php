@@ -22,7 +22,7 @@
     </footer>
 
 @include('includes.scriptInclude')
-<script   src="build/bundle.js"  ></script>
+<script src={{ asset("build/bundle.js") }}></script>
 @yield('scriptArea')
 
 </body>

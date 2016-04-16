@@ -90,5 +90,6 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web']], function () {
     /* Cyinf Curriculum */
     Route::get('/curriculum' , 'CurriculumController@index');
+    Route::get('/curriculum/courseDetail' , 'CurriculumController@courseDetail');
 
 });
