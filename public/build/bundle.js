@@ -19733,7 +19733,7 @@
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            profile_pic: "./img/no-user-image.gif",
+	            profile_pic: "/img/no-user-image.gif",
 	            profile_name: "連結 FB"
 	        };
 	    },
@@ -19745,7 +19745,7 @@
 	            React.createElement(
 	                "div",
 	                { id: "title-wrap" },
-	                React.createElement("img", { id: "logo", src: "./curr/img/icon_c.svg" }),
+	                React.createElement("img", { id: "logo", src: "/curr/img/icon_c.svg" }),
 	                React.createElement(
 	                    "h3",
 	                    null,

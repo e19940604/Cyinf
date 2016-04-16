@@ -29,7 +29,7 @@ var Header = React.createClass({
 
     getInitialState: function() {
         return {
-            profile_pic : "./img/no-user-image.gif" ,
+            profile_pic : "/img/no-user-image.gif" ,
             profile_name : "連結 FB"
         };
     },
@@ -38,7 +38,7 @@ var Header = React.createClass({
         return (
             <div id="hd-container" >
                 <div id="title-wrap">
-                    <img id="logo" src="./curr/img/icon_c.svg" />
+                    <img id="logo" src="/curr/img/icon_c.svg" />
                     <h3>urriculum</h3>
                 </div>
                 <SideBar pic={this.state.profile_pic} name={ this.state.profile_name }/>
