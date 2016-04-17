@@ -1,4 +1,21 @@
+/* color */
+$light-blue: #8BB4FF;
+$blue: #6993E9;
+$dark-blue: #5471D7;
+$light-orange: #FD9F5B;
+$orange: #EB7338;
+$bg-orange: #FF8C39;
+$dark-orange: #E36127;
+$light-pink: #FD96AD;
+$pink: #F67093;
+$dark-pink: #DC4E6D;
+$white: #FBFBFB;
+$mi: #EAD1C2;
+$dark-mi: #D0A197;
 $light-black: #423e3e;
+$black: #352f2f;
+$dark-black: #262022;
+
 
 .courseDetail-container {
   display: flex;
@@ -6,32 +23,102 @@ $light-black: #423e3e;
   align-items: center;
 
   .content {
-  	width: 75%;
+  	width: 70%;
   	height: auto;
   	margin-top: 50px;
+    color: $light-black;
 
   	.title {
   		font-size: 24px;
-		color: $light-black;
-		padding-bottom:  8px;
-		border-bottom: 1px solid $light-black;
+      padding-bottom:  8px;
+      border-bottom: 1px solid $light-black;
+      margin-bottom: 24px;
   	}
   	.list {
   		width: 100%;
-  		height: 20px;
-  		font-size: 16px;
+  		font-size: 18px;
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+
+       * {
+        display: inline-block;
+        margin: 0px;
+        padding: 0px;
+       }
+
   		.icon {
-  			max-width: 10%;
-  			max-height: 20px;
-  			padding-right: 10px;
+  			width: 18px;
   		}
   		.desc {
-			width: 25%;
-			padding-right: 5%;
+        width: 40%;
+        padding-left: 18px;
   		}
   		.content {
-			width: 50%;
+        width: 45%;
   		}
   	}
+
+    .btn-collect {
+      margin-top: 30px;
+      width: 100%;
+    }
+
+    .btn-list {
+      display: inline-block;
+      width: 15%;
+      height: 40px;
+      line-height: 40px;
+      margin-right: 5%;
+      text-align: center;
+      color: white;
+      transition-duration: 1s;
+      letter-spacing: 3px;
+    }
+
+    .btn-list:hover {
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .blue-btn {
+      background-color: $light-blue;
+      border: 1px solid $light-blue;
+    }
+
+    .blue-btn:hover {
+      color: $dark-blue;
+    }
+
+    .pink-btn {
+      background-color: $light-pink;
+      border: 1px solid $light-pink;
+    }
+
+    .pink-btn:hover {
+      color: $dark-pink;
+    }
+
+    .mi-btn {
+      background-color: $mi;
+      border: 1px solid $mi;
+    }
+
+    .mi-btn:hover {
+      color: $dark-mi;
+    }
+  }
+}
+
+@media screen and (max-width: 900px),  screen and (max-device-width: 900px){
+  .courseDetail-container{ 
+    .content {
+      width: 80%;
+      
+      .btn-list {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
   }
 }
