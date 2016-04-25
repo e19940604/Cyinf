@@ -402,4 +402,81 @@ footer {
   #curriculum thead tr {
     top: 135px; } }
 
+/* color */
+.courseDetail-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .courseDetail-container .content {
+    width: 70%;
+    height: auto;
+    margin-top: 50px;
+    color: #423e3e; }
+    .courseDetail-container .content .title {
+      font-size: 24px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #423e3e;
+      margin-bottom: 24px; }
+    .courseDetail-container .content .list {
+      width: 100%;
+      font-size: 18px;
+      display: inline-block;
+      height: 30px;
+      line-height: 30px; }
+      .courseDetail-container .content .list * {
+        display: inline-block;
+        margin: 0px;
+        padding: 0px; }
+      .courseDetail-container .content .list .icon {
+        width: 18px; }
+      .courseDetail-container .content .list .desc {
+        width: 40%;
+        padding-left: 18px; }
+      .courseDetail-container .content .list .content {
+        width: 45%; }
+    .courseDetail-container .content .btn-collect {
+      margin-top: 30px;
+      width: 100%; }
+    .courseDetail-container .content .btn-list {
+      display: inline-block;
+      width: 15%;
+      height: 40px;
+      line-height: 40px;
+      margin-right: 5%;
+      text-align: center;
+      color: white;
+      transition-duration: 1s;
+      letter-spacing: 3px; }
+    .courseDetail-container .content .btn-list:hover {
+      background-color: white;
+      cursor: pointer; }
+    .courseDetail-container .content .blue-btn {
+      background-color: #8BB4FF;
+      border: 1px solid #8BB4FF; }
+    .courseDetail-container .content .blue-btn:hover {
+      color: #5471D7; }
+    .courseDetail-container .content .pink-btn {
+      background-color: #FD96AD;
+      border: 1px solid #FD96AD; }
+    .courseDetail-container .content .pink-btn:hover {
+      color: #DC4E6D; }
+    .courseDetail-container .content .mi-btn {
+      background-color: #EAD1C2;
+      border: 1px solid #EAD1C2; }
+    .courseDetail-container .content .mi-btn:hover {
+      color: #D0A197; }
+
+@media screen and (max-width: 900px), screen and (max-device-width: 900px) {
+  .courseDetail-container .content {
+    width: 80%; }
+    .courseDetail-container .content .btn-list {
+      width: 100%;
+      margin-bottom: 20px; } }
+
 /*# sourceMappingURL=app.css.map */
