@@ -9,11 +9,11 @@ var SideBar = React.createClass({
                         <i className="fa fa-bell-o"></i>
                     </li>
                     <li id="m-sidebtn" className="m-only" >
-                        <i className="fa fa-bars"></i>
+                        <i id="m-side" className="fa fa-bars"></i>
                     </li>
                     <li className="desk-only"> | </li>
                     <li id="fb-icon" className="desk-only">
-                        <a href="#"><img src={ this.props.pic } /></a>
+                        <a href="#" ><img className="img-circle"  src={ this.props.pic } /></a>
                     </li>
                     <li className="desk-only"> | </li>
                     <li id="fb-name" className="desk-only">

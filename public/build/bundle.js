@@ -19692,7 +19692,7 @@
 	                React.createElement(
 	                    "li",
 	                    { id: "m-sidebtn", className: "m-only" },
-	                    React.createElement("i", { className: "fa fa-bars" })
+	                    React.createElement("i", { id: "m-side", className: "fa fa-bars" })
 	                ),
 	                React.createElement(
 	                    "li",
@@ -19705,7 +19705,7 @@
 	                    React.createElement(
 	                        "a",
 	                        { href: "#" },
-	                        React.createElement("img", { src: this.props.pic })
+	                        React.createElement("img", { className: "img-circle", src: this.props.pic })
 	                    )
 	                ),
 	                React.createElement(
