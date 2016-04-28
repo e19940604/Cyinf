@@ -332,7 +332,7 @@ footer {
       margin-bottom: 24px; }
     .courseDetail-container .content .list {
       width: 100%;
-      font-size: 18px;
+      font-size: calc( 0.5vw + 10px);
       display: inline-block;
       height: 30px;
       line-height: 30px; }
@@ -356,6 +356,7 @@ footer {
       height: 40px;
       line-height: 40px;
       margin-right: 5%;
+      font-size: calc( 0.5vw + 8px);
       text-align: center;
       color: white;
       transition-duration: 1s;
@@ -381,9 +382,50 @@ footer {
 
 @media screen and (max-width: 900px), screen and (max-device-width: 900px) {
   .courseDetail-container .content {
-    width: 80%; }
+    width: 90%; }
     .courseDetail-container .content .btn-list {
       width: 100%;
       margin-bottom: 20px; } }
+
+/* color */
+.notify-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .notify-container .content {
+    width: 70%;
+    height: auto;
+    margin-top: 50px;
+    color: #423e3e; }
+  .notify-container .title {
+    font-size: 24px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #423e3e;
+    margin-bottom: 24px; }
+  .notify-container .list {
+    width: 100%;
+    font-size: calc( 0.8vw + 6px);
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #423e3e;
+    margin-top: 10px;
+    margin-bottom: 10px; }
+    .notify-container .list .icon {
+      max-width: calc( 1vw + 14px);
+      margin-bottom: 10px; }
+    .notify-container .list .desc {
+      width: 80%;
+      padding-left: 2vw; }
+
+@media screen and (max-width: 900px), screen and (max-device-width: 900px) {
+  .notify-container .content {
+    width: 90%; } }
 
 /*# sourceMappingURL=app.css.map */

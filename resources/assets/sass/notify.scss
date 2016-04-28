@@ -1,0 +1,68 @@
+/* color */
+$light-blue: #8BB4FF;
+$blue: #6993E9;
+$dark-blue: #5471D7;
+$light-orange: #FD9F5B;
+$orange: #EB7338;
+$bg-orange: #FF8C39;
+$dark-orange: #E36127;
+$light-pink: #FD96AD;
+$pink: #F67093;
+$dark-pink: #DC4E6D;
+$white: #FBFBFB;
+$mi: #EAD1C2;
+$dark-mi: #D0A197;
+$light-black: #423e3e;
+$black: #352f2f;
+$dark-black: #262022;
+
+
+.notify-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.content {
+		width: 70%;
+		height: auto;
+		margin-top: 50px;
+		color: $light-black;
+	}
+
+	.title {
+  		font-size: 24px;
+      	padding-bottom:  8px;
+      	border-bottom: 1px solid $light-black;
+      	margin-bottom: 24px;
+  	}
+
+	.list {
+		width: 100%;
+		font-size: calc( 0.8vw + 6px );
+		display: block;
+		height: 30px;
+		line-height: 30px;
+		border-bottom: 1px solid $light-black;
+		margin-top: 10px;
+		margin-bottom: 10px;
+
+		.icon {
+			max-width: calc( 1vw + 14px );
+			margin-bottom: 10px;
+		}
+
+		.desc {
+			width: 80%;
+			padding-left: 2vw;
+		}
+		
+	}
+}
+
+@media screen and (max-width: 900px),  screen and (max-device-width: 900px){
+  .notify-container{ 
+    .content {
+      width: 90%;
+    }
+  }
+}

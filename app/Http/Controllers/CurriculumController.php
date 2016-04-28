@@ -17,4 +17,8 @@ class CurriculumController extends Controller
     protected function courseDetail(){
     	return view('curriculum.courseDetail');
     }
+
+    protected function notify(){
+    	return view('curriculum.notify');
+    }
 }

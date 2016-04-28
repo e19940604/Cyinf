@@ -15,7 +15,8 @@ elixir(function(mix) {
     /* compileing sass */
     mix.sass([
         'curriculum.scss',
-        'curriculum-courseDetail.scss'
+        'curriculum-courseDetail.scss',
+        'notify.scss'
     ], 'public/Curr/css/app.css');
     /* executing phpunit test */
     mix.phpUnit();

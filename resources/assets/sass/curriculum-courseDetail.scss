@@ -36,7 +36,7 @@ $dark-black: #262022;
   	}
   	.list {
   		width: 100%;
-  		font-size: 18px;
+  		font-size: calc( 0.5vw + 10px );
       display: inline-block;
       height: 30px;
       line-height: 30px;
@@ -70,6 +70,7 @@ $dark-black: #262022;
       height: 40px;
       line-height: 40px;
       margin-right: 5%;
+      font-size: calc( 0.5vw + 8px );
       text-align: center;
       color: white;
       transition-duration: 1s;
@@ -113,7 +114,7 @@ $dark-black: #262022;
 @media screen and (max-width: 900px),  screen and (max-device-width: 900px){
   .courseDetail-container{ 
     .content {
-      width: 80%;
+      width: 90%;
       
       .btn-list {
         width: 100%;
