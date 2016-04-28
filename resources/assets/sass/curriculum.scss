@@ -12,13 +12,7 @@
         td, th{
             width: $tdWidth;
             height: $tdHeight;
-        }
-        tbody {
-            tr{
-                td{
-                    font-size: $fontSize;  
-                }
-            }   
+            font-size: $fontSize
         }
 
         thead{
@@ -40,6 +34,12 @@
 }
 
 #container{
+    z-index: 0;
+    background-image: url('../../Cyinf/img/CyinfLogo_curr.png');
+    background-repeat: no-repeat;
+    background-position: center  center;
+    background-size: auto;
+    background-attachment: fixed;
     margin-top: 20px;
 }
 
@@ -64,6 +64,7 @@
         color: $white;
         text-align: center;
         border-left: 1px solid $light-black;
+        font-size: 12px;
         min-width: 40px;
         width: 40px;
         height: 40px;
@@ -94,12 +95,16 @@
             border-bottom: 1px solid $white;
             overflow: hidden;
             td{
-                font-size: 12px;    
                 padding: 0 2px 0 2px;
+            }
+            td:hover{
+                cursor: pointer;
             }
         }   
     }
 }
+
+
 
 @media screen and ( min-width: 470px ) and ( max-width: 680px ){
     @include tableBoxSize( 470px , 20px , 60px );
@@ -130,6 +135,52 @@
             }
         }
     }
+
+    #sideBtns{
+        position: fixed;
+        right: -22px;
+        bottom: 80px;
+
+        .sideBtn{
+            margin-top: 30px;
+            position: relative;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            border: 1px solid;
+            border-radius: 22px;
+            color: #FBFBFB;
+            line-height: 26px;
+
+            span{
+                font-size: 20px;
+                position: absolute;
+                top: 50%;
+                height: 50px;
+                margin-top: -25px;
+                margin-left: -30px;
+                letter-spacing: 15px;
+                line-height: 25px;
+            }
+        }
+
+        .pinkBtn{
+            background: #F67093;
+            box-shadow: 0 0 0 10px rgba(253,150,173,0.3);
+        }
+
+        .blueBtn{
+            background: #6993E9;
+            box-shadow: 0 0 0 10px rgba(139,180,255,0.3);
+        }
+
+        .orangeBtn{
+            background: #EB7338;
+            box-shadow: 0 0 0 10px rgba(253,158,91,0.3);
+        }
+    }
+
+
 }
 @media screen and ( min-width: 1120px ){
     @include tableBoxSize( 1120px , 40px , 150px , 20px , 90px , 45px);
