@@ -1,7 +1,7 @@
 @extends('curriculum.layout')
 
 @section('style')
-    
+
 @endsection
 
 @section('content')
@@ -21,5 +21,11 @@
 			</span>
 		</div>
 	</div>
+
+@endsection
+
+@section('scriptArea')
+
+<script src="/Curr/js/views/notify.js"></script>
 
 @endsection

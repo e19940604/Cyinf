@@ -1,7 +1,7 @@
 @extends('curriculum.layout')
 
 @section('style')
-    
+
 @endsection
 
 @section('content')
@@ -41,5 +41,11 @@
 			</div>
 		</div>
 	</div>
+
+@endsection
+
+@section('scriptArea')
+
+<script src="/Curr/js/views/courseDetail.js"></script>
 
 @endsection

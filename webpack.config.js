@@ -1,11 +1,15 @@
 var path = require( 'path' );
 
 module.exports = {
-    entry: "./resources/assets/js/index.js",
+    entry: {
+        index: "./resources/assets/js/views/index.jsx",
+        courseDetail: "./resources/assets/js/views/courseDetail.jsx",
+        notify: "./resources/assets/js/views/notify.jsx"
+    },
     output: {
-        path: path.resolve( __dirname, './public/build' ),
-        publicPath: './public/build/',
-        filename: "bundle.js"
+        path: path.resolve( __dirname, './public/Curr/js/views' ),
+        publicPath: './public/Curr/js/views',
+        filename: "[name].js"
     },
     resolve: {
         extensions: [ '', '.js', '.jsx' ]

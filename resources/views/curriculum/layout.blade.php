@@ -5,12 +5,12 @@
     @yield('style')
     @include('includes.includingHeader')
     @include('includes.curriculumCss')
-    
+
 
 </head>
 <body >
     <header id="header">
-        
+
     </header>
 
     <div id="sideMenu" class="m-only">
@@ -31,7 +31,7 @@
             <img id="sideBg" src="../../Cyinf/img/CyinfLogo.png">
         </div>
     </div>
-    
+
     <div id="blackBG"></div>
 
     <section id="container">
@@ -39,12 +39,11 @@
     </section>
 
     <footer id="footer">
-        
+
     </footer>
 
 @include('includes.scriptInclude')
-<script   src="build/bundle.js"  ></script>
-<script type="text/javascript" src="Curr/js/main.js"></script>
+<script type="text/javascript" src="/Curr/js/main.js"></script>
 @yield('scriptArea')
 
 </body>
