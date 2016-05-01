@@ -20295,12 +20295,17 @@
 	
 	var _footer2 = _interopRequireDefault(_footer);
 	
+	var _sideMenu = __webpack_require__(/*! ./sideMenu */ 162);
+	
+	var _sideMenu2 = _interopRequireDefault(_sideMenu);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mainLayout = function mainLayout(Container) {
 	
 	  _reactDom2.default.render(_react2.default.createElement(_header2.default, null), document.getElementById('header'));
-	  _reactDom2.default.render(_react2.default.createElement(Container, null), document.getElementById('container'));
+	  _reactDom2.default.render(_react2.default.createElement(_sideMenu2.default, null), document.getElementById('sideMenu-wrap'));
+	  _reactDom2.default.render(_react2.default.createElement(Container, null), document.getElementById('container-wrap'));
 	  _reactDom2.default.render(_react2.default.createElement(_footer2.default, null), document.getElementById('footer'));
 	};
 	
@@ -20478,6 +20483,68 @@
 	});
 	
 	exports.default = Footer;
+
+/***/ },
+/* 162 */
+/*!*************************************************!*\
+  !*** ./resources/assets/js/layout/sideMenu.jsx ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SideMenu = _react2.default.createClass({
+	    displayName: "SideMenu",
+	
+	    render: function render() {
+	        return _react2.default.createElement(
+	            "div",
+	            { id: "sideMenu", className: "m-only" },
+	            _react2.default.createElement(
+	                "div",
+	                { id: "sideContent" },
+	                _react2.default.createElement(
+	                    "div",
+	                    { id: "sideProfile" },
+	                    _react2.default.createElement("img", { className: "img-circle", src: "/img/no-user-image.gif" }),
+	                    _react2.default.createElement(
+	                        "span",
+	                        null,
+	                        "xgnid"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "sideRow" },
+	                    "新增課程"
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "sideRow" },
+	                    "通知設定"
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "sideRow" },
+	                    "帳號連結"
+	                ),
+	                _react2.default.createElement("img", { id: "sideBg", src: "/Cyinf/img/CyinfLogo.png" })
+	            )
+	        );
+	    }
+	});
+	
+	exports.default = SideMenu;
 
 /***/ }
 /******/ ]);

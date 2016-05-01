@@ -189,7 +189,7 @@ let SideBtns = React.createClass({
 let index = React.createClass({
   render: function () {
     return (
-      <div id="container-wrap">
+      <div id="container">
           <Curriculum />
           <SideBtns />
       </div>
