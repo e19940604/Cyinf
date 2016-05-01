@@ -31,7 +31,7 @@ $dark-black: #262022;
 }
 
 .light-orange{
-    color: $light-orange; 
+    color: $light-orange;
 }
 
 .orange{
@@ -117,7 +117,7 @@ body{
     transition: right 0.8s;
 
     #sideContent{
-        width: 80%; 
+        width: 80%;
         margin: auto;
         margin-top: 45px;
         height:100%;
@@ -161,14 +161,14 @@ body{
 
 #blackBG{
     opacity: 0;
-    visbility: hidden;
+    visibility: hidden;
     position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba(66, 62, 62, 0.5);
     -webkit-transition: opacity 0.8s; /* Safari */
     transition: opacity 0.8s;
-    z-index: 997;
+    z-index: -997;
 }
 
 /* header */

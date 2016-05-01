@@ -1,4 +1,5 @@
-var React = require('react');
+import React from 'react';
+//var React = require('react');
 
 var SideBar = React.createClass({
     render: function() {
@@ -47,4 +48,4 @@ var Header = React.createClass({
     }
 });
 
-module.exports = Header;
+export default Header;
