@@ -4,7 +4,7 @@ import mainLayout from '../layout/mainLayout';
 let CourseDetail = React.createClass({
   render: function () {
     return (
-      <div id="container-wrap">
+      <div id="container">
         <div className="courseDetail-container">
           <div className="content">
             <p className="title">Nana Mizuki Live Adventure</p>

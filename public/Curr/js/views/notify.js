@@ -59,13 +59,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var CourseDetail = _react2.default.createClass({
-	  displayName: 'CourseDetail',
+	var notify = _react2.default.createClass({
+	  displayName: 'notify',
 	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'notify-container' },
+	      { id: 'container', className: 'notify-container' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'content' },
@@ -104,7 +104,7 @@
 	  }
 	});
 	
-	(0, _mainLayout2.default)(CourseDetail);
+	(0, _mainLayout2.default)(notify);
 
 /***/ },
 /* 1 */

@@ -65,7 +65,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { id: 'container-wrap' },
+	      { id: 'container' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'courseDetail-container' },

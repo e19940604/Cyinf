@@ -1,10 +1,10 @@
 import React from 'react';
 import mainLayout from '../layout/mainLayout';
 
-let CourseDetail = React.createClass({
+let notify = React.createClass({
   render: function () {
     return (
-      <div className="notify-container">
+      <div id="container" className="notify-container">
         <div className="content">
           <p className="title">Nana Mizuki Live Adventure</p>
           <div className="date">2016/04/27</div>
@@ -23,4 +23,4 @@ let CourseDetail = React.createClass({
   }
 });
 
-mainLayout(CourseDetail);
+mainLayout(notify);
