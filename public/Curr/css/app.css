@@ -117,7 +117,7 @@ body {
   background-color: rgba(66, 62, 62, 0.5);
   /* Safari */
   transition: opacity 0.8s;
-  z-index: -997; }
+  z-index: 997; }
 
 /* header */
 header {

@@ -1,12 +1,12 @@
-(function(){
+$(function () {
     var m_sideBtn = $('#m-side');
     var sideMenu = $('#sideMenu');
     var bg = $('#blackBG');
     var sideMenuStatus = false;
     var bgStatus = false;
 
-    m_sideBtn.on('click', function(){
-        if( sideMenuStatus ){
+    m_sideBtn.on('click', function () {
+        if (sideMenuStatus) {
             sideMenuHide();
             blackBGHide();
         }
@@ -16,30 +16,30 @@
         }
     });
 
-    bg.on('click', function(){
-        if( sideMenuStatus === true )
+    bg.on('click', function () {
+        if (sideMenuStatus === true)
             sideMenuHide();
         blackBGHide();
     })
 
-    function sideMenuHide(){
+    function sideMenuHide() {
         sideMenu.css('right', '-320px');
         sideMenuStatus = false;
     }
 
-    function sideMenuShow(){
-        sideMenu.css('right', '0'); 
+    function sideMenuShow() {
+        sideMenu.css('right', '0');
         sideMenuStatus = true;
     }
 
-    function blackBGHide(){
+    function blackBGHide() {
         bg.css('opacity', '0');
-        bg.css('visbility', 'hidden');
+        bg.css('visibility', 'hidden');
     }
 
-    function blackBGShow(){
+    function blackBGShow() {
         bg.css('opacity', '1');
-        bg.css('visbility', 'visible');
+        bg.css('visibility', 'visible');
     }
 
-})();
+});
