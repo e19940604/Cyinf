@@ -53,364 +53,65 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _curriculum = __webpack_require__(/*! ../layout/curriculum */ 163);
+	
+	var _curriculum2 = _interopRequireDefault(_curriculum);
+	
 	var _mainLayout = __webpack_require__(/*! ../layout/mainLayout */ 158);
 	
 	var _mainLayout2 = _interopRequireDefault(_mainLayout);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Curriculum = _react2.default.createClass({
-	    displayName: 'Curriculum',
-	
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { id: 'curriculum' },
-	            _react2.default.createElement(
-	                'div',
-	                { id: 'table-scroll' },
-	                _react2.default.createElement(
-	                    'table',
-	                    null,
-	                    _react2.default.createElement(
-	                        'thead',
-	                        null,
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement('th', null),
-	                            _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                '一'
-	                            ),
-	                            _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                '二'
-	                            ),
-	                            _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                '三'
-	                            ),
-	                            _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                '四'
-	                            ),
-	                            _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                '五'
-	                            ),
-	                            _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                '六'
-	                            ),
-	                            _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                '日'
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'tbody',
-	                        null,
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                'A'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '1'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '2'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement(
-	                                'td',
-	                                { className: 'blueClass' },
-	                                '跨領域文'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '3'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement(
-	                                'td',
-	                                { className: 'blueClass' },
-	                                '跨領域文'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '4'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement(
-	                                'td',
-	                                { className: 'blueClass' },
-	                                '跨領域文'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                'B'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '5'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '6'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '7'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '8'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '9'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                'C'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                'D'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        ),
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                'E'
-	                            ),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null),
-	                            _react2.default.createElement('td', null)
-	                        )
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-	
 	var SideBtns = _react2.default.createClass({
-	    displayName: 'SideBtns',
+	  displayName: 'SideBtns',
 	
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { id: 'sideBtns', className: 'desk-only' },
-	            _react2.default.createElement(
-	                'div',
-	                { id: 'addCourseBtn', className: 'sideBtn pinkBtn' },
-	                _react2.default.createElement(
-	                    'span',
-	                    null,
-	                    '新增'
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { id: 'configBtn', className: 'sideBtn blueBtn' },
-	                _react2.default.createElement(
-	                    'span',
-	                    null,
-	                    '設定'
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { id: 'connectBtn', className: 'sideBtn orangeBtn' },
-	                _react2.default.createElement(
-	                    'span',
-	                    null,
-	                    '連結'
-	                )
-	            )
-	        );
-	    }
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { id: 'sideBtns', className: 'desk-only' },
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'addCourseBtn', className: 'sideBtn pinkBtn' },
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          '新增'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'configBtn', className: 'sideBtn blueBtn' },
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          '設定'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'connectBtn', className: 'sideBtn orangeBtn' },
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          '連結'
+	        )
+	      )
+	    );
+	  }
 	});
 	
 	var index = _react2.default.createClass({
-	    displayName: 'index',
+	  displayName: 'index',
 	
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { id: 'container' },
-	            _react2.default.createElement(Curriculum, null),
-	            _react2.default.createElement(SideBtns, null)
-	        );
-	    }
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { id: 'container' },
+	      _react2.default.createElement(_curriculum2.default, null),
+	      _react2.default.createElement(SideBtns, null)
+	    );
+	  }
 	});
 	
 	(0, _mainLayout2.default)(index);
@@ -20761,6 +20462,177 @@
 	});
 	
 	exports.default = SideMenu;
+
+/***/ },
+/* 163 */
+/*!***************************************************!*\
+  !*** ./resources/assets/js/layout/curriculum.jsx ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ScheduleItem = _react2.default.createClass({
+	  displayName: 'ScheduleItem',
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'tr',
+	      null,
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        this.props.scheduleName
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        { className: this.props.courses[0].className },
+	        this.props.courses[0].name
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        { className: this.props.courses[1].className },
+	        this.props.courses[1].name
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        { className: this.props.courses[2].className },
+	        this.props.courses[2].name
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        { className: this.props.courses[3].className },
+	        this.props.courses[3].name
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        { className: this.props.courses[4].className },
+	        this.props.courses[4].name
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        { className: this.props.courses[5].className },
+	        this.props.courses[5].name
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        { className: this.props.courses[6].className },
+	        this.props.courses[6].name
+	      )
+	    );
+	  }
+	});
+	
+	var Curriculum = _react2.default.createClass({
+	  displayName: 'Curriculum',
+	
+	  'getInitialState': function getInitialState() {
+	    return {
+	      'courses': [{ 'schedule': [[1, 1], [2, 1], [3, 1]], 'name': '跨領域文', 'className': 'blueClass' }]
+	    };
+	  },
+	  'render': function render() {
+	    var courseSchedule = Array(14).fill().map(function () {
+	      return Array(7).fill().map(function () {
+	        return { 'name': '', 'className': '' };
+	      });
+	    });
+	
+	    this.state.courses.forEach(function (course) {
+	      course.schedule.forEach(function (e) {
+	        courseSchedule[e[0]][e[1]].name = course.name;
+	        courseSchedule[e[0]][e[1]].className = course.className;
+	      });
+	    });
+	
+	    return _react2.default.createElement(
+	      'div',
+	      { id: 'curriculum' },
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'table-scroll' },
+	        _react2.default.createElement(
+	          'table',
+	          null,
+	          _react2.default.createElement(
+	            'thead',
+	            null,
+	            _react2.default.createElement(
+	              'tr',
+	              null,
+	              _react2.default.createElement('th', null),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '一'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '二'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '三'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '四'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '五'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '六'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '日'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'tbody',
+	            null,
+	            _react2.default.createElement(ScheduleItem, { scheduleName: 'A', courses: courseSchedule[0] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '1', courses: courseSchedule[1] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '2', courses: courseSchedule[2] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '3', courses: courseSchedule[3] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '4', courses: courseSchedule[4] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: 'B', courses: courseSchedule[5] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '5', courses: courseSchedule[6] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '6', courses: courseSchedule[7] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '7', courses: courseSchedule[8] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '8', courses: courseSchedule[9] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: '9', courses: courseSchedule[10] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: 'C', courses: courseSchedule[11] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: 'D', courses: courseSchedule[12] }),
+	            _react2.default.createElement(ScheduleItem, { scheduleName: 'E', courses: courseSchedule[13] })
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = Curriculum;
 
 /***/ }
 /******/ ]);
