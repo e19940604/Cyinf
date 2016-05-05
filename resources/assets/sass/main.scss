@@ -82,6 +82,8 @@ $dark-black: #262022;
     color: $dark-black;
 }
 
+
+
 /* global */
 a {
     color: $light-blue;
@@ -150,7 +152,7 @@ body{
             border-bottom: 1px solid rgba(251,251,251,0.6);
         }
 
-        #sideBg{
+        .sideBg{
             width: inherit;
             position: absolute;
             bottom: 40px;
@@ -165,10 +167,211 @@ body{
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: rgba(66, 62, 62, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
     -webkit-transition: opacity 0.8s; /* Safari */
     transition: opacity 0.8s;
-    z-index: 997;
+    z-index: 990;
+}
+/* modal */
+.mod {
+    position: fixed;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: calc(100vw - 20px);
+    /* 46(header) + 10(border) + 10(border) + 41(footer) = */
+    height: calc(100vh - 107px);
+    border-radius: 4px;
+    z-index: 991;
+}
+
+.pinkModal{
+    background: #F67093;
+    box-shadow: 0 0 0 10px rgba(253,150,173,0.3);
+}
+
+.blueModal{
+    background: #6993E9;
+    box-shadow: 0 0 0 10px rgba(139,180,255,0.3);
+}
+
+.orangeModal{
+    background: #FF8C39;
+    box-shadow: 0 0 0 10px rgba(253,158,91,0.3);
+}
+
+.closeBtn{
+    z-index: 992;
+    position: absolute;
+    right:0;
+    top: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.mod-content{
+    height: 100%;
+    overflow: auto;
+
+    .mod-title{
+        width: 80%;
+        margin: auto;
+    }
+
+    .mod-title-text{
+        color: $white;
+        text-align: center;
+        padding: 20px;
+        border-bottom: 1px solid $mi ;
+        letter-spacing: 5px;
+    }
+
+    .mod-item{
+        position: relative;
+        padding: 40px;
+        margin: auto;
+
+        .mod-text{
+            color: $white;
+            font-size: 16px;
+            line-height: 22px;
+        }
+    }
+
+    .mod-add{
+        height: 30%;
+
+        .mod-add-inputGroup{
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 15px;
+
+            .mod-add-text{
+                float: left;
+                height: 100%;
+            }
+            .mod-add-inputBlock{
+                float:right;
+
+                .mod-add-input{
+                    width: 100%;
+                    height: 28px;
+                    margin-bottom: 15px;
+                    border-radius: 20px;
+                    border-color: rgb( 220 ,78 ,109 );
+                    border-width: 2px;
+                }
+            }
+        }
+
+        .mod-add-icon{
+            position: relative;
+            color: rgba( 255 , 255 , 255,  0.9);
+            float: right;
+            font-size: 28px;
+        }
+
+        .mod-add-btn{
+            font-size: 32px;
+        }
+    }
+
+    .mod-add-result{
+        color: #fbfbfb;
+        width: 90%;
+        margin: auto;
+
+        table{
+            width: 100%;
+        }
+
+        thead{
+            tr{
+                th{
+                    display: none;
+                }
+            }
+        }
+
+        tbody{
+            tr:nth-child(even){
+                background-color: rgba(253,150,173,0.6);
+            }
+            tr{
+                td{
+                    width: 100%;
+                    display: block;
+                    border: 0;
+                    font-weight: 300;
+                    line-height: 30px;
+                    text-align: left;
+                    letter-spacing: 3px;
+                }
+
+                td[data-title]:before {
+                    content: attr(data-title)"：";
+                    font-weight: 700;
+                    margin-right: 5px;
+                }
+
+                .add-result-btn{
+                    width: 100%;
+                    border: 1px solid #fbfbfb;
+                    background-color: #FA6686;
+                    border-radius: 4px;
+                    margin-top: 5px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+
+    .mod-config{
+        width: 80%;
+        height: 20%;
+
+        .mod-config-text{
+            display: inline-box;
+            float: left;
+        }
+
+        .mod-config-text:last-child{
+            float: right;
+
+            .mod-switch{
+                margin-right: 0;
+            }
+
+        }
+    }
+
+    .mod-link{
+        width: 80%;
+        height: 20%;
+
+        .mod-image{
+            display: inline-block;
+            float: left;
+            width: 30px;
+        }
+
+        .mod-link-text{
+            float: left;
+            display: inline-block;
+            width: calc( 100% - 30px);
+            text-align: center;
+            font-size: 12px;
+            line-height: 30px;
+        }
+    }
+    .mod-bg{
+        width: 80%;
+        margin:auto;
+        opacity: 0.29;
+
+        img{
+            width: 100%
+        }
+    }
 }
 
 /* header */
@@ -256,7 +459,63 @@ footer{
     }
 }
 
+@media screen and ( min-width: 680px ){
 
+    /* modal */
+    .mod-content{
+
+        .mod-title-text{
+            font-size: 25px;
+        }
+
+        .mod-item{
+            width: 400px;
+
+            .mod-text{
+                 font-size: 18px;
+            }
+        }
+
+        .mod-add{
+            width: 480px;
+            padding: 0;
+
+            .mod-add-inputGroup{
+                width: 100%;
+
+                .mod-add-text{
+                    margin-right: 20px;
+                }
+                .mod-add-inputBlock{
+                    float: left;
+
+                    .mod-add-input{
+                        width: 175px;
+                        margin-right: 20px;
+                        float: left;
+                    }
+                }
+
+                .mod-add-inputBlock:last-child{
+                    float:right;
+                }
+            }
+        }
+
+        .mod-link{
+            width: 50%;
+            .mod-image{
+                width: 40px;
+            }
+
+            .mod-link-text{
+                text-align: center;
+                width: calc(100% - 40px);
+                line-height: 40px;
+            }
+        }
+    }
+}
 
 @media screen and ( max-device-width: 900px ){
 
@@ -326,6 +585,100 @@ footer{
                 opacity: 60%;
                 font-size: 14px;
             }
+        }
+    }
+
+    /* modal */
+
+    .pinkModal{
+        box-shadow: 0 0 0 20px rgba(253,150,173,0.6);
+    }
+
+    .blueModal{
+        box-shadow: 0 0 0 20px rgba(139,180,255,0.6);
+    }
+
+    .orangeModal{
+        box-shadow: 0 0 0 20px rgba(253,158,91,0.6);
+    }
+
+    .mod{
+        width: 60vw;
+        height: 60vh;
+        top: 50%;
+        margin-top: calc( -30vh + (49px / 2) );
+        right: 50%;
+        margin-right: -30vw;
+        border-radius: 22px;
+    }
+
+    .mod-content{
+
+        .mod-link{
+            
+            .mod-image{
+                width: 40px;
+            }
+
+            .mod-link-text{
+                text-align: center;
+                width: calc(100% - 40px);
+                font-size: 16px;
+                line-height: 40px;
+            }
+        }
+
+        .mod-add-result{
+            font-size: 16px;
+            width: 80%;
+
+            th,td{
+                padding : 5px;
+                width: 12%;
+                text-align: center;
+            }
+
+            th:first-child , td:first-child{
+                width: 28%;
+            }
+
+            thead{
+                tr{
+                    height: 50px;
+                    border-bottom: 2px solid $white;
+                    th{
+                        width: 12%;
+                        display: inline-table;
+                        font-weight: 400;
+                    }
+                }
+            }
+
+            tbody{
+                tr:nth-child(2){
+                    background-color: rgba(253,150,173,0.6);
+                }
+
+                tr{
+                    td{
+                        display: inline-table;
+                        text-align: center;
+                        width: 12%;
+                        letter-spacing: 3px;
+                    }
+                    td[data-title]:before {
+                        content: "";
+                        display: none;
+                    }
+                }
+
+                .mod-result-icon{
+                    font-size: 30px;
+                }
+
+ 
+            }
+            
         }
     }
 }
