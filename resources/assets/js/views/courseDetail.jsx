@@ -18,25 +18,25 @@ let CourseDetail = React.createClass({
               <span className="desc">教室位置</span>
               <span className="content">工EC 5012</span>
             </span>
-            <span class="list">
-              <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-              <span class="desc">上課時間</span>
-              <span class="content">一 67, 二 8</span>
+            <span className="list">
+              <span className="icon"><i className="fa fa-clock-o" aria-hidden="true"></i></span>
+              <span className="desc">上課時間</span>
+              <span className="content">一 67, 二 8</span>
             </span>
-            <span class="list">
-              <span class="icon"><i class="fa fa-university" aria-hidden="true"></i></span>
-              <span class="desc">開課系所</span>
-              <span class="content">音樂系</span>
+            <span className="list">
+              <span className="icon"><i className="fa fa-university" aria-hidden="true"></i></span>
+              <span className="desc">開課系所</span>
+              <span className="content">音樂系</span>
             </span>
-            <span class="list">
-              <span class="icon"><i class="fa fa-money" aria-hidden="true"></i></span>
-              <span class="desc">課程學分</span>
-              <span class="content">10</span>
+            <span className="list">
+              <span className="icon"><i className="fa fa-money" aria-hidden="true"></i></span>
+              <span className="desc">課程學分</span>
+              <span className="content">10</span>
             </span>
-            <div class="btn-collect">
-              <span class="btn-list blue-btn">課程評鑑</span>
-              <span class="btn-list pink-btn">發送點名通知</span>
-              <span class="btn-list mi-btn">發送考試通知</span>
+            <div className="btn-collect">
+              <span className="btn-list blue-btn">課程評鑑</span>
+              <span className="btn-list pink-btn">發送點名通知</span>
+              <span className="btn-list mi-btn">發送考試通知</span>
             </div>
           </div>
         </div>
