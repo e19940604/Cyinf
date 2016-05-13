@@ -50,7 +50,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _mainLayout = __webpack_require__(158);
+	var _courseDetailPartial = __webpack_require__(158);
+
+	var _courseDetailPartial2 = _interopRequireDefault(_courseDetailPartial);
+
+	var _mainLayout = __webpack_require__(159);
 
 	var _mainLayout2 = _interopRequireDefault(_mainLayout);
 
@@ -59,137 +63,28 @@
 	var CourseDetail = _react2.default.createClass({
 	  displayName: 'CourseDetail',
 
-	  render: function render() {
+	  'getInitialState': function getInitialState() {
+	    return {
+	      'courseName': 'Nana Mizuki Live Adventure',
+	      'teacher': '水樹奈奈',
+	      'room': '工EC 5012',
+	      'schedule': '一 67, 二 8',
+	      'department': '音樂系',
+	      'credit': 10
+	    };
+	  },
+	  'render': function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      { id: 'container' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'courseDetail-container' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'content' },
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'title' },
-	            'Nana Mizuki Live Adventure'
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'list' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'icon' },
-	              _react2.default.createElement('i', { className: 'fa fa-microphone', 'aria-hidden': 'true' })
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'desc' },
-	              '授課教師'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'content' },
-	              '水樹奈奈'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'list' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'icon' },
-	              _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' })
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'desc' },
-	              '教室位置'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'content' },
-	              '工EC 5012'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { 'class': 'list' },
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'icon' },
-	              _react2.default.createElement('i', { 'class': 'fa fa-clock-o', 'aria-hidden': 'true' })
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'desc' },
-	              '上課時間'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'content' },
-	              '一 67, 二 8'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { 'class': 'list' },
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'icon' },
-	              _react2.default.createElement('i', { 'class': 'fa fa-university', 'aria-hidden': 'true' })
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'desc' },
-	              '開課系所'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'content' },
-	              '音樂系'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { 'class': 'list' },
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'icon' },
-	              _react2.default.createElement('i', { 'class': 'fa fa-money', 'aria-hidden': 'true' })
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'desc' },
-	              '課程學分'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'content' },
-	              '10'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { 'class': 'btn-collect' },
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'btn-list blue-btn' },
-	              '課程評鑑'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'btn-list pink-btn' },
-	              '發送點名通知'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { 'class': 'btn-list mi-btn' },
-	              '發送考試通知'
-	            )
-	          )
-	        )
-	      )
+	      _react2.default.createElement(_courseDetailPartial2.default, {
+	        courseName: this.state.courseName,
+	        teacher: this.state.teacher,
+	        room: this.state.room,
+	        schedule: this.state.schedule,
+	        department: this.state.department,
+	        credit: this.state.credit
+	      })
 	    );
 	  }
 	});
@@ -19802,19 +19697,171 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(159);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var CourseDetailPartial = _react2.default.createClass({
+	  displayName: 'CourseDetailPartial',
+
+	  'render': function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'courseDetail-container' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'content' },
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'title' },
+	          this.props.courseName
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'list' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'icon' },
+	            _react2.default.createElement('i', { className: 'fa fa-microphone', 'aria-hidden': 'true' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'desc' },
+	            '授課教師'
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'content' },
+	            this.props.teacher
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'list' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'icon' },
+	            _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'desc' },
+	            '教室位置'
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'content' },
+	            this.props.room
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'list' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'icon' },
+	            _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'desc' },
+	            '上課時間'
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'content' },
+	            this.props.schedule
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'list' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'icon' },
+	            _react2.default.createElement('i', { className: 'fa fa-university', 'aria-hidden': 'true' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'desc' },
+	            '開課系所'
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'content' },
+	            this.props.department
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'list' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'icon' },
+	            _react2.default.createElement('i', { className: 'fa fa-money', 'aria-hidden': 'true' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'desc' },
+	            '課程學分'
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'content' },
+	            this.props.credit
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'btn-collect' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'btn-list blue-btn' },
+	            '課程評鑑'
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'btn-list pink-btn' },
+	            '發送點名通知'
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'btn-list mi-btn' },
+	            '發送考試通知'
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	exports.default = CourseDetailPartial;
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(160);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _header = __webpack_require__(160);
+	var _header = __webpack_require__(161);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(161);
+	var _footer = __webpack_require__(162);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _sideMenu = __webpack_require__(162);
+	var _sideMenu = __webpack_require__(163);
 
 	var _sideMenu2 = _interopRequireDefault(_sideMenu);
 
@@ -19831,7 +19878,7 @@
 	exports.default = mainLayout;
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19840,13 +19887,13 @@
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _react = __webpack_require__(1);
@@ -19858,98 +19905,99 @@
 	//var React = require('react');
 
 	var SideBar = _react2.default.createClass({
-	    displayName: "SideBar",
+	  displayName: 'SideBar',
 
-	    render: function render() {
-	        return _react2.default.createElement(
-	            "div",
-	            { id: "profile" },
-	            _react2.default.createElement(
-	                "ul",
-	                null,
-	                _react2.default.createElement(
-	                    "li",
-	                    { id: "note" },
-	                    _react2.default.createElement("i", { className: "fa fa-bell-o" })
-	                ),
-	                _react2.default.createElement(
-	                    "li",
-	                    { id: "m-sidebtn", className: "m-only" },
-	                    _react2.default.createElement("i", { id: "m-side", className: "fa fa-bars" })
-	                ),
-	                _react2.default.createElement(
-	                    "li",
-	                    { className: "desk-only" },
-	                    " | "
-	                ),
-	                _react2.default.createElement(
-	                    "li",
-	                    { id: "fb-icon", className: "desk-only" },
-	                    _react2.default.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        _react2.default.createElement("img", { className: "img-circle", src: this.props.pic })
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    "li",
-	                    { className: "desk-only" },
-	                    " | "
-	                ),
-	                _react2.default.createElement(
-	                    "li",
-	                    { id: "fb-name", className: "desk-only" },
-	                    _react2.default.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        this.props.name
-	                    )
-	                )
-	            )
-	        );
-	    }
+	  'render': function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { id: 'profile' },
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        _react2.default.createElement(
+	          'li',
+	          { id: 'note' },
+	          _react2.default.createElement('i', { className: 'fa fa-bell-o' })
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          { id: 'm-sidebtn', className: 'm-only' },
+	          _react2.default.createElement('i', { id: 'm-side', className: 'fa fa-bars' })
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          { className: 'desk-only' },
+	          ' | '
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          { id: 'fb-icon', className: 'desk-only' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#' },
+	            _react2.default.createElement('img', { className: 'img-circle', src: this.props.pic })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          { className: 'desk-only' },
+	          ' | '
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          { id: 'fb-name', className: 'desk-only' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#' },
+	            this.props.name
+	          )
+	        )
+	      )
+	    );
+	  }
 	});
 
 	var Header = _react2.default.createClass({
-	    displayName: "Header",
+	  displayName: 'Header',
 
 
-	    getInitialState: function getInitialState() {
-	        return {
-	            profile_pic: "/img/no-user-image.gif",
-	            profile_name: "連結 FB"
-	        };
-	    },
+	  'getInitialState': function getInitialState() {
+	    return {
+	      'profile_pic': '/img/no-user-image.gif',
+	      'profile_name': '連結 FB'
+	    };
+	  },
 
-	    render: function render() {
-	        return _react2.default.createElement(
-	            "div",
-	            { id: "hd-container" },
-	            _react2.default.createElement(
-	                "div",
-	                { id: "title-wrap" },
-	                _react2.default.createElement("img", { id: "logo", src: "/curr/img/icon_c.svg" }),
-	                _react2.default.createElement(
-	                    "h3",
-	                    null,
-	                    "urriculum"
-	                )
-	            ),
-	            _react2.default.createElement(SideBar, { pic: this.state.profile_pic, name: this.state.profile_name })
-	        );
-	    }
+	  'render': function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { id: 'hd-container' },
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'title-wrap' },
+	        _react2.default.createElement('img', { id: 'logo', src: '/curr/img/icon_c.svg' }),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'urriculum'
+	        )
+	      ),
+	      _react2.default.createElement(SideBar, { pic: this.state.profile_pic, name: this.state.profile_name })
+	    );
+	  }
+
 	});
 
 	exports.default = Header;
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _react = __webpack_require__(1);
@@ -19959,49 +20007,49 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Footer = _react2.default.createClass({
-	    displayName: "Footer",
+	  displayName: 'Footer',
 
-	    render: function render() {
-	        return _react2.default.createElement(
-	            "div",
-	            { className: "container" },
-	            _react2.default.createElement(
-	                "h5",
-	                null,
-	                "Copyright © Cyinf Studio 2015 ",
-	                _react2.default.createElement(
-	                    "p",
-	                    { className: "desk-only" },
-	                    " |  ",
-	                    _react2.default.createElement(
-	                        "a",
-	                        { href: "#", className: "desk-only footer-link" },
-	                        _react2.default.createElement("i", { className: "fa fa-commenting-o" }),
-	                        " 意見與反饋"
-	                    ),
-	                    "  | ",
-	                    _react2.default.createElement(
-	                        "a",
-	                        { href: "#", className: "desk-only footer-link" },
-	                        _react2.default.createElement("i", { className: "fa fa-question" }),
-	                        " 使用教學"
-	                    )
-	                )
-	            )
-	        );
-	    }
+	  'render': function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'container' },
+	      _react2.default.createElement(
+	        'h5',
+	        null,
+	        'Copyright © Cyinf Studio 2015 ',
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'desk-only' },
+	          ' |  ',
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#', className: 'desk-only footer-link' },
+	            _react2.default.createElement('i', { className: 'fa fa-commenting-o' }),
+	            ' 意見與反饋'
+	          ),
+	          '  | ',
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#', className: 'desk-only footer-link' },
+	            _react2.default.createElement('i', { className: 'fa fa-question' }),
+	            ' 使用教學'
+	          )
+	        )
+	      )
+	    );
+	  }
 	});
 
 	exports.default = Footer;
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _react = __webpack_require__(1);
@@ -20011,44 +20059,44 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var SideMenu = _react2.default.createClass({
-	    displayName: "SideMenu",
+	  displayName: 'SideMenu',
 
-	    render: function render() {
-	        return _react2.default.createElement(
-	            "div",
-	            { id: "sideMenu", className: "m-only" },
-	            _react2.default.createElement(
-	                "div",
-	                { id: "sideContent" },
-	                _react2.default.createElement(
-	                    "div",
-	                    { id: "sideProfile" },
-	                    _react2.default.createElement("img", { className: "img-circle", src: "/img/no-user-image.gif" }),
-	                    _react2.default.createElement(
-	                        "span",
-	                        null,
-	                        "xgnid"
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "sideRow" },
-	                    "新增課程"
-	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "sideRow" },
-	                    "通知設定"
-	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "sideRow" },
-	                    "帳號連結"
-	                ),
-	                _react2.default.createElement("img", { id: "sideBg", src: "/Cyinf/img/CyinfLogo.png" })
-	            )
-	        );
-	    }
+	  'render': function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { id: 'sideMenu', className: 'm-only' },
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'sideContent' },
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'sideProfile' },
+	          _react2.default.createElement('img', { className: 'img-circle', src: '/img/no-user-image.gif' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'xgnid'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'sideRow' },
+	          '新增課程'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'sideRow' },
+	          '通知設定'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'sideRow' },
+	          '帳號連結'
+	        ),
+	        _react2.default.createElement('img', { id: 'sideBg', src: '/Cyinf/img/CyinfLogo.png' })
+	      )
+	    );
+	  }
 	});
 
 	exports.default = SideMenu;

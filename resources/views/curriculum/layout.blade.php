@@ -220,12 +220,12 @@
                 <h4 class="mod-title-text">帳號連結</h4>
             </div>
             <div class="mod-item mod-link">
-                <img class="mod-image" src="img/shortIcon.png">
-                <span class="mod-text mod-link-text">連結中： Xgnid / 登出</span>
+                <img class="mod-image" src="/img/shortIcon.png">
+                <span class="mod-text mod-link-text">登入中： Xgnid / <a>登出</a></span>
             </div>
             <div class="mod-item mod-link">
-                <img class="mod-image" src="img/fb-blue.png">
-                <span class="mod-text mod-link-text">連結中： Xgnid / 登出</span>
+                <img class="mod-image" src="/img/fb-blue.png">
+                <span class="mod-text mod-link-text">連結中： Xgnid / <a>斷開</a></span>
             </div>
             <div class="mod-bg m-only">
                 <img src="/Cyinf/img/CyinfLogo.png">
