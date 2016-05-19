@@ -49,6 +49,13 @@
 .dark-black {
   color: #262022; }
 
+.visibility-hidden {
+  opacity: 0;
+  visibility: hidden; }
+
+.cursor-pointer {
+  cursor: pointer; }
+
 /* global */
 a {
   color: #8BB4FF; }
@@ -109,8 +116,6 @@ body {
       opacity: 0.29; }
 
 #blackBG {
-  opacity: 0;
-  visibility: hidden;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -562,7 +567,8 @@ footer {
       border: 1px solid;
       border-radius: 22px;
       color: #FBFBFB;
-      line-height: 26px; }
+      line-height: 26px;
+      cursor: pointer; }
       #sideBtns .sideBtn span {
         font-size: 20px;
         position: absolute;
