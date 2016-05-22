@@ -21,11 +21,16 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
+        $response = [];
+        
     	if($this->userService->userLogin($request->all())){
-    		return 'success';
+            $response['status'] = "success";
+            $response['url'] = \Cache::get('loginRedirect' , "/");
+    		return response()->json( $response );
     	}
     	else{
-    		return 'fail';
+            $response['status'] = "fail";
+    		return response()->json($response);
     	}
     }
 

@@ -47,7 +47,11 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => 'guest'], function () {
 
-		Route::get('/users/login',    function () { return view('usersLogin'); });
+		Route::get('/users/login',    function () {
+			$backUrl = back()->getTargetUrl();
+			Cache::add( 'loginRedirect' , $backUrl , 20 );
+			return view('usersLogin');
+		});
 		Route::get('/users/register', function () { return view('usersRegister'); });
 		Route::get('/users/forget',   function () { return view('usersForget'); });
 		Route::post('/users/forget/{stu_id}', 'Password_resetsController@forget');
@@ -87,10 +91,16 @@ Route::group(['middleware' => ['web']], function () {
 	});
 });
 
+/* Cyinf Curriculum */
 Route::group(['middleware' => ['web']], function () {
-    /* Cyinf Curriculum */
+
     Route::get('/curriculum' , 'CurriculumController@index');
     Route::get('/curriculum/courseDetail' , 'CurriculumController@courseDetail');
-    Route::get('/curriculum/notify', 'CurriculumController@notify');
+    Route::get('/curriculum/notification', 'CurriculumController@notify');
+	
+	Route::group(['middleware' => 'auth'], function(){
+		Route::get('/curriculum/notify', 'NotificationController@show');
+	});
+	
 
 });

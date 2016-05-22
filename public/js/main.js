@@ -68,17 +68,16 @@ function loginAjax()
     var data = $("#loginForm").serialize();
     
     $.post( "/login", data, function(result) {
-        if( result == "success" ) {
-            $("#loginForm").empty();
-            $("#loginForm").append( "<legend>Welcome Back</legend><br />" );
-            setTimeout(toHome, 1000);
+        console.log( result );
+        if( result.status == "success" ) {
+            location.href = result.url;
         }
-        else if ( result == "fail" ) {
+        else if ( result.status == "fail" ) {
             var message = '* Wrong Information. Try Again.';
             $("#loginMessage").html( message );
             $("#password").val('');
         }
-    } ); 
+    } , "json"); 
 }
 
 function showNsysuForm()
