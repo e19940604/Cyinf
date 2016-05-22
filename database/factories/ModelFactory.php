@@ -3,6 +3,7 @@ use Cyinf\User;
 use Cyinf\Comment;
 use Cyinf\Course;
 use Cyinf\Favorite;
+use Cyinf\Notification;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -83,3 +84,24 @@ $factory->define( Favorite::class , function (Faker\Generator $faker) {
     return [
     ];
 });
+
+$factory->define( Notification::class , function( Faker\Generator $faker ){
+    $users = User::all()->pluck('stu_id');
+    $courses = Course::all()->pluck('id');
+    return [
+        'stu_id' => $users->random(),
+        'course_id' => $courses->random(),
+        'content' => $faker->text('50'),
+        'type' => $faker->numberBetween( 0 , 2 ),
+        'is_read' => $faker->boolean(),
+    ];
+});
+
+$factory->define( Curriculum::class , function( Faker\Generator $faker ){
+    $users = User::all()->pluck('stu_id');
+    $courses = Course::all()->pluck('id');    
+    return [
+        'stu_id' => $users->random(),
+        'course_id' => $courses->random(),
+    ];
+} );

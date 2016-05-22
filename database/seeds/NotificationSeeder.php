@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class NotificationSeeder extends Seeder
 {
+    private $numRows = 10;
     /**
      * Run the database seeds.
      *
@@ -11,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(NotificationSeeder::class);
-        $this->call(CurriculumSeeder::class);
+        factory( \Cyinf\Notification::class , $this->numRows )->create();
     }
 }
