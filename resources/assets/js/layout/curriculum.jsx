@@ -13,11 +13,11 @@ let ScheduleItem = React.createClass({
         <td className={this.props.courses[5].className}>{this.props.courses[5].name}</td>
         <td className={this.props.courses[6].className}>{this.props.courses[6].name}</td>
       </tr>
-    )}
+    )
+  }
 })
 
 let Curriculum = React.createClass({
-
   'getInitialState': function () {
     return {
       'courses': [

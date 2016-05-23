@@ -11,14 +11,24 @@ let SideBtns = React.createClass({
     modalLayout(AddModal);
     $('#blackBG').removeClass('visibility-hidden');
   },
+
   'handleClickConfig': function (e) {
-    modalLayout(ConfigModal);
+    modalLayout(ConfigModal, {
+      'classNote': false,
+      'goClassNote': true,
+      'testNote': true
+    });
     $('#blackBG').removeClass('visibility-hidden');
   },
+
   'handleClickLink': function (e) {
-    modalLayout(LinkModal);
+    modalLayout(LinkModal, {
+      'userName': 'Xgnid',
+      'fbName': '雷包'
+    });
     $('#blackBG').removeClass('visibility-hidden');
   },
+
   'render': function () {
     return (
       <div id="sideBtns" className="desk-only">
@@ -36,7 +46,7 @@ let SideBtns = React.createClass({
   }
 });
 
-let index = React.createClass({
+let Index = React.createClass({
   'render': function () {
     return (
       <div id="container">
@@ -47,4 +57,4 @@ let index = React.createClass({
   }
 });
 
-mainLayout(index);
+mainLayout(Index);
