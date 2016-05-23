@@ -24,7 +24,7 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">上課通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch1" />
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch1" defaultChecked={this.props.classNote} />
                 <label className="onoffswitch-label" htmlFor="switch1">
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
@@ -37,7 +37,7 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">點名通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch2" defaultChecked />
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch2" defaultChecked={this.props.goClassNote} />
                 <label className="onoffswitch-label" htmlFor="switch2">
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
@@ -50,7 +50,7 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">考試通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch3" defaultChecked />
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch3" defaultChecked={this.props.testNote} />
                 <label className="onoffswitch-label" htmlFor="switch3">
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
