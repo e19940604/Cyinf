@@ -102,6 +102,10 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/curriculum/notify', 'NotificationController@show');
 		Route::patch('/curriculum/config', 'NotificationController@config' );
 		Route::patch('/curriculum/readAll', 'NotificationController@readAll');
+
+		/* facebook api */
+		Route::get('/curriculum/link-facebook', 'FacebookController@login');
+		Route::get('/curriculum/loginCallBack', 'FacebookController@loginCallBack');
 	});
 	
 

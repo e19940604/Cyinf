@@ -31,11 +31,11 @@ class FacebookController extends Controller
     }
 
     protected function login( Request $request ){
-        $this->facebookService->fbLogin();
+        return $this->facebookService->fbLogin();
     }
 
     protected function loginCallBack(){
-        $this->facebookService->loginCallBack();
+        return $this->facebookService->loginCallBack();
     }
 
     protected function testAccessToken( Request $request ){
@@ -58,11 +58,10 @@ class FacebookController extends Controller
         } catch(FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
-            exit;
+
         } catch(FacebookSDKException $e) {
             // When validation fails or other local issues
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
-            exit;
         }
 
     }
