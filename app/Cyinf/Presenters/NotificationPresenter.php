@@ -29,7 +29,7 @@ class NotificationPresenter
             else{
                 $fbServ = new \Cyinf\Services\FacebookService();
                 $student = User::find( $item['stu_id'] );
-                $imageUrl = $fbServ->getPictureById( $student->FB_conn );
+                $imageUrl = $fbServ->getPictureById( $student->FB_conn , "Notification");
             }
 
             array_push( $result , [

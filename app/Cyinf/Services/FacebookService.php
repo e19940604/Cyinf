@@ -39,7 +39,7 @@ class FacebookService
      * @return mixed|string
      * @throws string
      */
-    public function getPictureById($fb_user_id ){
+    public function getPictureById($fb_user_id , $type ){
 
         $req = $this->fb->request(
             'GET' ,
@@ -56,11 +56,17 @@ class FacebookService
         } catch( FacebookResponseException $e) {
             // When Graph returns an error
             Log::error( 'Graph returned an error: ' . $e->getMessage() );
-            $imageUrl = "/curr/img/icon_c.svg";
+            if( $type === "Notification")
+                $imageUrl = "/curr/img/icon_c.svg";
+            else
+                $imageUrl = null;
         } catch(FacebookSDKException $e) {
             // When validation fails or other local issues
             Log::error( 'Facebook SDK returned an error: ' . $e->getMessage());
-            $imageUrl = "/curr/img/icon_c.svg";
+            if( $type === "Notification")
+                $imageUrl = "/curr/img/icon_c.svg";
+            else
+                $imageUrl = null;
         }
 
         return $imageUrl;
@@ -111,8 +117,7 @@ class FacebookService
             $user = \Auth::user();
             $user->FB_conn = $tokenMetadata->getUserId();
             $user->save();
+            return redirect('/curriculum');
         }
-
-        return redirect('/curriculum');
     }
 }

@@ -14,7 +14,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Cyinf\Services\FacebookService;
 
-class FacebookController extends Controller
+class FacebookController extends CyinfApiController
 {
     /**
      * @var FacebookService
@@ -27,10 +27,11 @@ class FacebookController extends Controller
      */
     public function __construct(FacebookService $facebookService)
     {
+        parent::__construct();
         $this->facebookService = $facebookService;
     }
 
-    protected function login( Request $request ){
+    protected function login( ){
         return $this->facebookService->fbLogin();
     }
 
@@ -64,5 +65,35 @@ class FacebookController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
         }
 
+    }
+
+    protected function profile( Request $request ){
+        $user = \Auth::user();
+
+        $imageUrl = $this->facebookService->getPictureById( $user->FB_conn , "Profile" );
+        $this->responseData['data'] = [
+            'username' => $user->real_name,
+            'imageUrl' => $imageUrl
+        ];
+        
+        $this->responseCode = 200;
+        
+        if( $imageUrl === null)
+            $this->responseData['status'] = "unlink";
+        else
+            $this->responseData['status'] = "success";
+
+        return $this->send_response();
+    }
+    
+    protected function logout(){
+
+        $user = \Auth::user();
+        $user->FB_conn = "";
+        $user->save();
+
+        $this->responseData['status'] = "success";
+        $this->responseCode = 200;
+        return $this->send_response();
     }
 }
