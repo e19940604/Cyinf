@@ -48,6 +48,7 @@ class FacebookController extends CyinfApiController
      */
     public function __construct(FacebookService $facebookService, CourseRepository $courseRepository, NotificationRepository $notificationRepository)
     {
+        parent::__construct();
         $this->facebookService = $facebookService;
         $this->courseRepository = $courseRepository;
         $this->notificationRepository = $notificationRepository;
@@ -139,16 +140,26 @@ class FacebookController extends CyinfApiController
         $course = $this->courseRepository->getCourseById( $course_id );
         $user = \Auth::user();
         $now = \Carbon\Carbon::now();
-        if( $type == 1 ){
+
+        if( $type === "1" ){
             $content = "點名通知：（" . $this->weekMap[ $now->format("l") ] . "）" . $now->format("H:i") . " " . $user->real_name . "在" . $course->course_nameCH . "發出了點名通知！" ;
         }
         else {
             $content = "考試通知：（" . $this->weekMap[ $now->format("l") ] . "）" . $now->format("H:i") . " " . $user->real_name . "在" . $course->course_nameCH . "發出了考試通知！" ;
         }
 
-        $this->facebookService->sendNotification( $user , $course , $content , $type );
-        $this->responseCode = 200;
-        return $this->send_response();
+        try{
+            $this->facebookService->sendNotification( $user , $course , $content , $type );
+            $this->responseCode = 200;
+            $this->responseData['status'] = "success";
+        }
+        catch( \Exception $e ){
+            $this->responseCode = 403;
+            $this->responseData['error'] = $e->getMessage();
+        }
+        finally{
+            return $this->send_response();
+        }
 
     }
 }

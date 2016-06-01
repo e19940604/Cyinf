@@ -9,6 +9,7 @@
 namespace Cyinf\Services;
 session_start();
 
+use Carbon\Carbon;
 use Cyinf\Repositories\CourseRepository;
 use Cyinf\Repositories\NotificationRepository;
 use Facebook\Exceptions\FacebookResponseException;
@@ -20,6 +21,42 @@ use Illuminate\Support\Facades\Log;
 
 class FacebookService
 {
+
+    private $course_start_map = [
+        'A' => '5:50',
+        '1' => '7:00',
+        '2' => '8:00',
+        '3' => '9:00',
+        '4' => '10:00',
+        'B' => '11:00',
+        '5' => '12:00',
+        '6' => '13:00',
+        '7' => '14:00',
+        '8' => '15:00',
+        '9' => '16:00',
+        'C' => '17:10',
+        'D' => '18:05',
+        'E' => '19:00',
+        'F' => '20:55',
+    ];
+
+    private $course_end_map = [
+        'A' => '7:50',
+        '1' => '9:00',
+        '2' => '10:00',
+        '3' => '11:00',
+        '4' => '12:00',
+        'B' => '13:00',
+        '5' => '14:00',
+        '6' => '15:00',
+        '7' => '16:00',
+        '8' => '17:00',
+        '9' => '18:00',
+        'C' => '19:10',
+        'D' => '20:05',
+        'E' => '21:00',
+        'F' => '21:55',
+    ];
 
     /**
      * @var NotificationRepository
@@ -141,13 +178,31 @@ class FacebookService
         
         $students = $course->students;
 
-        foreach( $students as $student ){
-            $notification = $this->notificationRepository->create( $student->stu_id , $sender->stu_id , $course->id , $content , $type );
-            if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
-                $this->sendFBNotification($student, $notification);
+        $todayWeek = substr( Carbon::now()->format("l") , 0 , 3 );
+
+        $courseDay = explode(",", $course->time1 );
+        $courseTime = explode(",", $course->time2 );
+
+        if( ($index = array_search( $todayWeek , $courseDay ) )!== false  ){
+            $courseTime = $courseTime[$index];
+            $courseStartTime = $this->course_start_map[ min( str_split( $courseTime ))];
+            $courseLatestTime = $this->course_end_map[ max( str_split( $courseTime ) ) ];
+            
+            if( Carbon::now()->between( Carbon::createFromFormat("H:i" , $courseStartTime ) , Carbon::createFromFormat("H:i" , $courseLatestTime )) ){
+                foreach( $students as $student ){
+                    $notification = $this->notificationRepository->create( $student->stu_id , $sender->stu_id , $course->id , $content , $type );
+                    if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
+                        $this->sendFBNotification($student, $notification);
+                    }
+                }
+            }
+            else{
+                throw new \Exception("目前非上課時間");
             }
         }
-
+        else{
+            throw new \Exception("目前非上課時間");
+        }
     }
 
     private function checkConfig( $student , $type ){
@@ -165,7 +220,7 @@ class FacebookService
     public function sendFBNotification( $student , $notification ){
 
         $req = $this->fb->request('POST' , '/' . $student->FB_conn .  '/notifications' , [
-            'href' => env('FACEBOOK_NOTIFICATION_URL') . "?course_id=" . $notification->id ,
+            'href' => "?course_id=" . $notification->course_id ,
             'template' => $notification->content,
             'access_token' => $this->fb->getDefaultAccessToken()->getValue()
         ] , $this->fb->getDefaultAccessToken()->getValue() );

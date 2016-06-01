@@ -73,11 +73,11 @@ class NotificationRepository
             ->update([ 'is_read' => true ]);
     }
 
-    public function create( $stu_id  , $course_id , $content , $type ){
+    public function create( $stu_id  , $sender , $course_id , $content , $type ){
         return $this->notification
             ->create([
                 'stu_id' => $stu_id,
-                'sender' => $stu_id,
+                'sender' => $sender,
                 'course_id' => $course_id,
                 'content' => $content,
                 'type' => $type
