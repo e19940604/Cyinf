@@ -9,6 +9,8 @@
 namespace Cyinf\Services;
 session_start();
 
+use Cyinf\Repositories\CourseRepository;
+use Cyinf\Repositories\NotificationRepository;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\FacebookApp;
@@ -19,9 +21,18 @@ use Illuminate\Support\Facades\Log;
 class FacebookService
 {
 
+    /**
+     * @var NotificationRepository
+     */
+    private $notificationRepository;
+
+    /**
+     * @var CourseRepository
+     */
+    private $courseRepository;
     private $fb;
 
-    public function __construct(){
+    public function __construct(NotificationRepository $notificationRepository, CourseRepository $courseRepository ){
 
         $this->fb = new Facebook([
             'app_id' => env('FACEBOOK_APP_ID') ,
@@ -30,8 +41,8 @@ class FacebookService
         ]);
 
         $this->fb->setDefaultAccessToken( env('FACEBOOK_APP_ID') . "|" . env('FACEBOOK_APP_SECRET') );
-        
-        
+        $this->notificationRepository = $notificationRepository;
+        $this->courseRepository = $courseRepository;
     }
 
     /**
@@ -116,8 +127,62 @@ class FacebookService
 
             $user = \Auth::user();
             $user->FB_conn = $tokenMetadata->getUserId();
+            $user->image_url = $this->getPictureById( $user->FB_conn , "Profile");
+            $user->FB_token = (string) $accessToken;
             $user->save();
+
+
+
             return redirect('/curriculum');
         }
     }
+    
+    public function sendNotification( $sender  , $course , $content , $type ){
+        
+        $students = $course->students;
+
+        foreach( $students as $student ){
+            $notification = $this->notificationRepository->create( $student->stu_id , $sender->stu_id , $course->id , $content , $type );
+            if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
+                $this->sendFBNotification($student, $notification);
+            }
+        }
+
+    }
+
+    private function checkConfig( $student , $type ){
+        if( $type === "0" )
+            return $student->class_note;
+        else if( $type === "1" )
+            return $student->go_class_note;
+        else if( $type === "2" )
+            return $student->test_note;
+
+        return false;
+    }
+    
+    
+    public function sendFBNotification( $student , $notification ){
+
+        $req = $this->fb->request('POST' , '/' . $student->FB_conn .  '/notifications' , [
+            'href' => env('FACEBOOK_NOTIFICATION_URL') . "?course_id=" . $notification->id ,
+            'template' => $notification->content,
+            'access_token' => $this->fb->getDefaultAccessToken()->getValue()
+        ] , $this->fb->getDefaultAccessToken()->getValue() );
+
+        // Send the request to Graph
+        try {
+            $response = $this->fb->getClient()->sendRequest( $req );
+        } catch(FacebookResponseException $e) {
+            // When Graph returns an error
+            Log::error( 'Graph returned an error: ' . $e->getMessage() );
+
+        } catch(FacebookSDKException $e) {
+            // When validation fails or other local issues
+            Log::error(  'Facebook SDK returned an error: ' . $e->getMessage() );
+        }
+        
+    }
+    
+    
 }

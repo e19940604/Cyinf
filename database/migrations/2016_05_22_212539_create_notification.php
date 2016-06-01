@@ -15,6 +15,7 @@ class CreateNotification extends Migration
         Schema::create('notification', function (Blueprint $table) {
             $table->increments('id');
             $table->string('stu_id' , 10 );
+            $table->string('sender', 10);
             $table->integer('course_id')->unsigned();
             $table->string('content');
             $table->tinyInteger('type')->default(0);

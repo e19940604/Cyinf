@@ -108,6 +108,8 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/curriculum/loginCallBack', 'FacebookController@loginCallBack');
 		Route::get('/curriculum/facebook-status', 'FacebookController@profile');
 		Route::delete('/curriculum/fbconnect', 'FacebookController@logout');
+		
+		Route::post('/curriculum/notify', 'FacebookController@notify');
 	});
 	
 
