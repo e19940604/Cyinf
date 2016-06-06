@@ -1,20 +1,13 @@
 import React from 'react';
 import FilterContent from './filterContent';
 import ResultContent from './resultContent';
+import ModalDispatcher from '../../dispatchers/modals';
 
 let AddModal = React.createClass({
-  'getInitialState': function () {
-    return {
-      'mode': 'search'
-    };
-  },
-  'search': function () {
-    this.setState({ 'mode': 'result' });
-  },
   'closeModal': function () {
-    this.props.unmount();
-    $('#blackBG').addClass('visibility-hidden');
+    ModalDispatcher.dispatch({ 'actionType': 'close' });
   },
+
   'render': function () {
     return (
       <div id="add-modal" className="pinkModal mod">
@@ -24,7 +17,11 @@ let AddModal = React.createClass({
             <h4 className="mod-title-text">搜尋課程</h4>
           </div>
 
-          { this.state.mode === 'search' ? <FilterContent search={this.search} /> : <ResultContent /> }
+          {
+            this.props.mode === 'search' ?
+              <FilterContent getFilters={this.props.getFilters} /> :
+              <ResultContent onGetResult={this.props.onGetResult} />
+          }
 
         </div>
       </div>

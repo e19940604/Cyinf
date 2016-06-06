@@ -1,17 +1,17 @@
 import React from 'react';
+import ModalDispatcher from '../dispatchers/modals';
 
 let LinkModal = React.createClass({
   'closeModal': function () {
-    this.props.unmount();
-    $('#blackBG').addClass('visibility-hidden');
+    ModalDispatcher.dispatch({ 'actionType': 'close' });
   },
 
   'onClickLogout': function () {
-    // nop
+    ModalDispatcher.dispatch({ 'actionType': 'link-logout' });
   },
 
   'onClickUnlink': function () {
-    // nop
+    ModalDispatcher.dispatch({ 'actionType': 'link-unlink' });
   },
 
   'render': function () {

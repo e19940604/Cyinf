@@ -5,28 +5,89 @@ import modalLayout from '../layout/modalLayout';
 import AddModal from '../layout/addModal/index';
 import ConfigModal from '../layout/configModal';
 import LinkModal from '../layout/linkModal';
+import ModalDispatcher from '../dispatchers/modals';
+import AddModalStore from '../stores/addModal';
+import ConfigModalStore from '../stores/configModal';
+import LinkModalStore from '../stores/linkModal';
+
+ModalDispatcher.register( (payload) => {
+  if (payload.actionType === 'modal-show') {
+    let ModalStore;
+    switch (payload.data) {
+    case 'add':    ModalStore = AddModalStore;    break;
+    case 'config': ModalStore = ConfigModalStore; break;
+    case 'link':   ModalStore = LinkModalStore;   break;
+    }
+    ModalStore.show();
+  }
+});
+
+ModalDispatcher.register( (payload) => {
+  if (payload.actionType === 'search') {
+    AddModalStore.search();
+  }
+});
+
+ModalDispatcher.register( (payload) => {
+  if (payload.actionType === 'close') {
+    AddModalStore.close();
+    ConfigModalStore.close();
+    LinkModalStore.close();
+  }
+});
+
+AddModalStore.onShow( () => {
+  modalLayout(AddModal, AddModalStore.getMode() === 'search' ?
+    { 'mode': 'search', 'getFilters': AddModalStore.getFilters.bind(AddModalStore) } :
+    { 'mode': 'result', 'onGetResult': AddModalStore.onGetResult.bind(AddModalStore) }
+  );
+  $('#blackBG').removeClass('visibility-hidden');
+});
+
+AddModalStore.onSearch( () => {
+  modalLayout(AddModal, { 'mode': 'result', 'onGetResult': AddModalStore.onGetResult.bind(AddModalStore) });
+  $('#blackBG').removeClass('visibility-hidden');
+});
+
+ConfigModalStore.onShow( () => {
+  modalLayout(ConfigModal, {
+    'onClickSwitch': ConfigModalStore.onClickSwitch.bind(ConfigModalStore),
+    'removeOnClickSwitch': ConfigModalStore.RemoveOnClickSwitch.bind(ConfigModalStore),
+    'switches': ConfigModalStore.getSwitches()
+  });
+  $('#blackBG').removeClass('visibility-hidden');
+});
+
+LinkModalStore.onShow( () => {
+  modalLayout(LinkModal, {
+    'userName': 'xgnid',
+    'fbName': '雷'
+  });
+  $('#blackBG').removeClass('visibility-hidden');
+});
+
+[AddModalStore, ConfigModalStore, LinkModalStore].forEach( (e) => {
+  e.onClose( () => {
+    modalLayout.unmount();
+    $('#blackBG').addClass('visibility-hidden');
+  });
+});
+
+$('#blackBG').on('click', (e) => {
+  ModalDispatcher.dispatch({ 'actionType': 'close' });
+});
 
 let SideBtns = React.createClass({
   'handleClickAdd': function (e) {
-    modalLayout(AddModal);
-    $('#blackBG').removeClass('visibility-hidden');
+    ModalDispatcher.dispatch({ 'actionType': 'modal-show', 'data': 'add' });
   },
 
   'handleClickConfig': function (e) {
-    modalLayout(ConfigModal, {
-      'classNote': false,
-      'goClassNote': true,
-      'testNote': true
-    });
-    $('#blackBG').removeClass('visibility-hidden');
+    ModalDispatcher.dispatch({ 'actionType': 'modal-show', 'data': 'config' });
   },
 
   'handleClickLink': function (e) {
-    modalLayout(LinkModal, {
-      'userName': 'Xgnid',
-      'fbName': '雷包'
-    });
-    $('#blackBG').removeClass('visibility-hidden');
+    ModalDispatcher.dispatch({ 'actionType': 'modal-show', 'data': 'link' });
   },
 
   'render': function () {
