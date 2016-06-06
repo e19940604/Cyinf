@@ -152,5 +152,6 @@ class CourseRepository
     public function initCourse(){
         $this->course->update(['time1' => '', 'time2' => '', 'place' => '']);
     }
+    
 
 }

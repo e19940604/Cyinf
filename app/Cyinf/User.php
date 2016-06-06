@@ -31,6 +31,6 @@ class User extends Authenticatable
     ];
 
     public function courses(){
-        return $this->belongsToMany( 'Cyinf\Course' , "favoritescourse" , 'stu_id' , 'course_id' );
+        return $this->belongsToMany( 'Cyinf\Course' , "favoritescourse" , 'course_id', 'stu_id' );
     }
 }

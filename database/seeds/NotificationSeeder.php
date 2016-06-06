@@ -12,6 +12,6 @@ class NotificationSeeder extends Seeder
      */
     public function run()
     {
-        factory( \Cyinf\Notification::class , $this->numRows )->create();
+        factory( \Cyinf\Notification::class , $this->numRows )->create(['stu_id' => 'B013090009']);
     }
 }

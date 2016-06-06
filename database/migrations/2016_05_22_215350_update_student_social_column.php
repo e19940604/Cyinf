@@ -13,9 +13,13 @@ class UpdateStudentSocialColumn extends Migration
     public function up()
     {
         Schema::table('student', function (Blueprint $table) {
-            $table->dropColumn('hobby');
-            $table->dropColumn('mobile_num');
-            $table->dropColumn('introduction');
+
+            if (Schema::hasColumn('hobby', 'mobile_num' , 'introduction')) {
+                $table->dropColumn('hobby');
+                $table->dropColumn('mobile_num');
+                $table->dropColumn('introduction');
+            }
+
             
             $table->boolean('class_note')->default( true );
             $table->boolean('go_class_note')->default( true );
@@ -30,6 +34,6 @@ class UpdateStudentSocialColumn extends Migration
      */
     public function down()
     {
-        //
+        
     }
 }

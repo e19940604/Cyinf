@@ -17,8 +17,16 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
+
         if (Auth::guard($guard)->guest()) {
-            if ($request->ajax()) {
+
+            if( preg_match( '/curriculum/' , $request->url() )  ){
+                return response()->json( [
+                    'status' => "failure",
+                    'error' => "Unauthorized"
+                ] , 401);
+            }
+            else if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest('/users/login');

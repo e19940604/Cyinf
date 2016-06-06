@@ -13,5 +13,8 @@ class Course extends Model
         return $this->hasMany('Cyinf\Comment');
     }
 
+    public function students(){
+        return $this->belongsToMany('Cyinf\User', 'curriculum', 'course_id' , 'stu_id');
+    }
     protected $guarded = [];
 }
