@@ -1,38 +1,36 @@
 import React from 'react';
-import Curriculum from '../layout/curriculum';
+
 import mainLayout from '../layout/mainLayout';
 import modalLayout from '../layout/modalLayout';
+
+import Curriculum from '../layout/curriculum';
+import SideBtns from '../layout/sideBtns';
 import AddModal from '../layout/addModal/index';
 import ConfigModal from '../layout/configModal';
 import LinkModal from '../layout/linkModal';
+
 import ModalDispatcher from '../dispatchers/modals';
+
 import AddModalStore from '../stores/addModal';
 import ConfigModalStore from '../stores/configModal';
 import LinkModalStore from '../stores/linkModal';
+import CurriculumStore from '../stores/curriculum';
 
 ModalDispatcher.register( (payload) => {
-  if (payload.actionType === 'modal-show') {
-    let ModalStore;
+  switch (payload.actionType) {
+  case 'modal-show':
     switch (payload.data) {
-    case 'add':    ModalStore = AddModalStore;    break;
-    case 'config': ModalStore = ConfigModalStore; break;
-    case 'link':   ModalStore = LinkModalStore;   break;
+    case 'add':    AddModalStore.show();    break;
+    case 'config': ConfigModalStore.show(); break;
+    case 'link':   LinkModalStore.show();   break;
     }
-    ModalStore.show();
-  }
-});
+    break;
 
-ModalDispatcher.register( (payload) => {
-  if (payload.actionType === 'search') {
-    AddModalStore.search();
-  }
-});
-
-ModalDispatcher.register( (payload) => {
-  if (payload.actionType === 'close') {
+  case 'close':
     AddModalStore.close();
     ConfigModalStore.close();
     LinkModalStore.close();
+    break;
   }
 });
 
@@ -46,14 +44,17 @@ AddModalStore.onShow( () => {
 
 AddModalStore.onSearch( () => {
   modalLayout(AddModal, { 'mode': 'result', 'onGetResult': AddModalStore.onGetResult.bind(AddModalStore) });
-  $('#blackBG').removeClass('visibility-hidden');
+});
+
+AddModalStore.onClearResult( () => {
+  modalLayout(AddModal, { 'mode': 'search', 'getFilters': AddModalStore.getFilters.bind(AddModalStore) });
 });
 
 ConfigModalStore.onShow( () => {
   modalLayout(ConfigModal, {
-    'onClickSwitch': ConfigModalStore.onClickSwitch.bind(ConfigModalStore),
+    'onClickSwitch':       ConfigModalStore.onClickSwitch.bind(ConfigModalStore),
     'removeOnClickSwitch': ConfigModalStore.RemoveOnClickSwitch.bind(ConfigModalStore),
-    'switches': ConfigModalStore.getSwitches()
+    'switches':            ConfigModalStore.getSwitches()
   });
   $('#blackBG').removeClass('visibility-hidden');
 });
@@ -61,7 +62,7 @@ ConfigModalStore.onShow( () => {
 LinkModalStore.onShow( () => {
   modalLayout(LinkModal, {
     'userName': 'xgnid',
-    'fbName': '雷'
+    'fbName':   '雷'
   });
   $('#blackBG').removeClass('visibility-hidden');
 });
@@ -73,45 +74,18 @@ LinkModalStore.onShow( () => {
   });
 });
 
+// will replace by GlobalDispatcher, implement later
 $('#blackBG').on('click', (e) => {
   ModalDispatcher.dispatch({ 'actionType': 'close' });
 });
 
-let SideBtns = React.createClass({
-  'handleClickAdd': function (e) {
-    ModalDispatcher.dispatch({ 'actionType': 'modal-show', 'data': 'add' });
-  },
-
-  'handleClickConfig': function (e) {
-    ModalDispatcher.dispatch({ 'actionType': 'modal-show', 'data': 'config' });
-  },
-
-  'handleClickLink': function (e) {
-    ModalDispatcher.dispatch({ 'actionType': 'modal-show', 'data': 'link' });
-  },
-
-  'render': function () {
-    return (
-      <div id="sideBtns" className="desk-only">
-        <div id="addCourseBtn" className="sideBtn pinkBtn cursor-pointer" onClick={this.handleClickAdd}>
-          <span>新增</span>
-        </div>
-        <div id="configBtn" className="sideBtn blueBtn cursor-pointer" onClick={this.handleClickConfig}>
-          <span>設定</span>
-        </div>
-        <div id="connectBtn" className="sideBtn orangeBtn cursor-pointer" onClick={this.handleClickLink}>
-          <span>連結</span>
-        </div>
-      </div>
-    );
-  }
-});
+CurriculumStore.load();
 
 let Index = React.createClass({
   'render': function () {
     return (
       <div id="container">
-        <Curriculum />
+        <Curriculum onLoad={CurriculumStore.onLoad.bind(CurriculumStore)} getCourses={CurriculumStore.getCourses.bind(CurriculumStore)} />
         <SideBtns />
       </div>
     );

@@ -1,46 +1,46 @@
 import React from 'react';
+import CurriculumDsipatcher from '../dispatchers/curriculum';
 
 let ScheduleItem = React.createClass({
+  'onClickCourse': function (course) {
+    CurriculumDsipatcher.dispatch({ 'actionType': 'course-detail', 'data': course.course_id });
+  },
+
   'render': function () {
+    let courses = this.props.courses;
     return (
       <tr>
         <td>{this.props.scheduleName}</td>
-        <td className={this.props.courses[0].className}>{this.props.courses[0].name}</td>
-        <td className={this.props.courses[1].className}>{this.props.courses[1].name}</td>
-        <td className={this.props.courses[2].className}>{this.props.courses[2].name}</td>
-        <td className={this.props.courses[3].className}>{this.props.courses[3].name}</td>
-        <td className={this.props.courses[4].className}>{this.props.courses[4].name}</td>
-        <td className={this.props.courses[5].className}>{this.props.courses[5].name}</td>
-        <td className={this.props.courses[6].className}>{this.props.courses[6].name}</td>
+        <td className={courses[0].className} onClick={this.onClickCourse.bind(this, courses[0])}>{courses[0].course_name}</td>
+        <td className={courses[1].className} onClick={this.onClickCourse.bind(this, courses[1])}>{courses[1].course_name}</td>
+        <td className={courses[2].className} onClick={this.onClickCourse.bind(this, courses[2])}>{courses[2].course_name}</td>
+        <td className={courses[3].className} onClick={this.onClickCourse.bind(this, courses[3])}>{courses[3].course_name}</td>
+        <td className={courses[4].className} onClick={this.onClickCourse.bind(this, courses[4])}>{courses[4].course_name}</td>
+        <td className={courses[5].className} onClick={this.onClickCourse.bind(this, courses[5])}>{courses[5].course_name}</td>
+        <td className={courses[6].className} onClick={this.onClickCourse.bind(this, courses[6])}>{courses[6].course_name}</td>
       </tr>
     )
   }
 })
 
 let Curriculum = React.createClass({
-  'getInitialState': function () {
-    return {
-      'courses': [
-        {
-          'schedule': [ [1, 1], [2, 1], [3, 1] ],
-          'name': '跨領域文',
-          'className': 'blueClass'
-        }
-      ]
-    };
+  'onLoadCourses': function () {
+    this.forceUpdate();
+  },
+
+  'componentWillMount': function () {
+    this.props.onLoad(this.onLoadCourses);
   },
 
   'render': function () {
-    let courseSchedule = Array(14).fill().map( () => {
-      return Array(7).fill().map( () => ({'name': '', 'className': ''}) );
-    });
+    let courses = this.props.getCourses();
+    let courseSchedule = Array(14).fill().map( () => Array(7).fill().map( () => Object() ) );
 
-    this.state.courses.forEach( (course) => {
+    for (const course of courses) {
       course.schedule.forEach( (e) => {
-        courseSchedule[ e[0] ][ e[1] ].name = course.name;
-        courseSchedule[ e[0] ][ e[1] ].className = course.className;
+        Object.assign(courseSchedule[ e[0] ][ e[1] ], course);
       });
-    });
+    }
 
     return (
       <div id="curriculum">
