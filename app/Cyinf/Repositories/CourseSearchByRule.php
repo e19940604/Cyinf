@@ -43,11 +43,14 @@ class CourseSearchByRule implements CourseSearchInterface {
         $this->course = $course;
     }
 	    
-    public function query($query_restrict){
+    public function query($query_restrict, $extend){
 	    
 	    $rule = $this->valid_query_string($query_restrict);
 
 	    if(empty($rule)) return new \Illuminate\Database\Eloquent\Collection();
+
+        if(isset($extend['now']))
+            $this->course = $this->course->where('time1', '!=', '');
 
 	    foreach ($rule as $key => $value_array) {
 	    	$column = $this->rule_mapping[$key];
@@ -62,7 +65,6 @@ class CourseSearchByRule implements CourseSearchInterface {
 	    		}
 	    	});
 	    }
-
 	    return $this->course->get();
 	
     }

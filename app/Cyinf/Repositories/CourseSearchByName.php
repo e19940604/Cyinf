@@ -26,7 +26,7 @@ class CourseSearchByName implements CourseSearchInterface
         $this->course = $course;
     }
 
-    public function query( $query_restrict){
+    public function query( $query_restrict, $extend){
 
         return $this->course
             ->where( "course_nameCH" , 'like' , "%" . $query_restrict . "%" )

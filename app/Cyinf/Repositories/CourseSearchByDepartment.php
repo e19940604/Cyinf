@@ -23,7 +23,7 @@ class CourseSearchByDepartment implements CourseSearchInterface
      * CourseSearchByDepartment constructor.
      * @param Course $course
      */
-    public function __construct(Course $course){
+    public function __construct(Course $course, $extend){
         $this->course = $course;
     }
 

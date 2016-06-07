@@ -113,6 +113,9 @@ Route::group(['middleware' => ['web']], function () {
 
 		Route::get('/curriculum/schedule', 'CurriculumApiController@schedule');
 		Route::get('/curriculum/course/{course_id}', 'CurriculumApiController@course');
+		Route::post('/curriculum/add', 'CurriculumApiController@add');
+		Route::post('/curriculum/remove', 'CurriculumApiController@remove');
+		Route::post('/curriculum/search', 'CurriculumApiController@search');
 	});
 	
 
