@@ -21,7 +21,7 @@ class CurriculumRepository
         $this->curriculum = $curriculum;
     }
 
-    private function get($stuId, $courseId){
+    public function get($stuId, $courseId){
         return $this->curriculum->where('stu_id', $stuId)->where('course_id', $courseId)->first();
     }
 

@@ -8,18 +8,21 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Cyinf\Repositories\CurriculumRepository;
 use Cyinf\Repositories\CourseRepository;
+use Cyinf\Presenters\CoursePresenter;
 
 class CurriculumApiController extends Controller
 {
     private $curriculumRepository;
     private $courseRepository;
+    private $coursePresenter;
 
-    public function __construct(CurriculumRepository $curriculumRepository, CourseRepository $courseRepository){
+    public function __construct(CurriculumRepository $curriculumRepository, CourseRepository $courseRepository, CoursePresenter $coursePresenter){
     	$this->curriculumRepository = $curriculumRepository;
     	$this->courseRepository = $courseRepository;
+    	$this->coursePresenter  = $coursePresenter; 
     }
 
-    protected function schedule(Request $request){
+    protected function schedule(){
     	$result = [];
     	$result['status'] = 'success';
     	$statusCode = 200;
@@ -61,6 +64,41 @@ class CurriculumApiController extends Controller
 		});
 
     	$result['data'] = $stu_schedule->all();
+
+    	return response()->json($result, $statusCode);
+    }
+
+    protected function course(Request $request, $courseId){
+    	$result = [];
+    	$result['status'] = 'success';
+    	$statusCode = 200;
+
+    	$course = $this->courseRepository->getCourseById($courseId);
+	    $curriculum = $this->curriculumRepository->get(\Auth::user()->stu_id, $courseId);
+
+    	$week2api = [
+	    	'Mon' => '一',
+	    	'Tue' => '二',
+	    	'Wed' => '三',
+	    	'Thu' => '四',
+	    	'Fri' => '五',
+	    	'Sat' => '六',
+	    	'Sun' => '日'
+	    ];
+
+	    $courseData['course_id']         = $course->id;
+	    $courseData['course_name']       = $course->course_nameCH;
+	    $courseData['course_department'] = $this->coursePresenter->getDepartmantNameByCode($course->course_department);
+	    $courseData['professor']         = $course->professor;
+	    $courseData['place']             = $course->place;
+	    $courseData['unit']              = $this->coursePresenter->getGradeNameByNum($course->unit);
+	    $courseData['week_day']          = explode(",", $course->time1); 
+    	$courseData['time']              = explode(",", $course->time2);
+    	$courseData['add']               = ($curriculum instanceof Giftpack\Curriculum) ? 0 : 1;
+    	$courseData['remove']            = ($curriculum instanceof Giftpack\Curriculum) ? 1 : 0;
+
+	    $result['data'] = $courseData;
+
 
     	return response()->json($result, $statusCode);
     }

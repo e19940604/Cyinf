@@ -112,6 +112,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/curriculum/notify', 'FacebookController@notify');
 
 		Route::get('/curriculum/schedule', 'CurriculumApiController@schedule');
+		Route::get('/curriculum/course/{course_id}', 'CurriculumApiController@course');
 	});
 	
 
