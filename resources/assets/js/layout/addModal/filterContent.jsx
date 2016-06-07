@@ -10,7 +10,7 @@ let SearchKey = React.createClass({
     this.setState({ 'value': e.target.value });
     ModalDispatcher.dispatch({
       'actionType': 'add-update-filter',
-      'data': ['searchKey', this.props.index, e.target.value]
+      'data': [this.props.id, 'searchKey', e.target.value]
     });
   },
 
@@ -42,7 +42,7 @@ let SearchValue = React.createClass({
     this.setState({ 'value': e.target.value });
     ModalDispatcher.dispatch({
       'actionType': 'add-update-filter',
-      'data': ['searchValue', this.props.index, this.state.value]
+      'data': [this.props.id, 'searchValue', e.target.value]
     });
   },
 
@@ -59,8 +59,8 @@ let SearchValue = React.createClass({
 });
 
 let FilterItem = React.createClass({
-  'onClickRemove': function () {
-    this.props.remove(this.props.index);
+  'onClickRemoveFilter': function () {
+    this.props.removeFilter(this.props.id);
   },
 
   'render': function () {
@@ -69,10 +69,10 @@ let FilterItem = React.createClass({
         <span className="mod-text mod-add-text">條件</span>
         <div className="mod-add-inputBlock">
 
-          <SearchKey value={this.props.searchKey} index={this.props.index} />
-          <SearchValue value={this.props.searchValue} index={this.props.index} />
+          <SearchKey value={this.props.searchKey} id={this.props.id} />
+          <SearchValue value={this.props.searchValue} id={this.props.id} />
 
-          <span className="mod-add-icon glyphicon glyphicon-minus-sign cursor-pointer" aria-hidden="true" onClick={this.onClickRemove}></span>
+          <span className="mod-add-icon glyphicon glyphicon-minus-sign cursor-pointer" aria-hidden="true" onClick={this.onClickRemoveFilter}></span>
         </div>
       </div>
     );
@@ -84,57 +84,47 @@ let FilterContent = React.createClass({
 
   'initialFilters': undefined,
 
-  '_removeItem': function (index) {
-    let newFilterKeys = this.state.filterKeys.slice();
-    newFilterKeys.splice(index, 1);
-    this.setState({ 'filterKeys': newFilterKeys });
-
-    ModalDispatcher.dispatch({
-      'actionType': 'add-remove-filter',
-      'data': index
-    });
-  },
 
   'onClickSearch': function () {
     ModalDispatcher.dispatch({ 'actionType': 'add-search' });
   },
 
   'onClickAddFilter': function () {
-    ++this.filterKeyStart;
-    let newFilterKeys = this.state.filterKeys.slice();
-    newFilterKeys.push(this.filterKeyStart);
-    this.setState({ 'filterKeys': newFilterKeys });
-
     ModalDispatcher.dispatch({
       'actionType': 'add-add-filter'
     });
+    this.forceUpdate();
   },
 
-  'getInitialState': function () {
-    return {
-      'filterKeys': []
-    };
-  },
-
-  'componentWillMount': function () {
-    this.initialFilters = this.props.getFilters();
-    this.setState({ 'filterKeys': Array(this.initialFilters.length).fill().map( () => ++this.filterKeyStart ) })
+  'onClickRemoveFilter': function (key) {
+    ModalDispatcher.dispatch({
+      'actionType': 'add-remove-filter',
+      'data': key
+    });
+    this.forceUpdate();
   },
 
   'render': function () {
+    let filters = this.props.getFilters();
+    let entries = filters.entries();
+    let items = Array(filters.size).fill().map( () => {
+      let [key, filter] = entries.next().value;
+
+      return (
+        <FilterItem
+          key={key}
+          id={key}
+          removeFilter={this.onClickRemoveFilter}
+          searchKey={filter.searchKey}
+          searchValue={filter.searchValue}
+        />
+      );
+    });
+
     return (
       <div className="mod-add mod-item">
 
-        {this.state.filterKeys.map( (key, index) => {
-          return (
-            <FilterItem
-              key={key}
-              index={index}
-              remove={this._removeItem}
-              searchKey={this.initialFilters[index].searchKey}
-              searchValue={this.initialFilters[index].searchValue}
-            />);
-        }) }
+        {items}
 
         <div className="mod-add-inputGroup">
           <div className="mod-add-inputBlock" onClick={this.onClickAddFilter}>
