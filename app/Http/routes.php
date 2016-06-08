@@ -97,8 +97,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/curriculum' , 'CurriculumController@index');
     Route::get('/curriculum/courseDetail' , 'CurriculumController@courseDetail');
     Route::get('/curriculum/notification', 'CurriculumController@notify');
-	
+
+
 	Route::group(['middleware' => ['auth:web']], function(){
+		Route::get('/curriculum/user', 'UserController@user');
 		Route::post('/curriculum/notify', 'NotificationController@show');
 		Route::patch('/curriculum/config', 'NotificationController@config' );
 		Route::patch('/curriculum/readAll', 'NotificationController@readAll');
@@ -112,6 +114,10 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/curriculum/notify', 'FacebookController@notify');
 
 		Route::get('/curriculum/schedule', 'CurriculumApiController@schedule');
+		Route::get('/curriculum/course/{course_id}', 'CurriculumApiController@course');
+		Route::post('/curriculum/add', 'CurriculumApiController@add');
+		Route::post('/curriculum/remove', 'CurriculumApiController@remove');
+		Route::post('/curriculum/search', 'CurriculumApiController@search');
 	});
 	
 

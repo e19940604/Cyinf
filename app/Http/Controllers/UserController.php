@@ -9,13 +9,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Cyinf\Services\UserService;
 
-class UserController extends Controller
+class UserController extends CyinfApiController
 {
 	protected $userService;
     protected $pinService;
 
     public function __construct(UserService $userService , PinService $pinService )
     {
+        parent::__construct();
         $this->userService = $userService;
         $this->pinService = $pinService;
     }
@@ -101,6 +102,20 @@ class UserController extends Controller
         else{
             return response()->json(['status' => 'fail', 'message' => $result['errorMsg']]);
         }
+    }
+
+    public function user( Request $request  ){
+
+        if( \Auth::check() ){
+            $this->responseData['name'] = \Auth::user()->real_name;
+            $this->responseCode = 200;
+        }
+        else{
+            $this->responseData['status'] = "notLogin" ;
+            $this->responseCode = 401;
+        }
+
+        return $this->send_response();
     }
 
 }

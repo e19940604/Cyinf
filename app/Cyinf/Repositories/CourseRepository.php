@@ -35,7 +35,7 @@ class CourseRepository
      * @param $restrict
      * @return mixed
      */
-    public function searchCourse( $method , $restrict ){
+    public function searchCourse( $method , $restrict , $extend = []){
 
         $searchClass = null;
 
@@ -53,7 +53,7 @@ class CourseRepository
                 $searchClass = new CourseSearchByName( $this->course );
         }
 
-        return $searchClass->query( $restrict );
+        return $searchClass->query( $restrict , $extend );
 
     }
 
