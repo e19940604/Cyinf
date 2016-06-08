@@ -1,14 +1,31 @@
 import React from 'react';
+import ModalDispatcher from '../dispatchers/modals';
 
 let ConfigModal = React.createClass({
-  'closeModal': function () {
-    this.props.unmount();
-    $('#blackBG').addClass('visibility-hidden');
+  'getInitialState': function () {
+    return {
+      'switches': this.props.switches
+    };
   },
 
-  'onClickSwitch': function (e) {
-    let checkbox = $('#' + $(e.target).parent('label').attr('for'));
-    checkbox.prop('checked', !checkbox.prop('checked'));
+  'updateSwitches': function (switches) {
+    this.setState({ 'switches': switches });
+  },
+
+  'componentWillMount': function () {
+    this.props.onClickSwitch(this.updateSwitches);
+  },
+
+  'componentWillUnmount': function () {
+    this.props.removeOnClickSwitch(this.updateSwitches);
+  },
+
+  'closeModal': function () {
+    ModalDispatcher.dispatch({ 'actionType': 'close' });
+  },
+
+  'handleClickSwitch': function (switchName) {
+    ModalDispatcher.dispatch({ 'actionType': 'config-click-switch', 'data': switchName });
   },
 
   'render': function () {
@@ -24,8 +41,8 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">上課通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch1" defaultChecked={this.props.classNote} />
-                <label className="onoffswitch-label" htmlFor="switch1">
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch1" checked={this.state.switches[0]} readOnly />
+                <label className="onoffswitch-label" htmlFor="switch1" onClick={this.handleClickSwitch.bind(this, 'switch1')}>
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
                 </label>
@@ -37,8 +54,8 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">點名通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch2" defaultChecked={this.props.goClassNote} />
-                <label className="onoffswitch-label" htmlFor="switch2">
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch2" checked={this.state.switches[1]} readOnly />
+                <label className="onoffswitch-label" htmlFor="switch2" onClick={this.handleClickSwitch.bind(this, 'switch2')}>
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
                 </label>
@@ -50,8 +67,8 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">考試通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch3" defaultChecked={this.props.testNote} />
-                <label className="onoffswitch-label" htmlFor="switch3">
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch3" checked={this.state.switches[2]} readOnly />
+                <label className="onoffswitch-label" htmlFor="switch3" onClick={this.handleClickSwitch.bind(this, 'switch3')}>
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
                 </label>

@@ -27,7 +27,7 @@ class CourseSearchByProfessor implements CourseSearchInterface
         $this->course = $course;
     }
 
-    public function query($query_restrict)
+    public function query($query_restrict, $extend)
     {
         return $this->course
             ->where( "professor" , "like" , "%" . $query_restrict . "%" )

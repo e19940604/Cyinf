@@ -14,5 +14,5 @@ use Illuminate\Database\Eloquent\Collection;
 interface CourseSearchInterface
 {
     /* TODO// after updating PHP7 , adding return type hint here  */
-    public function query( $query_restrict ); /* return Collections */
+    public function query( $query_restrict , $extend ); /* return Collections */
 }

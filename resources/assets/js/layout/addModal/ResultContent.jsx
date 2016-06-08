@@ -1,8 +1,12 @@
 import React from 'react';
+import ModalDispatcher from '../../dispatchers/modals';
 
 let ResultItem = React.createClass({
   'onClickAction': function () {
-    // nop
+    ModalDispatcher.dispatch({
+      'actionType': this.props.add ? 'add-course' : 'remove-course',
+      'data': this.props.course_id
+    });
   },
   'render': function () {
     return (
@@ -14,7 +18,14 @@ let ResultItem = React.createClass({
         <td data-title="上課時間">{this.props.time}</td>
         <td data-title="上課地點">{this.props.place}</td>
         <td onClick={this.onClickAction}>
-          <span className={'desk-only mod-result-icon glyphicon cursor-pointer glyphicon-' + (this.props.action === 'add' ? 'plus-sign' : 'remove-circle')} aria-hidden="true"></span>
+          <span
+            className={
+              'desk-only mod-result-icon glyphicon cursor-pointer' +
+              (this.props.add    ? ' glyphicon-plus-sign'     : '') +
+              (this.props.remove ? ' glyphicon-remove-circle' : '')
+            }
+            aria-hidden="true"
+          ></span>
           <button className="m-only add-result-btn">刪除課程</button>
         </td>
       </tr>
@@ -25,36 +36,13 @@ let ResultItem = React.createClass({
 let ResultContent = React.createClass({
   'getInitialState': function () {
     return {
-      'resultStore': [
-        {
-          'courseName': '服務學習（三）：萬安部落原住民學童課輔服務',
-          'teacher': '梁慧玫',
-          'department': '服務學習',
-          'weekday': 'Tue, Fri',
-          'time': '34, 23',
-          'place': '理SC 2001',
-          'action': 'add'
-        },
-        {
-          'courseName': '服務學習（三）：萬安部落原住民學童課輔服務',
-          'teacher': '梁慧玫',
-          'department': '服務學習',
-          'weekday': 'Tue, Fri',
-          'time': '34, 23',
-          'place': '理SC 2001',
-          'action': 'add'
-        },
-        {
-          'courseName': '服務學習（三）：萬安部落原住民學童課輔服務',
-          'teacher': '梁慧玫',
-          'department': '服務學習',
-          'weekday': 'Tue, Fri',
-          'time': '34, 23',
-          'place': '理SC 2001',
-          'action': 'remove'
-        }
-      ]
+      'result': []
     };
+  },
+  'componentWillMount': function () {
+    this.props.onGetResult( (result) => {
+      this.setState({ 'result': result });
+    });
   },
   'render': function () {
     return (
@@ -73,7 +61,7 @@ let ResultContent = React.createClass({
           </thead>
           <tbody>
 
-          {this.state.resultStore.map( (e, i) => <ResultItem {...e} index={i} /> )}
+          {this.state.result.map( (e, i) => <ResultItem {...e} index={i} /> )}
 
           </tbody>
         </table>

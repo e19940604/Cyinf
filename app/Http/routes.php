@@ -45,7 +45,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('/api/updateRecommendation', 'RecommendationController@update');
 
-    Route::group(['middleware' => 'guest'], function () {
+    Route::group(['middleware' => 'guest:web'], function () {
 
 		Route::get('/users/login',    function () {
 			$backUrl = back()->getTargetUrl();
@@ -63,7 +63,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	});
 
-	Route::group(['middleware' => 'auth'], function () {
+	Route::group(['middleware' => 'auth:web'], function () {
 
 
 		Route::get('/users/logout', 'UserController@logout');
@@ -97,8 +97,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/curriculum' , 'CurriculumController@index');
     Route::get('/curriculum/courseDetail' , 'CurriculumController@courseDetail');
     Route::get('/curriculum/notification', 'CurriculumController@notify');
-	
-	Route::group(['middleware' => 'auth'], function(){
+
+
+	Route::group(['middleware' => ['auth:web']], function(){
 		Route::get('/curriculum/user', 'UserController@user');
 		Route::post('/curriculum/notify', 'NotificationController@show');
 		Route::patch('/curriculum/config', 'NotificationController@config' );
@@ -111,6 +112,12 @@ Route::group(['middleware' => ['web']], function () {
 		Route::delete('/curriculum/fbconnect', 'FacebookController@logout');
 		
 		Route::post('/curriculum/notify', 'FacebookController@notify');
+
+		Route::get('/curriculum/schedule', 'CurriculumApiController@schedule');
+		Route::get('/curriculum/course/{course_id}', 'CurriculumApiController@course');
+		Route::post('/curriculum/add', 'CurriculumApiController@add');
+		Route::post('/curriculum/remove', 'CurriculumApiController@remove');
+		Route::post('/curriculum/search', 'CurriculumApiController@search');
 	});
 	
 
