@@ -99,6 +99,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/curriculum/notification', 'CurriculumController@notify');
 	
 	Route::group(['middleware' => 'auth'], function(){
+		Route::get('/curriculum/user', 'UserController@user');
 		Route::post('/curriculum/notify', 'NotificationController@show');
 		Route::patch('/curriculum/config', 'NotificationController@config' );
 		Route::patch('/curriculum/readAll', 'NotificationController@readAll');
