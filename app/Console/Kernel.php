@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Cyinf\Services\FacebookService;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\Inspire::class,
+        Commands\Inspire::class,
         Commands\AutoRefreshCourse::class,
     ];
 
@@ -27,5 +28,17 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        
+        $schedule->call(function(){
+            \Log::info("[sendCourseNotification Start]");
+            $fs = \App::make(FacebookService::class);
+            $count = $fs->sendCourseNotification();
+            \Log::info("[sendCourseNotification Send Count] ".$count);
+            \Log::info("[sendCourseNotification End]");
+        })
+        ->everyThirtyMinutes()
+        ->when(function () {
+            return date('H') >= 7 && date('H') <= 21;
+        });
     }
 }

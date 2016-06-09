@@ -58,6 +58,7 @@ class FacebookService
         'F' => '21:55',
     ];
 
+
     /**
      * @var NotificationRepository
      */
@@ -238,6 +239,59 @@ class FacebookService
         }
         
     }
-    
-    
+
+    public function sendCourseNotification(){
+
+        $now = Carbon::now();
+        $week = $now->dayOfWeek;
+        $hour = $now->hour;
+        $type = "0";
+        $count = 0;
+
+        $hour2course = [
+            7  => 'A',
+            8  => '1',
+            9  => '2',
+            10 => '3',
+            11 => '4',
+            12 => 'B',
+            13 => '5',
+            14 => '6',
+            15 => '7',
+            16 => '8',
+            17 => '9',
+            18 => 'C',
+            19 => 'D',
+            20 => 'E',
+            21 => 'F'
+        ];
+
+        $week2course = [
+            0 => 'Sun',
+            1 => 'Mon',
+            2 => 'Tue',
+            3 => 'Wed',
+            4 => 'Thu',
+            5 => 'Fri',
+            6 => 'Sat'
+        ];
+
+        $courseCollect = $this->courseRepository->getCourseByTime($week2course[$week], $hour2course[$hour]);
+
+        foreach ($courseCollect as $key => $course) {
+            
+            $content = $course->course_nameCH." ".$this->course_start_map[$hour2course[$hour]]." ".$course->place;
+            try{
+                $this->sendNotification(null, $course, $content, $type);
+                $count++;
+                \Log::info("[sendCourseNotification Success] ".$content);
+            }
+            catch(\Exception $e){
+                \Log::warning("[sendCourseNotification Fail] ".$content);
+            }
+        }
+
+        return $count;
+    }
+     
 }
