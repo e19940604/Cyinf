@@ -101,17 +101,18 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::group(['middleware' => ['auth:web']], function(){
 		Route::get('/curriculum/user', 'UserController@user');
-		Route::post('/curriculum/notify', 'NotificationController@show');
+		Route::get('/curriculum/notify', 'NotificationController@show');
+		Route::post('/curriculum/notify', 'FacebookController@notify');
 		Route::patch('/curriculum/config', 'NotificationController@config' );
 		Route::patch('/curriculum/readAll', 'NotificationController@readAll');
+
 
 		/* facebook api */
 		Route::get('/curriculum/link-facebook', 'FacebookController@login');
 		Route::get('/curriculum/loginCallBack', 'FacebookController@loginCallBack');
 		Route::get('/curriculum/facebook-status', 'FacebookController@profile');
 		Route::delete('/curriculum/fbconnect', 'FacebookController@logout');
-		
-		Route::post('/curriculum/notify', 'FacebookController@notify');
+
 
 		Route::get('/curriculum/schedule', 'CurriculumApiController@schedule');
 		Route::get('/curriculum/course/{course_id}', 'CurriculumApiController@course');
