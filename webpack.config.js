@@ -4,7 +4,7 @@ module.exports = {
     entry: {
         index: "./resources/assets/js/views/index.jsx",
         courseDetail: "./resources/assets/js/views/courseDetail.jsx",
-        notify: "./resources/assets/js/views/notify.jsx"
+        notification: "./resources/assets/js/views/notification.jsx"
     },
     output: {
         path: path.resolve( __dirname, './public/Curr/js/views' ),

@@ -12,20 +12,31 @@ let NotifyItem = React.createClass({
 });
 
 let NotifyPartial = React.createClass({
+  'updateNotify': function () {
+    this.forceUpdate();
+  },
+
+  'componentWillMount': function () {
+    this.props.onUpdate(this.updateNotify);
+  },
+
+  'componentWillUnmount': function () {
+    this.props.removeOnUpdate(this.updateNotify);
+  },
+
   'render': function () {
-    let notificationGroup = this.props.notifications
-      .reduce( (p, c) => {
-        if (!p[c.create_at]) p[c.create_at] = [<NotifyItem {...c} key={c.id} />];
-        else p[c.create_at].push(<NotifyItem {...c} key={c.id} />);
-        return p;
-      }, {});
+    let notificationGroup = this.props.getNotifications().reduce( (p, c) => {
+      if (!p[c.create_at]) p[c.create_at] = [<NotifyItem {...c} key={c.item_id} />];
+      else p[c.create_at].push(<NotifyItem {...c} key={c.item_id} />);
+      return p;
+    }, {});
 
     let notifications = [];
     for (let key of Object.keys(notificationGroup)) {
       notifications.push(
         <div key={key}>
           <div className="date">{key}</div>
-          {notificationGroup[key]}
+          {notificationGroup[key].reverse()}
         </div>
       );
     }
@@ -34,7 +45,7 @@ let NotifyPartial = React.createClass({
       <div className="content">
         <p className="title">所有通知</p>
 
-        {notifications}
+        {notifications.reverse()}
 
       </div>
     );
