@@ -153,5 +153,16 @@ class CourseRepository
         $this->course->update(['time1' => '', 'time2' => '', 'place' => '']);
     }
     
-
+    public function getCourseByTime($week, $time){
+        return $this->course
+                    ->where(function($query) use($week, $time){
+                        $query->where('time1', 'like', $week.'%')
+                              ->Where('time2', 'like', $time.'%');
+                    })
+                    ->orWhere(function($query) use($week, $time){
+                        $query->where('time1', 'like', '%,'.$week.'%')
+                              ->Where('time2', 'like', '%,'.$time.'%');
+                    })
+                    ->get();
+    }
 }
