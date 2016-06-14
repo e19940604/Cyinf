@@ -34,20 +34,35 @@ ModalDispatcher.register( (payload) => {
   }
 });
 
+let SearchModal = () => {
+  modalLayout(AddModal, {
+    'mode': 'search',
+    'getFilters': AddModalStore.getFilters.bind(AddModalStore)
+  });
+};
+
+let ResultModal = () => {
+  modalLayout(AddModal, {
+    'mode': 'result',
+    'onGetResults': AddModalStore.onGetResults.bind(AddModalStore),
+    'removeOnGetResults': AddModalStore.removeOnGetResults.bind(AddModalStore),
+    'getResults': AddModalStore.getResults.bind(AddModalStore)
+  });
+};
+
 AddModalStore.onShow( () => {
-  modalLayout(AddModal, AddModalStore.getMode() === 'search' ?
-    { 'mode': 'search', 'getFilters': AddModalStore.getFilters.bind(AddModalStore) } :
-    { 'mode': 'result', 'onGetResult': AddModalStore.onGetResult.bind(AddModalStore) }
-  );
+  if (AddModalStore.getMode() === 'search') SearchModal();
+  else ResultModal();
+
   $('#blackBG').removeClass('visibility-hidden');
 });
 
 AddModalStore.onSearch( () => {
-  modalLayout(AddModal, { 'mode': 'result', 'onGetResult': AddModalStore.onGetResult.bind(AddModalStore) });
+  ResultModal();
 });
 
-AddModalStore.onClearResult( () => {
-  modalLayout(AddModal, { 'mode': 'search', 'getFilters': AddModalStore.getFilters.bind(AddModalStore) });
+AddModalStore.onClearResults( () => {
+  SearchModal();
 });
 
 ConfigModalStore.onShow( () => {
@@ -85,7 +100,7 @@ let Index = React.createClass({
   'render': function () {
     return (
       <div id="container">
-        <Curriculum onLoad={CurriculumStore.onLoad.bind(CurriculumStore)} getCourses={CurriculumStore.getCourses.bind(CurriculumStore)} />
+        <Curriculum onUpdate={CurriculumStore.onUpdate.bind(CurriculumStore)} />
         <SideBtns />
       </div>
     );

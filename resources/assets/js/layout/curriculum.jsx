@@ -3,7 +3,7 @@ import CurriculumDsipatcher from '../dispatchers/curriculum';
 
 let ScheduleItem = React.createClass({
   'onClickCourse': function (course) {
-    CurriculumDsipatcher.dispatch({ 'actionType': 'course-detail', 'data': course.course_id });
+    if (course.course_id) CurriculumDsipatcher.dispatch({ 'actionType': 'course-detail', 'data': course.course_id });
   },
 
   'render': function () {
@@ -24,21 +24,31 @@ let ScheduleItem = React.createClass({
 })
 
 let Curriculum = React.createClass({
-  'onLoadCourses': function () {
-    this.forceUpdate();
+  'getInitialState': function () {
+    return { 'courses': [] };
+  },
+
+  'updateCurriculum': function (data) {
+    this.setState({ 'courses': data });
   },
 
   'componentWillMount': function () {
-    this.props.onLoad(this.onLoadCourses);
+    this.props.onUpdate(this.updateCurriculum);
+  },
+
+  'componentWillUnmount': function () {
+    this.props.removeOnUpdate(this.updateCurriculum);
   },
 
   'render': function () {
-    let courses = this.props.getCourses();
+    let courses = this.state.courses;
     let courseSchedule = Array(14).fill().map( () => Array(7).fill().map( () => Object() ) );
 
     for (const course of courses) {
       course.schedule.forEach( (e) => {
-        Object.assign(courseSchedule[ e[0] ][ e[1] ], course);
+        courseSchedule[ e[0] ][ e[1] ].course_name = course.course_name;
+        courseSchedule[ e[0] ][ e[1] ].course_id = course.course_id;
+        courseSchedule[ e[0] ][ e[1] ].className = 'blueClass';
       });
     }
 
