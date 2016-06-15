@@ -120,6 +120,8 @@ class FacebookService
 
         return $imageUrl;
     }
+    
+    
 
     public function fbLogin(){
 
@@ -293,5 +295,21 @@ class FacebookService
 
         return $count;
     }
-     
+
+    public function getName( $token ){
+
+        try {
+            // Returns a `Facebook\FacebookResponse` object
+            $response = $this->fb->get('/me?fields=id,name',$token);
+        } catch(FacebookResponseException $e) {
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch(FacebookSDKException $e) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
+        $user = $response->getGraphUser();
+        return $user['name'];
+
+    }
 }

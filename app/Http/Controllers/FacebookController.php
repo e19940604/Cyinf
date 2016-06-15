@@ -92,11 +92,19 @@ class FacebookController extends CyinfApiController
     }*/
 
     protected function profile( Request $request ){
+
         $user = \Auth::user();
 
+        if( $user->FB_token === "" ){
+            $this->responseCode = 403;
+            return $this->send_response();
+        }
+
+        $fb_name = $this->facebookService->getName( $user->FB_token );
+        
         $imageUrl = $user->image_url;
         $this->responseData['data'] = [
-            'username' => $user->real_name,
+            'username' => $fb_name,
             'imageUrl' => $imageUrl
         ];
         
@@ -114,6 +122,8 @@ class FacebookController extends CyinfApiController
 
         $user = \Auth::user();
         $user->FB_conn = "";
+        $user->image_url = "";
+        $user->FB_token = "";
         $user->save();
 
         $this->responseData['status'] = "success";
@@ -162,4 +172,6 @@ class FacebookController extends CyinfApiController
         }
 
     }
+    
+
 }

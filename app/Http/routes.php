@@ -95,17 +95,21 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/curriculum' , 'CurriculumController@index');
-    Route::get('/curriculum/courseDetail' , 'CurriculumController@courseDetail');
-    Route::get('/curriculum/notification', 'CurriculumController@notify');
+    Route::get('/curriculum/courseDetail/{course_id}' , 'CurriculumController@courseDetail');
+    //Route::get('/curriculum/notification', 'CurriculumController@notify');
 
+	Route::get('/curriculum/course/{course_id}', 'CurriculumApiController@course');
+	Route::post('/curriculum/add', 'CurriculumApiController@add');
+	Route::post('/curriculum/remove', 'CurriculumApiController@remove');
+	Route::post('/curriculum/search', 'CurriculumApiController@search');
 
 	Route::group(['middleware' => ['auth:web']], function(){
+		Route::get('/curriculum/config', 'CurriculumController@config');
 		Route::get('/curriculum/user', 'UserController@user');
 		Route::get('/curriculum/notify', 'NotificationController@show');
 		Route::post('/curriculum/notify', 'FacebookController@notify');
 		Route::patch('/curriculum/config', 'NotificationController@config' );
 		Route::patch('/curriculum/readAll', 'NotificationController@readAll');
-
 
 		/* facebook api */
 		Route::get('/curriculum/link-facebook', 'FacebookController@login');
@@ -113,12 +117,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/curriculum/facebook-status', 'FacebookController@profile');
 		Route::delete('/curriculum/fbconnect', 'FacebookController@logout');
 
-
 		Route::get('/curriculum/schedule', 'CurriculumApiController@schedule');
-		Route::get('/curriculum/course/{course_id}', 'CurriculumApiController@course');
-		Route::post('/curriculum/add', 'CurriculumApiController@add');
-		Route::post('/curriculum/remove', 'CurriculumApiController@remove');
-		Route::post('/curriculum/search', 'CurriculumApiController@search');
 	});
 	
 

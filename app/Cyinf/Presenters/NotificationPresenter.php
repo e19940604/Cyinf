@@ -27,7 +27,7 @@ class NotificationPresenter
                 $imageUrl = "/curr/img/icon_c.svg";
             }
             else{
-                $fbServ = new \Cyinf\Services\FacebookService();
+                $fbServ = new \Cyinf\Services\FacebookService( app()->make( \Cyinf\Repositories\NotificationRepository::class ) , app()->make( \Cyinf\Repositories\CourseRepository::class ) );
                 $student = User::find( $item['stu_id'] );
                 $imageUrl = $fbServ->getPictureById( $student->FB_conn , "Notification");
             }
