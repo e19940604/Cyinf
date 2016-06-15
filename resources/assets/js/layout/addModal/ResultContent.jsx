@@ -2,27 +2,34 @@ import React from 'react';
 import ModalDispatcher from '../../dispatchers/modals';
 
 let ResultItem = React.createClass({
+  'getInitialState': function () {
+    return { 'add': this.props.add, 'remove': this.props.remove };
+  },
+
   'onClickAction': function () {
     ModalDispatcher.dispatch({
-      'actionType': this.props.add ? 'add-course' : 'remove-course',
-      'data': this.props.course_id
+      'actionType': this.props.add ? 'add-add-course' : 'add-remove-course',
+      'data': this.props.index
     });
+
+    this.setState({ 'add': !this.state.add, 'remove': !this.state.remove });
   },
+
   'render': function () {
     return (
       <tr>
-        <td data-title="課程名稱">{this.props.courseName}</td>
-        <td data-title="授課教師">{this.props.teacher}</td>
-        <td data-title="開課系所">{this.props.department}</td>
-        <td data-title="上課星期">{this.props.weekday}</td>
+        <td data-title="課程名稱">{this.props.course_name}</td>
+        <td data-title="授課教師">{this.props.professor}</td>
+        <td data-title="開課系所">{this.props.course_department}</td>
+        <td data-title="上課星期">{this.props.week_day}</td>
         <td data-title="上課時間">{this.props.time}</td>
         <td data-title="上課地點">{this.props.place}</td>
         <td onClick={this.onClickAction}>
           <span
             className={
               'desk-only mod-result-icon glyphicon cursor-pointer' +
-              (this.props.add    ? ' glyphicon-plus-sign'     : '') +
-              (this.props.remove ? ' glyphicon-remove-circle' : '')
+              (this.state.add    ? ' glyphicon-plus-sign'     : '') +
+              (this.state.remove ? ' glyphicon-remove-circle' : '')
             }
             aria-hidden="true"
           ></span>
@@ -36,14 +43,22 @@ let ResultItem = React.createClass({
 let ResultContent = React.createClass({
   'getInitialState': function () {
     return {
-      'result': []
+      'results': this.props.getResults()
     };
   },
-  'componentWillMount': function () {
-    this.props.onGetResult( (result) => {
-      this.setState({ 'result': result });
-    });
+
+  'onGetResults': function (results) {
+    this.setState({ 'results': results });
   },
+
+  'componentWillMount': function () {
+    this.props.onGetResults(this.onGetResults);
+  },
+
+  'componentWillUnmount': function () {
+    this.props.removeOnGetResults(this.onGetResults);
+  },
+
   'render': function () {
     return (
       <div className="mod-add-result">
@@ -61,7 +76,7 @@ let ResultContent = React.createClass({
           </thead>
           <tbody>
 
-          {this.state.result.map( (e, i) => <ResultItem {...e} index={i} /> )}
+          {this.state.results.map( (e, i) => <ResultItem {...e} index={i} key={e.course_id} /> )}
 
           </tbody>
         </table>

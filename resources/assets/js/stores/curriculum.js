@@ -5,31 +5,19 @@ let CurriculumStore = new class extends EventEmitter {
   constructor() {
     super();
     this.courses = [];
-    this.loadRequest = undefined;
   }
 
   load() {
-    this.loadRequest = new Promise( (resolve, reject) => {
-      setTimeout( () => {
-        resolve([
-          {
-            'schedule': [ [1, 1], [2, 1], [3, 1] ],
-            'course_name': '演算法',
-            'course_id': 123,
-            'className': 'blueClass'
-          },
-          {
-            'schedule': [ [6, 4], [7, 4], [2, 5] ],
-            'course_name': '微積分（一）',
-            'course_id': 456,
-            'className': 'blueClass'
-          }
-        ]);
-      }, 2000);
-    });
+    let loadRequest = fetch('/curriculum/schedule', { 'credentials': 'include' })
+      .then( (res) => res.json() )
+      .then( (res) =>
+        (res.status === 'success') ?
+          Promise.resolve(res.data) :
+          Promise.reject(res.error)
+      );
 
-    this.loadRequest.then( (data) => {
-      this.courses = data;
+    loadRequest.then( (data) => {
+      this.update(data);
       this.emit('load');
     });
   }
@@ -38,8 +26,61 @@ let CurriculumStore = new class extends EventEmitter {
     this.on('load', callback);
   }
 
+  update(courses) {
+    this.courses = courses;
+    this.emit('update', this.courses);
+  }
+
+  onUpdate(callback) {
+    this.on('update', callback);
+  }
+
+  add(courseId) {
+    let data = new URLSearchParams();
+    data.append('course_id', courseId);
+
+    let loadRequest = fetch('/curriculum/add', {
+      'method': 'POST',
+      'body': data,
+      'credentials': 'include'
+    }).then( (res) => res.json() )
+      .then( (res) =>
+        (res.status === 'success') ?
+          Promise.resolve(res.data) :
+          Promise.reject(res.error)
+      );
+
+    loadRequest.then( (data) => {
+      this.update(data);
+    });
+  }
+
+  remove(courseId) {
+    let data = new URLSearchParams();
+    data.append('course_id', courseId);
+
+    let loadRequest = fetch('/curriculum/remove', {
+      'method': 'POST',
+      'body': data,
+      'credentials': 'include'
+    }).then( (res) => res.json() )
+      .then( (res) =>
+        (res.status === 'success') ?
+          Promise.resolve(res.data) :
+          Promise.reject(res.error)
+      );
+
+    loadRequest.then( (data) => {
+      this.update(data);
+    });
+  }
+
   removeOnLoad(callback) {
     this.removeListener('load', callback);
+  }
+
+  removeOnUpdate(callback) {
+    this.removeListener('update', callback);
   }
 
   getCourses(callback) {
@@ -47,7 +88,7 @@ let CurriculumStore = new class extends EventEmitter {
   }
 
   courseDetail(courseId) {
-    console.log(courseId);
+    location.href = `/crriculum/courseDetail/${courseId}`;
   }
 };
 
@@ -55,6 +96,14 @@ CurriculumDispatcher.register( (payload) => {
   switch (payload.actionType) {
   case 'course-detail':
     CurriculumStore.courseDetail(payload.data);
+    break;
+
+  case 'add-course':
+    CurriculumStore.add(payload.data);
+    break;
+
+  case 'remove-course':
+    CurriculumStore.remove(payload.data);
     break;
   }
 });

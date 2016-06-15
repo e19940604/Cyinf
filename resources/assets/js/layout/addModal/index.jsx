@@ -28,8 +28,8 @@ let AddModal = React.createClass({
 
           {
             this.props.mode === 'search' ?
-              <FilterContent getFilters={this.props.getFilters} /> :
-              <ResultContent onGetResult={this.props.onGetResult} />
+              <FilterContent {...this.props} /> :
+              <ResultContent {...this.props} />
           }
 
         </div>

@@ -1,18 +1,18 @@
 import {EventEmitter} from 'events';
 import ModalDispatcher from '../dispatchers/modals';
+import CurriculumDispatcher from '../dispatchers/curriculum';
 
 let AddModalStore = new class extends EventEmitter {
   constructor() {
     super();
     this.active = false;
     this.mode = 'search';
-    this.searchRequest = undefined;
-    this.filterKey = 2;
 
     this.filters = new Map();
-    this.filters.set(0, { 'searchKey': 'de',  'searchValue': '資訊工程' });
+    this.filters.set(0, { 'searchKey': 'de',  'searchValue': '' });
     this.filters.set(1, { 'searchKey': 'ti1', 'searchValue': 'Tue'      });
-    this.result = [];
+
+    this.results = [];
   }
 
   show() {
@@ -38,42 +38,31 @@ let AddModalStore = new class extends EventEmitter {
   search() {
     this.mode = 'result';
 
-    this.searchRequest = new Promise( (resolve, reject) => {
-      setTimeout( () => {
-        resolve([
-          {
-            'course_id': 123,
-            'courseName': '服務學習（三）：萬安部落原住民學童課輔服務',
-            'teacher': '梁慧玫',
-            'department': '服務學習',
-            'weekday': 'Tue, Fri',
-            'time': '34, 23',
-            'place': '理SC 2001',
-            'add': true
-          },
-          {
-            'course_id': 321,
-            'courseName': '服務學習（三）：萬安部落原住民學童課輔服務',
-            'teacher': '梁慧玫',
-            'department': '服務學習',
-            'weekday': 'Tue, Fri',
-            'time': '34, 23',
-            'place': '理SC 2001',
-            'remove': true
-          },
-          {
-            'course_id': 1234567,
-            'courseName': '服務學習（三）：萬安部落原住民學童課輔服務',
-            'teacher': '梁慧玫',
-            'department': '服務學習',
-            'weekday': 'Tue, Fri',
-            'time': '34, 23',
-            'place': '理SC 2001',
-            'remove': true
-          }
-        ]);
-      }, 1000);
+    let filters = [...this.filters.values()]
+      .filter( (e) => e.searchKey.trim() && e.searchValue.trim() )
+      .reduce( (p, c) => {
+        let value = ['de', 'gr', 'di'].some( (e) => (e === c.searchKey) ) ? parseInt(c.searchValue, 10) : c.searchValue;
+        if (p[c.searchKey]) p[c.searchKey].push(value);
+        else p[c.searchKey] = [value];
+        return p;
+      }, {});
+
+    let data = new FormData();
+    data.append('rule', JSON.stringify(filters));
+
+    let searchRequest = fetch('/curriculum/search', { 'method': 'POST', 'body': data, 'credentials': 'include' })
+      .then( (res) => res.json() )
+      .then( (res) =>
+        (res.status === 'success') ?
+          Promise.resolve(res.data) :
+          Promise.reject(res.error)
+      );
+
+    searchRequest.then( (data) => {
+      this.results = data;
+      this.emit('result', data);
     });
+
     this.emit('search');
   }
 
@@ -81,19 +70,22 @@ let AddModalStore = new class extends EventEmitter {
     this.on('search', callback);
   }
 
-  onGetResult(callback) {
-    this.searchRequest.then(callback);
+  onGetResults(callback) {
+    this.on('result', callback);
   }
 
-  clearResult() {
+  removeOnGetResults(callback) {
+    this.removeListener('result', callback);
+  }
+
+  clearResults() {
     this.mode = 'search';
-    this.result = [];
-    this.searchRequest = undefined;
-    this.emit('clear-result');
+    this.results = [];
+    this.emit('clear-results');
   }
 
-  onClearResult(callback) {
-    this.on('clear-result', callback);
+  onClearResults(callback) {
+    this.on('clear-results', callback);
   }
 
   getMode() {
@@ -102,6 +94,10 @@ let AddModalStore = new class extends EventEmitter {
 
   getFilters() {
     return this.filters;
+  }
+
+  getResults() {
+    return this.results;
   }
 
   addFilter() {
@@ -113,15 +109,34 @@ let AddModalStore = new class extends EventEmitter {
     let filter = this.filters.get(key);
     if (!filter) return;
 
-    let newFilter = Object.assign({}, filter);
-    newFilter[type] = value;
-    this.filters.set(key, newFilter);
+    if (type === 'searchKey' && filter.searchKey !== value) {
+      let newFilter = { 'searchKey': value, 'searchValue': '' };
+      this.filters.set(key, newFilter);
+    }
+    else if (type === 'searchValue' && filter.searchValue !== value) {
+      let newFilter = { 'searchKey': filter.searchKey, 'searchValue': value };
+      this.filters.set(key, newFilter);
+    }
   }
 
   removeFilter(key) {
     if (!this.filters.has(key)) return;
 
     this.filters.delete(key);
+  }
+
+  addCourse(index) {
+    let result = this.results[index];
+    result.add = false;
+    result.remove = true;
+    CurriculumDispatcher.dispatch({ 'actionType': 'add-course', 'data': result.course_id });
+  }
+
+  removeCourse(index) {
+    let result = this.results[index];
+    result.add = true;
+    result.remove = false;
+    CurriculumDispatcher.dispatch({ 'actionType': 'remove-course', 'data': result.course_id });
   }
 }
 
@@ -143,9 +158,18 @@ ModalDispatcher.register( (payload) => {
     AddModalStore.search();
     break;
 
-  case 'add-clear-result':
-    AddModalStore.clearResult();
+  case 'add-add-course':
+    AddModalStore.addCourse(payload.data);
     break;
+
+  case 'add-remove-course':
+    AddModalStore.removeCourse(payload.data);
+    break;
+
+  case 'add-clear-result':
+    AddModalStore.clearResults();
+    break;
+
   };
 });
 

@@ -10,6 +10,6 @@
 
 @section('scriptArea')
 
-<script src="/Curr/js/views/notify.js"></script>
+<script src="/Curr/js/views/notification.js"></script>
 
 @endsection
