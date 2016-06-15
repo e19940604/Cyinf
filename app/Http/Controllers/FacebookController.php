@@ -97,6 +97,7 @@ class FacebookController extends CyinfApiController
 
         if( $user->FB_token === "" ){
             $this->responseCode = 403;
+            $this->responseData['error'] = "Not connect Facebook";
             return $this->send_response();
         }
 

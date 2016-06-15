@@ -107,11 +107,11 @@ class UserController extends CyinfApiController
     public function user( Request $request  ){
 
         if( \Auth::check() ){
-            $this->responseData['name'] = \Auth::user()->real_name;
+            $this->responseData['data'] = \Auth::user()->real_name;
             $this->responseCode = 200;
         }
         else{
-            $this->responseData['status'] = "notLogin" ;
+            $this->responseData['error'] = "notLogin" ;
             $this->responseCode = 401;
         }
 
