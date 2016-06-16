@@ -6,49 +6,23 @@ let NotificationStore = new class extends EventEmitter {
     super();
     this.notifications = [];
     this.latestId = undefined;
-    this.updateInterval = 5000;
+    this.updateInterval = 30000;
     this.updateTimeoutId = undefined;
-    this.updateRequest = undefined;
-    this.loadRequest = undefined;
   }
 
   load() {
-    this.loadRequest = new Promise( (resolve, reject) => {
-      setTimeout( () =>{
-        resolve([
-          {
-            'item_id': 9,
-            'imageUrl': '/curr/img/icon_c.svg',
-            'content': '上課通知 - 9: 00 C程式設計(二) 工EC 5012',
-            'create_at': '2016-04-27'
-          },
-          {
-            'item_id': 8,
-            'imageUrl': '/curr/img/icon_c.svg',
-            'content': 'test123',
-            'create_at': '2016-04-26'
-          },
-          {
-            'item_id': 7,
-            'imageUrl': '/curr/img/icon_c.svg',
-            'content': '測試',
-            'create_at': '2016-04-25'
-          }
-        ]);
-      }, 1000);
-    });
+    let loadRequest = fetch('/curriculum/notify', { 'credentials': 'include' })
+      .then( (res) => res.json() )
+      .then( (res) => ( res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) ) )
+      .then( (data) => {
+        this.notifications = data;
+        this.latestId = Math.max.apply(null, data.map( (e) => e.id ));
+        setTimeout(this.update.bind(this), this.updateInterval);
 
-    this.loadRequest.then( (data) => {
-      let noti = this.notifications;
-      noti = noti.concat(data.sort( (a, b) => a.item_id > b.item_id));
-      this.latestId = noti[noti.length - 1].item_id;
-      this.notifications = noti;
-
-      setTimeout(this.update.bind(this), this.updateInterval);
-
-      this.emit('load');
-      this.emit('update');
-    });
+        this.emit('load');
+        this.emit('update');
+      })
+      .catch( (err) => { console.log(`notification load error: ${err}`, err); });
   }
 
   onLoad(callback) {
@@ -62,27 +36,18 @@ let NotificationStore = new class extends EventEmitter {
   update() {
     clearTimeout(this.updateTimeoutId);
 
-    this.updateRequest = new Promise( (resolve, reject) => {
-      setTimeout( () => {
-        resolve([
-          {
-            'item_id': this.latestId + 1,
-            'imageUrl': '/curr/img/icon_c.svg',
-            'content': '上課通知 - 9: 00 C程式設計(二) 工EC 5012' + (this.latestId + 1),
-            'create_at': '2016-04-27'
-          }
-        ]);
-      }, 1000);
-    });
+    let updateRequest = fetch(`/curriculum/notify?item_id=${this.latestId}&range=10`, { 'credentials': 'include' })
+      .then( (res) => res.json() )
+      .then( (res) => (res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) ) )
+      .then( (data) => {
+        let noti = this.notifications;
+        noti = noti.concat(data.sort( (a, b) => a.id > b.id));
+        this.latestId = noti[noti.length - 1].id;
+        this.notifications = noti;
 
-    this.updateRequest.then( (data) => {
-      let noti = this.notifications;
-      noti = noti.concat(data.sort( (a, b) => a.item_id > b.item_id));
-      this.latestId = noti[noti.length - 1].item_id;
-      this.notifications = noti;
-
-      this.emit('update');
-    });
+        this.emit('update');
+      })
+      .catch( (err) => { console.log(`notification update error: ${err}`, err); });
 
     setTimeout(this.update.bind(this), this.updateInterval);
   }
@@ -99,12 +64,15 @@ let NotificationStore = new class extends EventEmitter {
     return this.notifications;
   }
 
-  create() {
+  create(courseId, type) {
 
   }
 
   readAll() {
-
+    let readRequest = fetch('/curriculum/readAll', {'method': 'PATCH', 'credentials': 'include' })
+      .then( (res) => res.json() )
+      .then( (res) => (res.status === 'success' ? Promise.resolve() : Promise.reject(res.error) ) )
+      .catch( (err) => { console.log(`notification ReadAll error: ${err}`, err); });
   }
 };
 

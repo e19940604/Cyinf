@@ -4,7 +4,8 @@ import ModalDispatcher from '../dispatchers/modals';
 let ConfigModal = React.createClass({
   'getInitialState': function () {
     return {
-      'switches': this.props.switches
+      'switches': this.props.switches,
+      'lock': [false, false, false]
     };
   },
 
@@ -12,20 +13,32 @@ let ConfigModal = React.createClass({
     this.setState({ 'switches': switches });
   },
 
-  'componentWillMount': function () {
-    this.props.onClickSwitch(this.updateSwitches);
-  },
+  'unlockSwitch': function (switchName) {
+    let lockIndex = ['classNote', 'rollCallNote', 'testNote'].indexOf(switchName);
+    let lock = Array.from(this.state.lock);
+    lock[lockIndex] = false;
 
-  'componentWillUnmount': function () {
-    this.props.removeOnClickSwitch(this.updateSwitches);
+    this.setState({ 'lock': lock });
   },
 
   'closeModal': function () {
     ModalDispatcher.dispatch({ 'actionType': 'close' });
   },
 
-  'handleClickSwitch': function (switchName) {
+  'handleClickSwitch': function (switchName, index) {
+    if (this.state.lock[index]) return;
+    this.state.lock[index] = true;
     ModalDispatcher.dispatch({ 'actionType': 'config-click-switch', 'data': switchName });
+  },
+
+  'componentWillMount': function () {
+    this.props.onUpdate(this.updateSwitches);
+    this.props.onSend(this.unlockSwitch);
+  },
+
+  'componentWillUnmount': function () {
+    this.props.removeOnUpdate(this.updateSwitches);
+    this.props.removeOnSend(this.unlockSwitch);
   },
 
   'render': function () {
@@ -41,8 +54,8 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">上課通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch1" checked={this.state.switches[0]} readOnly />
-                <label className="onoffswitch-label" htmlFor="switch1" onClick={this.handleClickSwitch.bind(this, 'switch1')}>
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch1" checked={this.state.switches.classNote} readOnly />
+                <label className="onoffswitch-label" htmlFor="switch1" onClick={this.handleClickSwitch.bind(this, 'classNote', 0)}>
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
                 </label>
@@ -54,8 +67,8 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">點名通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch2" checked={this.state.switches[1]} readOnly />
-                <label className="onoffswitch-label" htmlFor="switch2" onClick={this.handleClickSwitch.bind(this, 'switch2')}>
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch2" checked={this.state.switches.rollCallNote} readOnly />
+                <label className="onoffswitch-label" htmlFor="switch2" onClick={this.handleClickSwitch.bind(this, 'rollCallNote', 1)}>
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
                 </label>
@@ -67,8 +80,8 @@ let ConfigModal = React.createClass({
             <span className="mod-text mod-config-text">考試通知</span>
             <div className="switch mod-config-text">
               <div className="onoffswitch mod-switch">
-                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch3" checked={this.state.switches[2]} readOnly />
-                <label className="onoffswitch-label" htmlFor="switch3" onClick={this.handleClickSwitch.bind(this, 'switch3')}>
+                <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="switch3" checked={this.state.switches.testNote} readOnly />
+                <label className="onoffswitch-label" htmlFor="switch3" onClick={this.handleClickSwitch.bind(this, 'testNote', 2)}>
                   <span className="onoffswitch-inner"></span>
                   <span className="onoffswitch-switch"></span>
                 </label>

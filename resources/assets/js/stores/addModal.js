@@ -9,6 +9,7 @@ let AddModalStore = new class extends EventEmitter {
     this.mode = 'search';
 
     this.filters = new Map();
+    this.filterKey = 2;
     this.filters.set(0, { 'searchKey': 'de',  'searchValue': '' });
     this.filters.set(1, { 'searchKey': 'ti1', 'searchValue': 'Tue'      });
 
@@ -52,11 +53,7 @@ let AddModalStore = new class extends EventEmitter {
 
     let searchRequest = fetch('/curriculum/search', { 'method': 'POST', 'body': data, 'credentials': 'include' })
       .then( (res) => res.json() )
-      .then( (res) =>
-        (res.status === 'success') ?
-          Promise.resolve(res.data) :
-          Promise.reject(res.error)
-      );
+      .then( (res) => ( res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) ) );
 
     searchRequest.then( (data) => {
       this.results = data;

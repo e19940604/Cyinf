@@ -10,11 +10,7 @@ let CurriculumStore = new class extends EventEmitter {
   load() {
     let loadRequest = fetch('/curriculum/schedule', { 'credentials': 'include' })
       .then( (res) => res.json() )
-      .then( (res) =>
-        (res.status === 'success') ?
-          Promise.resolve(res.data) :
-          Promise.reject(res.error)
-      );
+      .then( (res) => ( res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) ) );
 
     loadRequest.then( (data) => {
       this.update(data);
@@ -43,12 +39,9 @@ let CurriculumStore = new class extends EventEmitter {
       'method': 'POST',
       'body': data,
       'credentials': 'include'
-    }).then( (res) => res.json() )
-      .then( (res) =>
-        (res.status === 'success') ?
-          Promise.resolve(res.data) :
-          Promise.reject(res.error)
-      );
+    })
+      .then( (res) => res.json() )
+      .then( (res) => ( res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) ) );
 
     loadRequest.then( (data) => {
       this.update(data);
@@ -63,12 +56,9 @@ let CurriculumStore = new class extends EventEmitter {
       'method': 'POST',
       'body': data,
       'credentials': 'include'
-    }).then( (res) => res.json() )
-      .then( (res) =>
-        (res.status === 'success') ?
-          Promise.resolve(res.data) :
-          Promise.reject(res.error)
-      );
+    })
+      .then( (res) => res.json() )
+      .then( (res) => ( res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) ) );
 
     loadRequest.then( (data) => {
       this.update(data);
@@ -86,16 +76,12 @@ let CurriculumStore = new class extends EventEmitter {
   getCourses(callback) {
     return this.courses;
   }
-
-  courseDetail(courseId) {
-    location.href = `/crriculum/courseDetail/${courseId}`;
-  }
 };
 
 CurriculumDispatcher.register( (payload) => {
   switch (payload.actionType) {
   case 'course-detail':
-    CurriculumStore.courseDetail(payload.data);
+    // CurriculumStore.courseDetail(payload.data);
     break;
 
   case 'add-course':

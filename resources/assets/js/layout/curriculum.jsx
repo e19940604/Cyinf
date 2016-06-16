@@ -11,13 +11,34 @@ let ScheduleItem = React.createClass({
     return (
       <tr>
         <td>{this.props.scheduleName}</td>
-        <td className={courses[0].className} onClick={this.onClickCourse.bind(this, courses[0])}>{courses[0].course_name}</td>
-        <td className={courses[1].className} onClick={this.onClickCourse.bind(this, courses[1])}>{courses[1].course_name}</td>
-        <td className={courses[2].className} onClick={this.onClickCourse.bind(this, courses[2])}>{courses[2].course_name}</td>
-        <td className={courses[3].className} onClick={this.onClickCourse.bind(this, courses[3])}>{courses[3].course_name}</td>
-        <td className={courses[4].className} onClick={this.onClickCourse.bind(this, courses[4])}>{courses[4].course_name}</td>
-        <td className={courses[5].className} onClick={this.onClickCourse.bind(this, courses[5])}>{courses[5].course_name}</td>
-        <td className={courses[6].className} onClick={this.onClickCourse.bind(this, courses[6])}>{courses[6].course_name}</td>
+
+        <td className={'course ' + courses[0].className} onClick={this.onClickCourse.bind(this, courses[0])}>
+          <a href={`/curriculum/courseDetail/${courses[0].course_id}`}>{courses[0].course_name}</a>
+        </td>
+
+        <td className={'course ' + courses[1].className} onClick={this.onClickCourse.bind(this, courses[1])}>
+          <a href={`/curriculum/courseDetail/${courses[1].course_id}`}>{courses[1].course_name}</a>
+        </td>
+
+        <td className={'course ' + courses[2].className} onClick={this.onClickCourse.bind(this, courses[2])}>
+          <a href={`/curriculum/courseDetail/${courses[2].course_id}`}>{courses[2].course_name}</a>
+        </td>
+
+        <td className={'course ' + courses[3].className} onClick={this.onClickCourse.bind(this, courses[3])}>
+          <a href={`/curriculum/courseDetail/${courses[3].course_id}`}>{courses[3].course_name}</a>
+        </td>
+
+        <td className={'course ' + courses[4].className} onClick={this.onClickCourse.bind(this, courses[4])}>
+          <a href={`/curriculum/courseDetail/${courses[4].course_id}`}>{courses[4].course_name}</a>
+        </td>
+
+        <td className={'course ' + courses[5].className} onClick={this.onClickCourse.bind(this, courses[5])}>
+          <a href={`/curriculum/courseDetail/${courses[5].course_id}`}>{courses[5].course_name}</a>
+        </td>
+
+        <td className={'course ' + courses[6].className} onClick={this.onClickCourse.bind(this, courses[6])}>
+          <a href={`/curriculum/courseDetail/${courses[6].course_id}`}>{courses[6].course_name}</a>
+        </td>
       </tr>
     )
   }

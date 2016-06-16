@@ -17,6 +17,8 @@ let CourseDetail = React.createClass({
         <CourseDetailPartial
           onLoad={CourseDetailStore.onLoad.bind(CourseDetailStore)}
           removeOnLoad={CourseDetailStore.removeOnLoad.bind(CourseDetailStore)}
+          onCreateNotify={CourseDetailStore.onCreateNotify.bind(CourseDetailStore)}
+          removeOnCreateNotify={CourseDetailStore.removeOnCreateNotify.bind(CourseDetailStore)}
         />
       </div>
     );

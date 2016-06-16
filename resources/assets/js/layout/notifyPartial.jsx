@@ -26,8 +26,8 @@ let NotifyPartial = React.createClass({
 
   'render': function () {
     let notificationGroup = this.props.getNotifications().reduce( (p, c) => {
-      if (!p[c.create_at]) p[c.create_at] = [<NotifyItem {...c} key={c.item_id} />];
-      else p[c.create_at].push(<NotifyItem {...c} key={c.item_id} />);
+      if (!p[c.created_at]) p[c.created_at] = [<NotifyItem {...c} key={c.id} />];
+      else p[c.created_at].push(<NotifyItem {...c} key={c.id} />);
       return p;
     }, {});
 
@@ -43,7 +43,7 @@ let NotifyPartial = React.createClass({
 
     return (
       <div className="content">
-        <p className="title">所有通知</p>
+        <p className="title"><a href="/curriculum/notification">所有通知</a></p>
 
         {notifications.reverse()}
 

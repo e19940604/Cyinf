@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events';
 import ModalDispatcher from '../dispatchers/modals';
+import UserDispatcher from '../dispatchers/user';
 
 let LinkModalStore = new class extends EventEmitter {
   constructor() {
@@ -27,39 +28,20 @@ let LinkModalStore = new class extends EventEmitter {
     this.on('close', callback);
   }
 
-  login() {
-    location.reload();
-  }
-
-  logout() {
-    location.reload();
-  }
-
-  link() {
-    location.reload();
-  }
-
   unlink() {
-    location.reload();
+    let unlinkRequest = fetch('/curriculum/fbconnect', { 'method': 'DELETE', 'credentials': 'include' })
+      .then( (res) => res.json() )
+      .then( (res) => (res.status === 'success' ? Promise.resolve() : Promise.reject(res.error)) )
+      .then( () => { UserDispatcher.dispatch({ 'actionType': 'check-status' }); })
+      .catch( (err) => { console.log(`link modal error: ${err}`, err); });
   }
 }
 
 ModalDispatcher.register( (payload) => {
-  if (payload.actionType === 'link-login') {
-    LinkModalStore.login();
-    return;
-  }
-  if (payload.actionType === 'link-logout') {
-    LinkModalStore.logout();
-    return;
-  }
-  if (payload.actionType === 'link-link') {
-    LinkModalStore.link();
-    return;
-  }
-  if (payload.actionType === 'link-unlink') {
+  switch (payload.actionType) {
+  case 'link-unlink':
     LinkModalStore.unlink();
-    return;
+    break;
   }
 });
 
