@@ -28,6 +28,7 @@ let SideBar = React.createClass({
     else {
       this.setState({ 'showNotification': true });
       $('body').on('click', this.onClickOutsideNotification);
+      NotificationStore.readAll();
     }
   },
 
