@@ -24,7 +24,7 @@ let UserStore = new class extends EventEmitter {
           this.userName = userStatus.data;
           if (fbStatus.status === 'success') {
             this.linkFacebook = true;
-            this.fbName = fbStatus.data.username;
+            this.fbName = fbStatus.data.name;
             this.imageUrl = fbStatus.data.imageUrl;
           }
         }
