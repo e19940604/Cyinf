@@ -56,6 +56,7 @@ class NotificationController extends CyinfApiController
             $notis = $this->notificationRepository->getLatest10Notification( $user->stu_id );
         }
 
+        $this->responseData['status'] = "success";
         $this->responseData['data'] = NotificationPresenter::db2api( $notis->toArray() );
         $this->responseCode = 200;
 
@@ -65,7 +66,8 @@ class NotificationController extends CyinfApiController
     protected function config( Request $request ){
 
         if( $this->vaild_data_format( $request->all() , ['type']) !== true ){
-            $this->responseData['data'] = "type field format error";
+            $this->responseData['status'] = "failure";
+            $this->responseData['error'] = "type field format error";
             $this->responseCode = 400;
             return $this->send_response();
         }
@@ -73,7 +75,8 @@ class NotificationController extends CyinfApiController
         $type = $request->get('type');
 
         if( $type !== "1" && $type !== "2" ) {
-            $this->responseData['data'] = "type field format error";
+            $this->responseData['status'] = "failure";
+            $this->responseData['error'] = "type field format error";
             $this->responseCode = 400;
             return $this->send_response();
         }
