@@ -6,6 +6,7 @@ let NotificationStore = new class extends EventEmitter {
     super();
     this.notifications = [];
     this.latestId = undefined;
+    this.notRead = false;
     this.updateInterval = 30000;
     this.updateTimeoutId = undefined;
   }
@@ -17,6 +18,7 @@ let NotificationStore = new class extends EventEmitter {
       .then( (data) => {
         this.notifications = data;
         this.latestId = Math.max.apply(null, data.map( (e) => e.id ));
+        this.notRead = true;
         setTimeout(this.update.bind(this), this.updateInterval);
 
         this.emit('load');
@@ -36,13 +38,14 @@ let NotificationStore = new class extends EventEmitter {
   update() {
     clearTimeout(this.updateTimeoutId);
 
-    let updateRequest = fetch(`/curriculum/notify?item_id=${this.latestId}&range=10`, { 'credentials': 'include' })
+    let updateRequest = fetch(`/curriculum/notify?item_id=${this.latestId}`, { 'credentials': 'include' })
       .then( (res) => res.json() )
       .then( (res) => (res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) ) )
       .then( (data) => {
         let noti = this.notifications;
         noti = noti.concat(data.sort( (a, b) => a.id > b.id));
         this.latestId = noti[noti.length - 1].id;
+        this.notRead = true;
         this.notifications = noti;
 
         this.emit('update');
@@ -69,10 +72,15 @@ let NotificationStore = new class extends EventEmitter {
   }
 
   readAll() {
+    if (this.notRead) {
     let readRequest = fetch('/curriculum/readAll', {'method': 'PATCH', 'credentials': 'include' })
       .then( (res) => res.json() )
       .then( (res) => (res.status === 'success' ? Promise.resolve() : Promise.reject(res.error) ) )
+      .then( () => {
+        this.notRead = false;
+      })
       .catch( (err) => { console.log(`notification ReadAll error: ${err}`, err); });
+    }
   }
 };
 
