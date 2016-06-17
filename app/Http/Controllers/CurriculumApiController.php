@@ -200,7 +200,7 @@ class CurriculumApiController extends Controller
 
         if($request->has('rule')){
             $courseCollect = $this->courseRepository->searchCourse("rule", $request->get('rule'), ['now' => 1]);
-            $result['data2'] = $courseCollect->all();
+            //$result['data2'] = $courseCollect->all();
             $result['data'] = $this->course2api($courseCollect);
         }
 
