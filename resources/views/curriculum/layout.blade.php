@@ -33,7 +33,8 @@
     </footer>
 
 @include('includes.scriptInclude')
-    <script type="text/javascript" src="/Curr/js/main.js"></script>
+    <!-- <script type="text/javascript" src="/Curr/js/main.js"></script> -->
+    <script src="/Curr/js/views/commons.js"></script>
 @yield('scriptArea')
 
 </body>
