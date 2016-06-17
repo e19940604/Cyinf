@@ -67,7 +67,7 @@ class CurriculumApiController extends Controller
 
         $courseApi = [];
 
-        $stu_schedule = $this->curriculumRepository->get_stu_schedule(\Auth::user()->stu_id)->pluck('course_id');
+        @$stu_schedule = $this->curriculumRepository->get_stu_schedule(\Auth::user()->stu_id)->pluck('course_id');
 
          $week2api = [
             'Mon' => '一',
@@ -81,7 +81,7 @@ class CurriculumApiController extends Controller
 
         foreach ($courseArray as $course) {
             $courseData = [];
-            $has_schedule = $stu_schedule->contains($course->id);
+            @$has_schedule = $stu_schedule->contains($course->id);
             $courseData['course_id']         = $course->id;
             $courseData['course_name']       = $course->course_nameCH;
             $courseData['course_department'] = $this->coursePresenter->getDepartmantNameByCode($course->course_department);
@@ -90,8 +90,8 @@ class CurriculumApiController extends Controller
             $courseData['unit']              = $this->coursePresenter->getGradeNameByNum($course->unit);
             $courseData['week_day']          = explode(",", $course->time1); 
             $courseData['time']              = explode(",", $course->time2);
-            $courseData['add']               = ($has_schedule) ? 0 : 1;
-            $courseData['remove']            = ($has_schedule) ? 1 : 0;
+            @$courseData['add']               = ($has_schedule) ? 0 : 1;
+            @$courseData['remove']            = ($has_schedule) ? 1 : 0;
 
             foreach ($courseData['week_day'] as $key => $value) {
                 $courseData['week_day'][$key] = '星期'.$week2api[$value];
@@ -144,11 +144,15 @@ class CurriculumApiController extends Controller
                 $result['error'] = 'The course is not one of current semester.';
             }
             else{
-                $r = $this->curriculumRepository->create(\Auth::user()->stu_id, $request->get('course_id'));
+                $r = $this->curriculumRepository->create(\Auth::user()->stu_id, $course);
 
-                if($r !== true){
+                if($r === false){
                     $statusCode = 500;
                     $result['error'] = 'Oops! Something wrong, please try again later.';
+                }
+                else if($r === null){
+                    $statusCode = 400;
+                    $result['error'] = 'Duplicate course time.';
                 }
                 else{
                     $statusCode = 200;
@@ -196,7 +200,7 @@ class CurriculumApiController extends Controller
 
         if($request->has('rule')){
             $courseCollect = $this->courseRepository->searchCourse("rule", $request->get('rule'), ['now' => 1]);
-            $result['data2'] = $courseCollect->all();
+            //$result['data2'] = $courseCollect->all();
             $result['data'] = $this->course2api($courseCollect);
         }
 
