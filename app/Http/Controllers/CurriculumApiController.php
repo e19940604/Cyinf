@@ -67,7 +67,7 @@ class CurriculumApiController extends Controller
 
         $courseApi = [];
 
-        $stu_schedule = $this->curriculumRepository->get_stu_schedule(\Auth::user()->stu_id)->pluck('course_id');
+        @$stu_schedule = $this->curriculumRepository->get_stu_schedule(\Auth::user()->stu_id)->pluck('course_id');
 
          $week2api = [
             'Mon' => '一',
@@ -81,7 +81,7 @@ class CurriculumApiController extends Controller
 
         foreach ($courseArray as $course) {
             $courseData = [];
-            $has_schedule = $stu_schedule->contains($course->id);
+            @$has_schedule = $stu_schedule->contains($course->id);
             $courseData['course_id']         = $course->id;
             $courseData['course_name']       = $course->course_nameCH;
             $courseData['course_department'] = $this->coursePresenter->getDepartmantNameByCode($course->course_department);
@@ -90,8 +90,8 @@ class CurriculumApiController extends Controller
             $courseData['unit']              = $this->coursePresenter->getGradeNameByNum($course->unit);
             $courseData['week_day']          = explode(",", $course->time1); 
             $courseData['time']              = explode(",", $course->time2);
-            $courseData['add']               = ($has_schedule) ? 0 : 1;
-            $courseData['remove']            = ($has_schedule) ? 1 : 0;
+            @$courseData['add']               = ($has_schedule) ? 0 : 1;
+            @$courseData['remove']            = ($has_schedule) ? 1 : 0;
 
             foreach ($courseData['week_day'] as $key => $value) {
                 $courseData['week_day'][$key] = '星期'.$week2api[$value];
