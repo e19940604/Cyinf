@@ -3,6 +3,7 @@ import React from 'react';
 import NotifyPartial from './notifyPartial';
 import UserStore from '../stores/user';
 import NotificationStore from '../stores/notification';
+import NotificationDispatcher from '../dispatchers/notification';
 
 NotificationStore.load();
 UserStore.load();
@@ -28,7 +29,8 @@ let SideBar = React.createClass({
     else {
       this.setState({ 'showNotification': true });
       $('body').on('click', this.onClickOutsideNotification);
-      NotificationStore.readAll();
+      NotificationDispatcher.dispatch({ 'actionType': 'read-all' });
+
     }
   },
 

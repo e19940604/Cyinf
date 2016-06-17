@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events';
 import CourseDetailDispatcher from '../dispatchers/courseDetail';
+import NotificationDispatcher from '../dispatchers/notification';
 
 let CourseDetailStore = new class extends EventEmitter {
   constructor() {
@@ -115,6 +116,10 @@ CourseDetailDispatcher.register( (payload) => {
     CourseDetailStore.remove();
     break;
   };
+});
+
+CourseDetailStore.onCreateNotify( () => {
+  NotificationDispatcher.dispatch({ 'actionType': 'update-notification' });
 });
 
 export default CourseDetailStore;

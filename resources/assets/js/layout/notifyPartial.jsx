@@ -36,7 +36,7 @@ let NotifyPartial = React.createClass({
       notifications.push(
         <div key={key}>
           <div className="date">{key}</div>
-          {notificationGroup[key].reverse()}
+          {notificationGroup[key]}
         </div>
       );
     }
@@ -45,7 +45,7 @@ let NotifyPartial = React.createClass({
       <div className="content">
         <p className="title"><a href="/curriculum/notification">所有通知</a></p>
 
-        {notifications.reverse()}
+        {notifications}
 
       </div>
     );
