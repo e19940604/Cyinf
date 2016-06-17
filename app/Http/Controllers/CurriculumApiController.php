@@ -144,11 +144,15 @@ class CurriculumApiController extends Controller
                 $result['error'] = 'The course is not one of current semester.';
             }
             else{
-                $r = $this->curriculumRepository->create(\Auth::user()->stu_id, $request->get('course_id'));
+                $r = $this->curriculumRepository->create(\Auth::user()->stu_id, $course);
 
-                if($r !== true){
+                if($r === false){
                     $statusCode = 500;
                     $result['error'] = 'Oops! Something wrong, please try again later.';
+                }
+                else if($r === null){
+                    $statusCode = 400;
+                    $result['error'] = 'Duplicate course time.';
                 }
                 else{
                     $statusCode = 200;
