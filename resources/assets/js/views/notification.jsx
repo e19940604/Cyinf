@@ -5,6 +5,7 @@ import NotificationDispatcher from '../dispatchers/notification';
 import NotificationStore from '../stores/notification';
 
 NotificationStore.load();
+
 let Notification = React.createClass({
   'render': function () {
     return (

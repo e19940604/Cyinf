@@ -25,8 +25,8 @@
     }
 }
 
-::-webkit-scrollbar { 
-    display: block; 
+::-webkit-scrollbar {
+    display: block;
 }
 
 .blueClass{
@@ -70,12 +70,16 @@
         height: 40px;
     }
 
+    td a, td a:hover, td a:visited, td a:active {
+        color: $white;
+    }
+
     thead {
         z-index: 2;
         tr{
             position: absolute;
             top: 76px;
-            
+
 
             th:first-child{
                 min-width: 18px;
@@ -97,10 +101,7 @@
             td{
                 padding: 0 2px 0 2px;
             }
-            td:hover{
-                cursor: pointer;
-            }
-        }   
+        }
     }
 }
 

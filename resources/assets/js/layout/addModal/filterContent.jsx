@@ -3,11 +3,6 @@ import ModalDispatcher from '../../dispatchers/modals';
 import FilterItem from './filterItem';
 
 let FilterContent = React.createClass({
-  'filterKeyStart': 0,
-
-  'initialFilters': undefined,
-
-
   'onClickSearch': function () {
     ModalDispatcher.dispatch({ 'actionType': 'add-search' });
   },
@@ -28,21 +23,8 @@ let FilterContent = React.createClass({
   },
 
   'render': function () {
-    let filters = this.props.getFilters();
-    let entries = filters.entries();
-    let items = Array(filters.size).fill().map( () => {
-      let [key, filter] = entries.next().value;
-
-      return (
-        <FilterItem
-          key={key}
-          id={key}
-          removeFilter={this.onClickRemoveFilter}
-          searchKey={filter.searchKey}
-          searchValue={filter.searchValue}
-        />
-      );
-    });
+    let filters = [...this.props.getFilters().entries()];
+    let items = filters.map( (e) => (<FilterItem key={e[0]} id={e[0]} removeFilter={this.onClickRemoveFilter} {...e[1]} />) );
 
     return (
       <div className="mod-add mod-item">

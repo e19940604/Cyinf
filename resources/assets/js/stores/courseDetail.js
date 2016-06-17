@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events';
 import CourseDetailDispatcher from '../dispatchers/courseDetail';
+import NotificationDispatcher from '../dispatchers/notification';
 
 let CourseDetailStore = new class extends EventEmitter {
   constructor() {
@@ -10,28 +11,18 @@ let CourseDetailStore = new class extends EventEmitter {
   }
 
   load(id) {
-    console.log(`load course id: ${id}`);
-    this.courseId = id;
-    this.loadRequest = new Promise( (resolve, reject) => {
-      setTimeout( () => {
-        resolve({
-          'course_id': 123,
-          'course_name': 'Nana Mizuki Live Adventure',
-          'course_department': '音樂系',
-          'professor': '水樹奈奈',
-          'place': '工EC 5012',
-          'unit': 10,
-          'add': true,
-          'week_day': ['Mon', 'Tue'],
-          'time': ['67', '8']
-        });
-      }, 1000);
-    });
+    if (typeof id !== 'undefined') this.courseId = id;
 
-    this.loadRequest.then( (data) => {
-      this.course = data;
-      this.emit('load', this.course);
-    });
+    let loadRequest = fetch(`/curriculum/course/${this.courseId}`, { 'credentials': 'include' })
+      .then( (res) => res.json() )
+      .then( (res) => ( res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) ) )
+      .then( (data) => {
+        this.course = data;
+      })
+      .catch( (err) => { console.log(`courseDetail error: ${err}`, err); })
+      .then( () => {
+        this.emit('load', this.course);
+      });
   }
 
   onLoad(callback) {
@@ -46,21 +37,89 @@ let CourseDetailStore = new class extends EventEmitter {
     return this.course;
   }
 
-  create(type) {
-    console.log(`create ${type === 1 ? 'roll call' : 'test'} notify for ${this.courseId}`);
+  createNotify(type) {
+    if (type !== 1 && type !== 2) return;
+
+    let data = new URLSearchParams();
+    data.append('course_id', this.courseId);
+    data.append('type', type);
+    let notifyRequest = fetch('/curriculum/notify', {
+      'method': 'POST',
+      'body': data,
+      'credentials': 'include'
+    })
+      .then( (res) => res.json() )
+      .then( (res) => ( res.status === 'success' ? Promise.resolve() : Promise.reject(res.error) ) )
+      .then( () => {
+        this.emit('create-notify', undefined, type);
+      })
+      .catch( (err) => {
+        console.log(`create notify error: ${err}`, err);
+        this.emit('create-notify', err, type);
+      });
   }
 
-  onCreate(callback) {
-    this.on('create', callback);
+  onCreateNotify(callback) {
+    this.on('create-notify', callback);
+  }
+
+  removeOnCreateNotify(callback) {
+    this.removeListener('create-notify', callback);
+  }
+
+  add() {
+    let data = new URLSearchParams();
+    data.append('course_id', this.courseId);
+
+    let loadRequest = fetch('/curriculum/add', {
+      'method': 'POST',
+      'body': data,
+      'credentials': 'include'
+    })
+      .then( (res) => res.json() )
+      .then( (res) => ( res.status === 'success' ? Promise.resolve() : Promise.reject(res.error) ) )
+      .then( () => {
+        this.load();
+      })
+      .catch( (err) => { console.log(`course detail add error: ${err}`, err); });
+  }
+
+  remove() {
+    let data = new URLSearchParams();
+    data.append('course_id', this.courseId);
+
+    let loadRequest = fetch('/curriculum/remove', {
+      'method': 'POST',
+      'body': data,
+      'credentials': 'include'
+    })
+      .then( (res) => res.json() )
+      .then( (res) => ( res.status === 'success' ? Promise.resolve() : Promise.reject(res.error) ) )
+      .then( () => {
+        this.load();
+      })
+      .catch( (err) => { console.log(`course detail add error: ${err}`, err); });
   }
 };
 
 CourseDetailDispatcher.register( (payload) => {
   switch (payload.actionType) {
   case 'create-notify':
-    CourseDetailStore.create(payload.data);
+    CourseDetailStore.createNotify(payload.data);
+    break;
+
+  case 'add-course':
+    CourseDetailStore.add();
+    break;
+
+  case 'remove-course':
+    CourseDetailStore.remove();
     break;
   };
+});
+
+CourseDetailStore.onCreateNotify( () => {
+  NotificationDispatcher.dispatch({ 'actionType': 'update-notification' });
 });
 
 export default CourseDetailStore;

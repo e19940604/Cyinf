@@ -21,8 +21,8 @@ let ResultItem = React.createClass({
         <td data-title="課程名稱">{this.props.course_name}</td>
         <td data-title="授課教師">{this.props.professor}</td>
         <td data-title="開課系所">{this.props.course_department}</td>
-        <td data-title="上課星期">{this.props.week_day}</td>
-        <td data-title="上課時間">{this.props.time}</td>
+        <td data-title="上課星期">{this.props.week_day.join(',')}</td>
+        <td data-title="上課時間">{this.props.time.join(',')}</td>
         <td data-title="上課地點">{this.props.place}</td>
         <td onClick={this.onClickAction}>
           <span
@@ -68,8 +68,8 @@ let ResultContent = React.createClass({
               <th className="col">課程名稱</th>
               <th className="col">授課教師</th>
               <th className="col">開課系所</th>
-              <th className="col">上課時間</th>
               <th className="col">上課星期</th>
+              <th className="col">上課時間</th>
               <th className="col">上課地點</th>
               <th className="col">加入課程</th>
             </tr>

@@ -5,12 +5,17 @@ let ConfigModalStore = new class extends EventEmitter {
   constructor() {
     super();
     this.active = false;
-    this.switches = [true, true, true];
+    this.switches = {
+      'classNote': true,
+      'rollCallNote': true,
+      'testNote': true
+    };
   }
 
   show() {
     this.active = true;
     this.emit('show');
+    this.load();
   }
 
   onShow(callback) {
@@ -28,29 +33,75 @@ let ConfigModalStore = new class extends EventEmitter {
     this.on('close', callback);
   }
 
-  clickSwitch(switchName) {
-    switch (switchName) {
-    case 'switch1': this.switches[0] = !this.switches[0]; break;
-    case 'switch2': this.switches[1] = !this.switches[1]; break;
-    case 'switch3': this.switches[2] = !this.switches[2]; break;
+  load() {
+    let loadRequest = fetch('/curriculum/config', { 'credentials': 'include' })
+      .then( (res) => res.json() )
+      .then( (res) => res.status === 'success' ? Promise.resolve(res.data) : Promise.reject(res.error) )
+      .then( (data) => {
+        this.update({
+          'classNote': data.class_note,
+          'rollCallNote': data.go_class_note,
+          'testNote': data.test_note
+        });
+      })
+      .catch( (err) => { console.log(`config modal error: ${err}`, err); })
+      .then( () => {
+        this.emit('load', this.switches);
+      });
+  }
+
+  onLoad(callback) {
+    this.on('load', callback);
+  }
+
+  removeOnLoad(callback) {
+    this.removeListener('load', callback);
+  }
+
+  update(data) {
+    Object.assign(this.switches, data);
+    this.emit('update', this.switches);
+  }
+
+  onUpdate(callback) {
+    this.on('update', callback);
+  }
+
+  removeOnUpdate(callback) {
+    this.removeListener('update', callback);
+  }
+
+  send(switchName) {
+    if (this.switches.hasOwnProperty(switchName)) {
+      let data = new URLSearchParams();
+      data.append('type', ['classNote', 'rollCallNote', 'testNote'].indexOf(switchName));
+      if (data.get('type') < 0) throw `unknown switch name: ${switchName}`;
+
+      let sendRequest = fetch('/curriculum/config', { 'method': 'PATCH', 'body': data, 'credentials': 'include' })
+        .then( (res) => res.json() )
+        .then( (data) => (data.status === 'success' ? Promise.resolve() : Promise.reject(data.error)) )
+        .then( () => {
+          let newSwitches = Object.assign({}, this.switches);
+          newSwitches[switchName] = !newSwitches[switchName];
+          this.update(newSwitches);
+        })
+        .catch( (err) => { console.log(`config send server error: ${err}`, err); })
+        .then( () => {
+          this.emit('send', switchName);
+        });
     }
-
-    this.updateServer();
-    this.emit('clickSwitch', this.switches);
   }
 
-  onClickSwitch(callback) {
-    this.on('clickSwitch', callback);
+  onSend(callback) {
+    this.on('send', callback);
   }
 
-  RemoveOnClickSwitch(callback) {
-    this.removeListener('clickSwitch', callback);
+  removeOnSend(callback) {
+    this.removeListener('send', callback);
   }
 
-  updateServer() {
-    setTimeout(() => {
-      console.log(this.switches);
-    }, 1000);
+  clickSwitch(switchName) {
+    if (this.switches.hasOwnProperty(switchName)) this.send(switchName);
   }
 
   getSwitches() {
