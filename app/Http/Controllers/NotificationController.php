@@ -64,17 +64,18 @@ class NotificationController extends CyinfApiController
     }
 
     protected function config( Request $request ){
+        $valid = $this->vaild_data_format( $request->all() , ['type']);
 
-        if( $this->vaild_data_format( $request->all() , ['type']) !== true ){
+        if( $valid !== true ){
             $this->responseData['status'] = "failure";
-            $this->responseData['error'] = "type field format error";
+            $this->responseData['error'] = $valid;
             $this->responseCode = 400;
             return $this->send_response();
         }
 
         $type = $request->get('type');
 
-        if( $type !== "1" && $type !== "2" ) {
+        if( $type !== "1" && $type !== "2" && $type !== "0") {
             $this->responseData['status'] = "failure";
             $this->responseData['error'] = "type field format error";
             $this->responseCode = 400;
