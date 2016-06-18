@@ -15,7 +15,6 @@ let ConfigModalStore = new class extends EventEmitter {
   show() {
     this.active = true;
     this.emit('show');
-    this.load();
   }
 
   onShow(callback) {
