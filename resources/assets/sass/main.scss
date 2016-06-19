@@ -93,13 +93,15 @@ $dark-black: #262022;
 
 /* global */
 a {
-    color: $light-blue;
+    color: $white;
 }
 
 a:hover{
-    color: $blue;
+    color: $white;
     text-decoration: none;
 }
+
+
 
 body{
     font-family: 'Noto Sans TC', sans-serif , Arial , Heltevica;
@@ -218,7 +220,7 @@ body{
     overflow: auto;
 
     .mod-title{
-        width: 80%;
+        width: 90%;
         margin: auto;
     }
 
@@ -304,7 +306,7 @@ body{
             tr{
                 td{
                     width: 100%;
-                    display: block;
+                    display: inline-block;
                     border: 0;
                     font-weight: 300;
                     line-height: 30px;
@@ -635,16 +637,20 @@ footer{
 
         .mod-add-result{
             font-size: 16px;
-            width: 80%;
+            width: 90%;
 
             th,td{
                 padding : 5px;
                 width: 12%;
+                max-width: 12%;
                 text-align: center;
+                display: inline-block; 
+                text-overflow: ellipsis;
             }
 
             th:first-child , td:first-child{
-                width: 28%;
+                width: 25%;
+                max-width: 25%;
             }
 
             thead{
@@ -653,7 +659,7 @@ footer{
                     border-bottom: 2px solid $white;
                     th{
                         width: 12%;
-                        display: inline-table;
+                        display: inline-block; 
                         font-weight: 400;
                     }
                 }
@@ -666,7 +672,7 @@ footer{
 
                 tr{
                     td{
-                        display: inline-table;
+                        display: inline-block;
                         text-align: center;
                         width: 12%;
                         letter-spacing: 3px;

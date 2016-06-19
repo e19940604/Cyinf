@@ -43,10 +43,10 @@ let NotifyPartial = React.createClass({
 
     return (
       <div className="content">
-        <p className="title"><a href="/curriculum/notification">所有通知</a></p>
+        <p className="title">所有通知</p>
 
         {notifications}
-
+        <div id="showNotify"> <a  href="/curriculum/notification">- 查看所有通知 -</a></div> 
       </div>
     );
   }

@@ -96,7 +96,7 @@ let CourseDetailPartial = React.createClass({
                     (this.state.lockCall ? '中...' : '') )
             }
             </span>
-            <span className="btn-list mi-btn" onClick={this.onClickTestNotify}>發送考試通知
+            <span className="btn-list orange-btn" onClick={this.onClickTestNotify}>發送考試通知
             {
               this.state.createTestFail ?
                 '失敗' :

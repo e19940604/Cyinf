@@ -40,6 +40,7 @@ let SideBar = React.createClass({
         <ul>
           <li id="note" >
             <i className="fa fa-bell-o cursor-pointer" onClick={this.onClickNotification}></i>
+            <div id="triangle" style={this.state.showNotification ? {} : {'display': 'none'}} ></div>
             <div className="notify-container" style={this.state.showNotification ? {} : {'display': 'none'}}>
                 <NotifyPartial
                   onUpdate={NotificationStore.onUpdate.bind(NotificationStore)}

@@ -153,10 +153,10 @@ class FacebookController extends CyinfApiController
         $now = \Carbon\Carbon::now();
 
         if( $type === "1" ){
-            $content = "點名通知：（" . $this->weekMap[ $now->format("l") ] . "）" . $now->format("H:i") . " " . $user->real_name . "在" . $course->course_nameCH . "發出了點名通知！" ;
+            $content = "點名通知：（" . $this->weekMap[ $now->format("l") ] . "）" . $now->format("H:i") . " " . $user->real_name . " 在" . $course->course_nameCH . "發出了點名通知！" ;
         }
         else {
-            $content = "考試通知：（" . $this->weekMap[ $now->format("l") ] . "）" . $now->format("H:i") . " " . $user->real_name . "在" . $course->course_nameCH . "發出了考試通知！" ;
+            $content = "考試通知：（" . $this->weekMap[ $now->format("l") ] . "）" . $now->format("H:i") . " " . $user->real_name . " 在" . $course->course_nameCH . "發出了考試通知！" ;
         }
 
         try{

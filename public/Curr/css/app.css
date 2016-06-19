@@ -58,10 +58,10 @@
 
 /* global */
 a {
-  color: #8BB4FF; }
+  color: #FBFBFB; }
 
 a:hover {
-  color: #6993E9;
+  color: #FBFBFB;
   text-decoration: none; }
 
 body {
@@ -159,7 +159,7 @@ body {
   height: 100%;
   overflow: auto; }
   .mod-content .mod-title {
-    width: 80%;
+    width: 90%;
     margin: auto; }
   .mod-content .mod-title-text {
     color: #FBFBFB;
@@ -212,7 +212,7 @@ body {
       background-color: rgba(253, 150, 173, 0.6); }
     .mod-content .mod-add-result tbody tr td {
       width: 100%;
-      display: block;
+      display: inline-block;
       border: 0;
       font-weight: 300;
       line-height: 30px;
@@ -416,24 +416,28 @@ footer {
     line-height: 40px; }
   .mod-content .mod-add-result {
     font-size: 16px;
-    width: 80%; }
+    width: 90%; }
     .mod-content .mod-add-result th, .mod-content .mod-add-result td {
       padding: 5px;
       width: 12%;
-      text-align: center; }
+      max-width: 12%;
+      text-align: center;
+      display: inline-block;
+      text-overflow: ellipsis; }
     .mod-content .mod-add-result th:first-child, .mod-content .mod-add-result td:first-child {
-      width: 28%; }
+      width: 25%;
+      max-width: 25%; }
     .mod-content .mod-add-result thead tr {
       height: 50px;
       border-bottom: 2px solid #FBFBFB; }
       .mod-content .mod-add-result thead tr th {
         width: 12%;
-        display: inline-table;
+        display: inline-block;
         font-weight: 400; }
     .mod-content .mod-add-result tbody tr:nth-child(2) {
       background-color: rgba(253, 150, 173, 0.6); }
     .mod-content .mod-add-result tbody tr td {
-      display: inline-table;
+      display: inline-block;
       text-align: center;
       width: 12%;
       letter-spacing: 3px; }
@@ -479,6 +483,8 @@ footer {
     min-width: 40px;
     width: 40px;
     height: 40px; }
+  #curriculum td a, #curriculum td a:hover, #curriculum td a:visited, #curriculum td a:active {
+    color: #FBFBFB; }
   #curriculum thead {
     z-index: 2; }
     #curriculum thead tr {
@@ -497,8 +503,6 @@ footer {
     overflow: hidden; }
     #curriculum tbody tr td {
       padding: 0 2px 0 2px; }
-    #curriculum tbody tr td:hover {
-      cursor: pointer; }
 
 @media screen and (min-width: 470px) and (max-width: 680px) {
   #curriculum {
@@ -567,8 +571,7 @@ footer {
       border: 1px solid;
       border-radius: 22px;
       color: #FBFBFB;
-      line-height: 26px;
-      cursor: pointer; }
+      line-height: 26px; }
       #sideBtns .sideBtn span {
         font-size: 20px;
         position: absolute;
@@ -691,6 +694,11 @@ footer {
       border: 1px solid #FD96AD; }
     .courseDetail-container .content .pink-btn:hover {
       color: #DC4E6D; }
+    .courseDetail-container .content .orange-btn {
+      background-color: #FD9F5B;
+      border: 1px solid #FD9F5B; }
+    .courseDetail-container .content .orange-btn:hover {
+      color: #EB7338; }
     .courseDetail-container .content .mi-btn {
       background-color: #EAD1C2;
       border: 1px solid #EAD1C2; }
@@ -705,6 +713,15 @@ footer {
       margin-bottom: 20px; } }
 
 /* color */
+#triangle {
+  position: absolute;
+  top: 40px;
+  right: 112px;
+  width: 20px;
+  height: 20px;
+  border: 20px solid;
+  border-color: transparent transparent #FBFBFB transparent; }
+
 .notify-container {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -735,11 +752,63 @@ footer {
     margin-top: 10px;
     margin-bottom: 10px; }
     .notify-container .list .icon {
+      border-radius: 5px;
       max-width: calc( 1vw + 14px);
       margin-bottom: 10px; }
     .notify-container .list .desc {
       width: 80%;
       padding-left: 2vw; }
+  .notify-container #showNotify a {
+    color: white; }
+
+header .notify-container {
+  position: absolute;
+  top: 73px;
+  width: 400px;
+  height: 385px;
+  right: 100px;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  background: #FBFBFB;
+  overflow: auto;
+  padding-top: 20px;
+  padding-left: 30px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 4px; }
+  header .notify-container .content {
+    width: 100%;
+    margin-top: 0; }
+    header .notify-container .content .title {
+      display: none; }
+    header .notify-container .content .date {
+      display: none; }
+  header .notify-container .list {
+    border-bottom: 0;
+    height: 50px;
+    line-height: 20px;
+    line-height: initial;
+    margin-bottom: 40px;
+    font-size: calc( 0.6vw + 6px); }
+    header .notify-container .list .icon {
+      float: left;
+      display: block;
+      max-width: calc( 1vw + 30px); }
+    header .notify-container .list .desc {
+      float: right;
+      display: block;
+      height: 50px;
+      width: 85%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 0;
+      border-bottom: 1px solid #423e3e; }
+  header .notify-container #showNotify {
+    font-size: 14px;
+    width: 100%;
+    text-align: center; }
+  header .notify-container #showNotify a {
+    color: #6993E9; }
 
 @media screen and (max-width: 900px), screen and (max-device-width: 900px) {
   .notify-container .content {
