@@ -193,7 +193,8 @@ class FacebookService
             
             if( Carbon::now()->between( Carbon::createFromFormat("H:i" , $courseStartTime ) , Carbon::createFromFormat("H:i" , $courseLatestTime )) ){
                 foreach( $students as $student ){
-                    $notification = $this->notificationRepository->create( $student->stu_id , $sender->stu_id , $course->id , $content , $type );
+                    $sender_info = (empty($sender->stu_id)) ? 'Cyinf' : $sender->stu_id;
+                    $notification = $this->notificationRepository->create( $student->stu_id , $sender_info , $course->id , $content , $type );
                     if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
                         $this->sendFBNotification($student, $notification);
                     }
@@ -251,21 +252,21 @@ class FacebookService
         $count = 0;
 
         $hour2course = [
-            7  => 'A',
-            8  => '1',
-            9  => '2',
-            10 => '3',
-            11 => '4',
-            12 => 'B',
-            13 => '5',
-            14 => '6',
-            15 => '7',
-            16 => '8',
-            17 => '9',
-            18 => 'C',
-            19 => 'D',
-            20 => 'E',
-            21 => 'F'
+            6  => 'A',
+            7  => '1',
+            8  => '2',
+            9  => '3',
+            10 => '4',
+            11 => 'B',
+            12 => '5',
+            13 => '6',
+            14 => '7',
+            15 => '8',
+            16 => '9',
+            17 => 'C',
+            18 => 'D',
+            19 => 'E',
+            20 => 'F'
         ];
 
         $week2course = [
@@ -290,6 +291,7 @@ class FacebookService
             }
             catch(\Exception $e){
                 \Log::warning("[sendCourseNotification Fail] ".$content);
+                \Log::warning($e->getMessage());
             }
         }
 
