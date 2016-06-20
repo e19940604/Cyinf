@@ -55,7 +55,7 @@ class CourseSearchByRule implements CourseSearchInterface {
 	    foreach ($rule as $key => $value_array) {
 	    	$column = $this->rule_mapping[$key];
 	    	$this->course = $this->course->where(function ($query) use($column, $value_array){
-	    		if($column == 'time1' || $column == 'time2' || $column == 'place'){
+	    		if($column == 'course_department' || $column == 'time1' || $column == 'time2' || $column == 'place'){
 	    			foreach ($value_array as $value) {
 	    				$query->orWhere($column, 'like', '%'.$value.'%');
 	    			}
