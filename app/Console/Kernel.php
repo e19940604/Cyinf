@@ -38,7 +38,7 @@ class Kernel extends ConsoleKernel
         })
         ->everyThirtyMinutes()
         ->when(function () {
-            return date('H') >= 7 && date('H') <= 21;
+            return date('H') >= 7 && date('H') <= 21 && date('i') == 30;
         });
     }
 }
