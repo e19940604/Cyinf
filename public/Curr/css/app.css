@@ -631,13 +631,10 @@ footer {
 
 /* color */
 .courseDetail-container {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center; }
   .courseDetail-container .content {
@@ -672,7 +669,7 @@ footer {
       width: 100%; }
     .courseDetail-container .content .btn-list {
       display: inline-block;
-      width: 15%;
+      width: 20%;
       height: 40px;
       line-height: 40px;
       margin-right: 5%;
@@ -723,13 +720,10 @@ footer {
   border-color: transparent transparent #FBFBFB transparent; }
 
 .notify-container {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center; }
   .notify-container .content {
@@ -767,7 +761,6 @@ header .notify-container {
   width: 400px;
   height: 385px;
   right: 100px;
-  -webkit-align-items: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
   background: #FBFBFB;
