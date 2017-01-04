@@ -20,7 +20,7 @@ let AddModal = React.createClass({
           <div className="mod-title">
             {
               this.props.mode === 'result' ?
-                <div className="cursor-pointer" style={{'float': 'left', 'fontSize': '25px', 'margin': '20px', 'lineHeight': '1.1'}} onClick={this.onClickReturn}>&lt;=</div> :
+                <div className="cursor-pointer" style={{'float': 'left', 'fontSize': '30px', 'margin': '20px', 'lineHeight': '1.1', 'color': '#fbfbfb' }} onClick={this.onClickReturn}><i className="fa fa-chevron-circle-left" aria-hidden="true"></i></div> :
                 ''
             }
             <h4 className="mod-title-text">搜尋課程</h4>

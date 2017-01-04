@@ -91,7 +91,7 @@ let Header = React.createClass({
   'render': function () {
     return (
       <div id="hd-container" >
-        <div id="title-wrap"><a href="/curriculum"><img id="logo" src="/curr/img/icon_c.svg" /><h3>urriculum</h3></a></div>
+        <div id="title-wrap"><a href="/curriculum"><img id="logo" src="/Curr/img/icon_c.svg" /><h3>urriculum</h3></a></div>
         <SideBar {...this.state} />
       </div>
     );

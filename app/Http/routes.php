@@ -94,6 +94,8 @@ Route::group(['middleware' => ['web']], function () {
 /* Cyinf Curriculum */
 Route::group(['middleware' => ['web']], function () {
 
+    Route::post('/curriculum/login' , 'UserController@curriculumLogin');
+
     Route::get('/curriculum' , 'CurriculumController@index');
     Route::get('/curriculum/courseDetail/{course_id}' , 'CurriculumController@courseDetail');
     Route::get('/curriculum/notification', 'CurriculumController@notify');

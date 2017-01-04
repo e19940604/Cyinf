@@ -21,14 +21,15 @@ class UserService
 		$rule = [
 			'stu_id'     => 'regex:/[BMD][0-9]{9}/',
 			'email'      => 'email',
-			'password'   => 'min:4',
+			'password'   => 'min:3',
 			'password_check'  => 'same:password',
 			'real_name'  => 'between:1,100',
 			'nick_name'  => 'between:1,100',
 			'grade'      => 'integer|between:105,150',
 			'department' => 'integer|between:0,60',
 	        'gender'     => 'in:男,女',
-	        'auth'       => 'integer|between:0,2'
+	        'auth'       => 'integer|between:0,2',
+            'device_token' => ''
 		];
 
 		foreach ($required as $value) {
@@ -47,14 +48,14 @@ class UserService
 
 	public function userLogin($userData){
 
-		$required = ['stu_id', 'password'];
+		$required = ['stu_id', 'password', 'device_token'];
 
 		if($this->vaildUserDataFormat($userData, $required) !== true)
-			return false;
+			return "parameter lost or not vaild";
 
 		$user = $this->userRepository->getUserWithCheckPwd($userData['stu_id'], $userData['password']);
 		
-		if($user == NULL) return false;
+		if($user == NULL) return "student id or password fail";
 
 		Auth::login($user);
 

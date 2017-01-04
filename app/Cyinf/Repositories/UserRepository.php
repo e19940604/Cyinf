@@ -30,6 +30,7 @@ class UserRepository
 	}
 
 	public function updateUser(User $user, $userData){
+	    dd( $user , $userData );
 		return $user->update($userData);
 	}
 

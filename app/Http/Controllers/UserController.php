@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cyinf\Repositories\UserRepository;
 use Cyinf\Services\PinService;
 use Illuminate\Http\Request;
 
@@ -13,12 +14,14 @@ class UserController extends CyinfApiController
 {
 	protected $userService;
     protected $pinService;
+    protected $userRepository;
 
-    public function __construct(UserService $userService , PinService $pinService )
+    public function __construct(UserService $userService , PinService $pinService , UserRepository $userRepository)
     {
         parent::__construct();
         $this->userService = $userService;
         $this->pinService = $pinService;
+        $this->userRepository = $userRepository;
     }
 
     public function login(Request $request){
@@ -118,4 +121,23 @@ class UserController extends CyinfApiController
         return $this->send_response();
     }
 
+    public function curriculumLogin( Request $request ){
+
+        $response = [];
+
+        if( ($result = $this->userService->userLogin($request->all())) === true ){
+            $user = \Auth::user();
+            $user->device_token = $request->get('device_token');
+            $user->save();
+            $response['status'] = "success";
+            $response['url'] = \Cache::get('loginRedirect' , "http://cyinf.club/curriculum");
+            return response()->json( $response );
+        }
+        else{
+            $response['status'] = "fail";
+            $response['error'] = $result;
+            return response()->json($response);
+        }
+
+    }
 }
