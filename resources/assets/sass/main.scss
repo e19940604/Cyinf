@@ -184,6 +184,7 @@ body{
     position: fixed;
     margin-top: 10px;
     margin-left: 10px;
+    top: 46px;
     width: calc(100vw - 20px);
     /* 46(header) + 10(border) + 10(border) + 41(footer) = */
     height: calc(100vh - 107px);

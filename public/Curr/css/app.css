@@ -129,6 +129,7 @@ body {
   position: fixed;
   margin-top: 10px;
   margin-left: 10px;
+  top: 46px;
   width: calc(100vw - 20px);
   /* 46(header) + 10(border) + 10(border) + 41(footer) = */
   height: calc(100vh - 107px);
@@ -631,10 +632,13 @@ footer {
 
 /* color */
 .courseDetail-container {
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center; }
   .courseDetail-container .content {
@@ -720,10 +724,13 @@ footer {
   border-color: transparent transparent #FBFBFB transparent; }
 
 .notify-container {
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center; }
   .notify-container .content {
@@ -761,6 +768,7 @@ header .notify-container {
   width: 400px;
   height: 385px;
   right: 100px;
+  -webkit-align-items: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
   background: #FBFBFB;

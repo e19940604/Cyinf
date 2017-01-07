@@ -20,7 +20,13 @@ $(function () {
         if (sideMenuStatus === true)
             sideMenuHide();
         blackBGHide();
-    })
+    });
+
+    sideMenu.on('click', function(){
+        if(sideMenuStatus === true )
+            sideMenuHide();
+        blackBGHide();
+    });
 
     function sideMenuHide() {
         sideMenu.css('right', '-320px');
