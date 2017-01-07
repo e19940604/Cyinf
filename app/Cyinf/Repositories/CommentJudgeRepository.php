@@ -5,11 +5,11 @@ namespace Cyinf\Repositories;
 use Cyinf\CommentJudge;
 use Illuminate\Support\Facades\Auth;
 
-class CommentjudgeRepository {
+class CommentJudgeRepository {
 
 	protected $commentjudge;
 
-	function __construct(Commentjudge $commentjudge){
+	function __construct(CommentJudge $commentjudge){
 		$this->commentjudge = $commentjudge;
 	}
 
