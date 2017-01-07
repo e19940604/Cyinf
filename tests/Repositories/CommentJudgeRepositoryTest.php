@@ -13,7 +13,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 use Cyinf\User;
-use Cyinf\Repositories\CommentjudgeRepository;
+use Cyinf\Repositories\CommentJudgeRepository;
 use Cyinf\Comment;
 
 class CommentJudgeRepositoryTest extends TestCase
@@ -44,7 +44,7 @@ class CommentJudgeRepositoryTest extends TestCase
         parent::setUp();
         $this->init();
         $this->seedData();
-        $this->repository = $this->app->make( \Cyinf\Repositories\CommentjudgeRepository::class);
+        $this->repository = $this->app->make( \Cyinf\Repositories\CommentJudgeRepository::class);
 
         $this->user = factory( User::class , 1 )->create();
         auth()->login( $this->user );
