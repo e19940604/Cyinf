@@ -12,6 +12,7 @@ session_start();
 use Carbon\Carbon;
 use Cyinf\Repositories\CourseRepository;
 use Cyinf\Repositories\NotificationRepository;
+use Davibennun\LaravelPushNotification\Facades\PushNotification;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\FacebookApp;
@@ -197,6 +198,9 @@ class FacebookService
                     $notification = $this->notificationRepository->create( $student->stu_id , $sender_info , $course->id , $content , $type );
                     if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
                         $this->sendFBNotification($student, $notification);
+                        PushNotification::app('curriculumAndroid')
+                            ->to( $student->device_token )
+                            ->send( $content );
                     }
                 }
             }
