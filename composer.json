@@ -12,7 +12,8 @@
         "predis/predis": "^1.0",
         "yangqi/htmldom": "dev-master",
         "facebook/php-sdk-v4": "^5.1",
-        "barryvdh/laravel-debugbar": "^2.2"
+        "barryvdh/laravel-debugbar": "^2.2",
+        "davibennun/laravel-push-notification": "dev-laravel5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

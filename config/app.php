@@ -158,6 +158,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yangqi\Htmldom\HtmldomServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class,
     ],
 
     /*
@@ -205,6 +206,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Htmldom'   =>  Yangqi\Htmldom\Htmldom::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'PushNotification' => Davibennun\LaravelPushNotification\Facades\PushNotification::class,
     ],
 
 ];

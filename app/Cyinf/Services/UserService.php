@@ -48,7 +48,7 @@ class UserService
 
 	public function userLogin($userData){
 
-		$required = ['stu_id', 'password', 'device_token'];
+		$required = ['stu_id', 'password'];
 
 		if($this->vaildUserDataFormat($userData, $required) !== true)
 			return "parameter lost or not vaild";

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Cyinf\Repositories\CourseRepository;
 use Cyinf\Repositories\NotificationRepository;
 use Cyinf\Services\NotificationService;
+use Davibennun\LaravelPushNotification\Facades\PushNotification;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
