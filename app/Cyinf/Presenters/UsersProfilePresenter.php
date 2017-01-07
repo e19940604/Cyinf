@@ -6,7 +6,7 @@ use Cyinf\User;
 use Cyinf\Repositories\CommentRepository;
 use Cyinf\Repositories\CourseRepository;
 use Cyinf\Repositories\FavoriteRepository;
-use Cyinf\Repositories\CommentjudgeRepository;
+use Cyinf\Repositories\CommentJudgeRepository;
 use Cyinf\Repositories\RecommendationRepository;
 
 class UsersProfilePresenter
@@ -25,7 +25,7 @@ class UsersProfilePresenter
 		CourseRepository         $courseRepository, 
 		FavoriteRepository       $favoriteRepository, 
 		CoursePresenter          $coursePresenter, 
-		CommentjudgeRepository   $commentjudgeRepository,
+		CommentJudgeRepository   $commentjudgeRepository,
 		RecommendationRepository $recommendationRepository
 	){
 		if(\Auth::check()){
