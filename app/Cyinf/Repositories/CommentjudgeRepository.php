@@ -2,7 +2,7 @@
 
 namespace Cyinf\Repositories;
 
-use Cyinf\Commentjudge;
+use Cyinf\CommentJudge;
 use Illuminate\Support\Facades\Auth;
 
 class CommentjudgeRepository {
