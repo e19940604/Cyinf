@@ -240,6 +240,7 @@ class FacebookService
             // When validation fails or other local issues
             Log::error(  'Facebook SDK returned an error: ' . $e->getMessage() );
         }
+	Log::info( 'Send Notification success \"' . $student->real_name . '\"' );
         
     }
 
