@@ -33,7 +33,8 @@ let ResultItem = React.createClass({
             }
             aria-hidden="true"
           ></span>
-          <button className="m-only add-result-btn">刪除課程</button>
+          <button style={this.state.add    ? {} : {display: "none"}} className="m-only add-result-btn">新增課程</button>
+          <button style={this.state.remove ? {} : {display: "none"}} className="m-only add-result-btn">刪除課程</button>
         </td>
       </tr>
     );

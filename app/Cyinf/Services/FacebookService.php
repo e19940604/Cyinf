@@ -12,13 +12,16 @@ session_start();
 use Carbon\Carbon;
 use Cyinf\Repositories\CourseRepository;
 use Cyinf\Repositories\NotificationRepository;
-use Davibennun\LaravelPushNotification\Facades\PushNotification;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\FacebookApp;
 use Facebook\Facebook;
 use Facebook\FacebookRequest;
 use Illuminate\Support\Facades\Log;
+use LaravelFCM\Facades\FCM;
+use LaravelFCM\Message\OptionsBuilder;
+use LaravelFCM\Message\PayloadDataBuilder;
+use LaravelFCM\Message\PayloadNotificationBuilder;
 
 class FacebookService
 {
@@ -178,7 +181,7 @@ class FacebookService
         }
     }
     
-    public function sendNotification( $sender  , $course , $content , $type ){
+    public function sendNotification( $sender  ,$title, $course , $content , $type ){
         
         $students = $course->students;
 
@@ -187,30 +190,48 @@ class FacebookService
         $courseDay = explode(",", $course->time1 );
         $courseTime = explode(",", $course->time2 );
 
-        if( ($index = array_search( $todayWeek , $courseDay ) )!== false  ){
-            $courseTime = $courseTime[$index];
-            $courseStartTime = $this->course_start_map[ min( str_split( $courseTime ))];
-            $courseLatestTime = $this->course_end_map[ max( str_split( $courseTime ) ) ];
+        //if( ($index = array_search( $todayWeek , $courseDay ) )!== false  ){
+            //$courseTime = $courseTime[$index];
+            //$courseStartTime = $this->course_start_map[ min( str_split( $courseTime ))];
+            //$courseLatestTime = $this->course_end_map[ max( str_split( $courseTime ) ) ];
             
-            if( Carbon::now()->between( Carbon::createFromFormat("H:i" , $courseStartTime ) , Carbon::createFromFormat("H:i" , $courseLatestTime )) ){
+            //if( Carbon::now()->between( Carbon::createFromFormat("H:i" , $courseStartTime ) , Carbon::createFromFormat("H:i" , $courseLatestTime )) ){
                 foreach( $students as $student ){
                     $sender_info = (empty($sender->stu_id)) ? 'Cyinf' : $sender->stu_id;
                     $notification = $this->notificationRepository->create( $student->stu_id , $sender_info , $course->id , $content , $type );
-                    if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
+                    /*if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
                         $this->sendFBNotification($student, $notification);
-                        PushNotification::app('curriculumAndroid')
-                            ->to( $student->device_token )
-                            ->send( $content );
+                    }*/
+
+                    if( $student->device_token && $this->checkConfig( $student , $type ) ){
+                        $optionBuiler = new OptionsBuilder();
+                        $optionBuiler->setTimeToLive(60*20);
+
+                        $notificationBuilder = new PayloadNotificationBuilder( $title );
+                        $notificationBuilder->setBody( $content )
+                            ->setIcon('@drawable/curriculum')
+                            ->setSound('default');
+
+                        $dataBuilder = new PayloadDataBuilder();
+                        $dataBuilder->addData(['course_id' => $course->id ]);
+
+                        $option = $optionBuiler->build();
+                        $notification = $notificationBuilder->build();
+                        $data = $dataBuilder->build();
+
+                        $token = $student->device_token;
+
+                        $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
                     }
                 }
-            }
+            /*}
             else{
                 throw new \Exception("目前非上課時間");
-            }
-        }
+            }*/
+        /*}
         else{
             throw new \Exception("目前非上課時間");
-        }
+        }*/
     }
 
     private function checkConfig( $student , $type ){

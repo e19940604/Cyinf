@@ -131,6 +131,7 @@ class CurriculumApiController extends Controller
         $result = [];
         $result['status'] = 'failure';
         $statusCode = 500;
+        $user = \Auth::user();
 
         if(!$request->has('course_id')){
             $statusCode = 401;
@@ -142,9 +143,12 @@ class CurriculumApiController extends Controller
             if(empty($course->time1)){
                 $statusCode = 403;
                 $result['error'] = 'The course is not one of current semester.';
+            }else if( $user == null ){
+                $statusCode = 403;
+                $result['error'] = 'no login';
             }
             else{
-                $r = $this->curriculumRepository->create(\Auth::user()->stu_id, $course);
+                $r = $this->curriculumRepository->create( $user->stu_id, $course);
 
                 if($r === false){
                     $statusCode = 500;
@@ -169,13 +173,17 @@ class CurriculumApiController extends Controller
         $result = [];
         $result['status'] = 'failure';
         $statusCode = 500;
+        $user = \Auth::user();
 
         if(!$request->has('course_id')){
             $statusCode = 401;
             $result['error'] = 'course id field must need.';
+        } else if( $user == null ){
+            $statusCode = 403;
+            $result['error'] = 'no login';
         }
         else{
-            $r = $this->curriculumRepository->remove(\Auth::user()->stu_id, $request->get('course_id'));
+            $r = $this->curriculumRepository->remove( $user->stu_id, $request->get('course_id'));
 
             if($r !== true){
                 $statusCode = 500;
