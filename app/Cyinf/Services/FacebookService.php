@@ -93,7 +93,7 @@ class FacebookService
      * @throws string
      */
     public function getPictureById($fb_user_id , $type ){
-        $imageUrl = "/curr/img/icon_c.svg";
+        $imageUrl = "/Curr/img/icon_c.svg";
         /*$req = $this->fb->request(
             'GET' ,
             '/' . $fb_user_id . '/picture',
