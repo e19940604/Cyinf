@@ -26,7 +26,7 @@ class UserController extends CyinfApiController
 
     public function login(Request $request){
         $response = [];
-        
+
     	if($this->userService->userLogin($request->all())){
             $response['status'] = "success";
             $response['url'] = \Cache::get('loginRedirect' , "/");
@@ -138,6 +138,24 @@ class UserController extends CyinfApiController
             $response['error'] = $result;
             return response()->json($response);
         }
+
+    }
+
+    public function refreshAndroidToken( Request $request ){
+        $user = \Auth::user();
+
+        $response = [];
+
+        if( $request->has('device_token') ){
+            $user->device_token = $request->get('device_token');
+            $user->save();
+            $response['status'] = "success";
+        } else {
+            $response['status'] = "fail";
+            $response['error'] = "empty or invalid value of device_token";
+        }
+
+        return response()->json( $response );
 
     }
 }

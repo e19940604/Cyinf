@@ -209,7 +209,6 @@ class FacebookService
 
                         $notificationBuilder = new PayloadNotificationBuilder( $title );
                         $notificationBuilder->setBody( $content )
-                            ->setIcon('@drawable/curriculum')
                             ->setSound('default');
 
                         $dataBuilder = new PayloadDataBuilder();
