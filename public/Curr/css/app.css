@@ -664,6 +664,7 @@ footer {
     width: 70%;
     height: auto;
     margin-top: 50px;
+    margin-bottom: 30px;
     color: #423e3e;
     overflow: auto; }
     .courseDetail-container .content .title {
@@ -833,7 +834,10 @@ header .notify-container {
     color: #6993E9; }
 
 @media screen and (max-width: 900px), screen and (max-device-width: 900px) {
-  .notify-container .content {
-    width: 90%; } }
+  #triangle {
+    display: none; }
+  header .notify-container {
+    top: 46px;
+    right: 0; } }
 
 /*# sourceMappingURL=app.css.map */

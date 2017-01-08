@@ -143,9 +143,38 @@ header .notify-container {
 }
 
 @media screen and (max-width: 900px),  screen and (max-device-width: 900px){
-  .notify-container{
+
+  #triangle{
+    display:none;
+  }
+
+  header .notify-container{
+    top: 46px;
+    right: 0;
+
     .content {
-      width: 90%;
+      .title{
+      }
+
+      .date{
+      }
+
+    }
+
+    .list{
+
+      .icon{
+
+      }
+      .desc{
+      }
+    }
+
+
+    #showNotify{
+    }
+
+    #showNotify a{
     }
   }
 }
