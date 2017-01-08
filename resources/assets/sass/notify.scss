@@ -32,7 +32,8 @@ $dark-black: #262022;
 	align-items: center;
 
 	.content {
-		width: 70%;
+		width: 80%;
+      font-size: 12px;
 		height: auto;
 		margin-top: 50px;
 		color: $light-black;
@@ -47,10 +48,11 @@ $dark-black: #262022;
 
 	.list {
 		width: 100%;
-		font-size: calc( 0.8vw + 6px );
+		font-size: 12px;
+        position: relative;
 		display: block;
-		height: 30px;
-		line-height: 30px;
+		height: 40px;
+		
 		border-bottom: 1px solid $light-black;
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -61,9 +63,15 @@ $dark-black: #262022;
 			margin-bottom: 10px;
 		}
 
+        .descIcon{
+
+          float:left;
+        }
+
 		.desc {
 			width: 80%;
 			padding-left: 2vw;
+          float:left;
 		}
 
 	}
@@ -151,7 +159,7 @@ header .notify-container {
   header .notify-container{
     top: 46px;
     right: 0;
-
+    width: 320px;
     .content {
       .title{
       }
@@ -162,7 +170,7 @@ header .notify-container {
     }
 
     .list{
-
+      font-size: 12px;
       .icon{
 
       }

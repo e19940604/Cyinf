@@ -3,10 +3,12 @@ import React from 'react';
 let NotifyItem = React.createClass({
   'render': function () {
     return (
-      <span className="list">
-        <img src={this.props.imageUrl} className="icon" />
-        <span className="desc">{this.props.content}</span>
-      </span>
+      <div className="list">
+        <div className="descIcon">
+          <img src={this.props.imageUrl} className="icon" />
+        </div>
+        <div className="desc">{this.props.content}</div>
+      </div>
     );
   }
 });

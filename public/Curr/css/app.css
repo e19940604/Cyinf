@@ -756,7 +756,8 @@ footer {
   -ms-flex-align: center;
   align-items: center; }
   .notify-container .content {
-    width: 70%;
+    width: 80%;
+    font-size: 12px;
     height: auto;
     margin-top: 50px;
     color: #423e3e; }
@@ -767,10 +768,10 @@ footer {
     margin-bottom: 24px; }
   .notify-container .list {
     width: 100%;
-    font-size: calc( 0.8vw + 6px);
+    font-size: 12px;
+    position: relative;
     display: block;
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
     border-bottom: 1px solid #423e3e;
     margin-top: 10px;
     margin-bottom: 10px; }
@@ -778,9 +779,12 @@ footer {
       border-radius: 5px;
       max-width: calc( 1vw + 14px);
       margin-bottom: 10px; }
+    .notify-container .list .descIcon {
+      float: left; }
     .notify-container .list .desc {
       width: 80%;
-      padding-left: 2vw; }
+      padding-left: 2vw;
+      float: left; }
   .notify-container #showNotify a {
     color: white; }
 
@@ -838,6 +842,9 @@ header .notify-container {
     display: none; }
   header .notify-container {
     top: 46px;
-    right: 0; } }
+    right: 0;
+    width: 320px; }
+    header .notify-container .list {
+      font-size: 12px; } }
 
 /*# sourceMappingURL=app.css.map */
