@@ -12,7 +12,10 @@
         td, th{
             width: $tdWidth;
             height: $tdHeight;
-            font-size: $fontSize
+            font-size: $fontSize;
+            text-overflow: initial;
+            white-space: normal;
+            max-width: $tdWidth;
         }
 
         thead{
@@ -68,6 +71,10 @@
         min-width: 40px;
         width: 40px;
         height: 40px;
+        overflow:hidden;
+        text-overflow: clip;
+        white-space: nowrap;
+        max-width: 40px;
     }
 
     td a, td a:hover, td a:visited, td a:active {

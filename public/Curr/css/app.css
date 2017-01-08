@@ -303,7 +303,7 @@ header {
           line-height: 40px; }
 
 footer {
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0;
   background-color: #423e3e;
@@ -483,7 +483,11 @@ footer {
     font-size: 12px;
     min-width: 40px;
     width: 40px;
-    height: 40px; }
+    height: 40px;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    max-width: 40px; }
   #curriculum td a, #curriculum td a:hover, #curriculum td a:visited, #curriculum td a:active {
     color: #FBFBFB; }
   #curriculum thead {
@@ -516,7 +520,10 @@ footer {
     #curriculum td, #curriculum th {
       width: 60px;
       height: 40px;
-      font-size: 12px; }
+      font-size: 12px;
+      text-overflow: initial;
+      white-space: normal;
+      max-width: 60px; }
     #curriculum thead tr th {
       height: 30px; } }
 
@@ -531,7 +538,10 @@ footer {
     #curriculum td, #curriculum th {
       width: 90px;
       height: 40px;
-      font-size: 14px; }
+      font-size: 14px;
+      text-overflow: initial;
+      white-space: normal;
+      max-width: 90px; }
     #curriculum thead tr th {
       height: 30px; } }
 
@@ -546,7 +556,10 @@ footer {
     #curriculum td, #curriculum th {
       width: 120px;
       height: 60px;
-      font-size: 16px; }
+      font-size: 16px;
+      text-overflow: initial;
+      white-space: normal;
+      max-width: 120px; }
     #curriculum thead tr th {
       height: 35px; }
   #curriculum {
@@ -603,7 +616,10 @@ footer {
     #curriculum td, #curriculum th {
       width: 150px;
       height: 90px;
-      font-size: 20px; }
+      font-size: 20px;
+      text-overflow: initial;
+      white-space: normal;
+      max-width: 150px; }
     #curriculum thead tr th {
       height: 45px; }
   #curriculum #table-scroll {
@@ -622,7 +638,10 @@ footer {
     #curriculum td, #curriculum th {
       width: 165px;
       height: 90px;
-      font-size: 20px; }
+      font-size: 20px;
+      text-overflow: initial;
+      white-space: normal;
+      max-width: 165px; }
     #curriculum thead tr th {
       height: 45px; }
   #curriculum #table-scroll {
@@ -645,7 +664,8 @@ footer {
     width: 70%;
     height: auto;
     margin-top: 50px;
-    color: #423e3e; }
+    color: #423e3e;
+    overflow: auto; }
     .courseDetail-container .content .title {
       font-size: 24px;
       padding-bottom: 8px;
@@ -708,7 +728,8 @@ footer {
 
 @media screen and (max-width: 900px), screen and (max-device-width: 900px) {
   .courseDetail-container .content {
-    width: 90%; }
+    width: 90%;
+    height: auto; }
     .courseDetail-container .content .btn-list {
       width: 100%;
       margin-bottom: 20px; } }

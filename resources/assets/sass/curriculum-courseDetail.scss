@@ -27,6 +27,7 @@ $dark-black: #262022;
   	height: auto;
   	margin-top: 50px;
     color: $light-black;
+    overflow: auto;
 
   	.title {
   		font-size: 24px;
@@ -124,6 +125,7 @@ $dark-black: #262022;
   .courseDetail-container{ 
     .content {
       width: 90%;
+      height: auto;
       
       .btn-list {
         width: 100%;
