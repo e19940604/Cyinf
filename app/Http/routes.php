@@ -112,7 +112,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/curriculum/notify', 'FacebookController@notify');
 		Route::patch('/curriculum/config', 'NotificationController@config' );
 		Route::patch('/curriculum/readAll', 'NotificationController@readAll');
-        Route::patch('/curriculum/refreshAndroidToken', 'UserController@refreshAndroidToken');
+        Route::post('/curriculum/refreshAndroidToken', 'UserController@refreshAndroidToken');
 
 		/* facebook api */
 		Route::get('/curriculum/link-facebook', 'FacebookController@login');
