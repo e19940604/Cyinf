@@ -760,7 +760,8 @@ footer {
     font-size: 12px;
     height: auto;
     margin-top: 50px;
-    color: #423e3e; }
+    color: #423e3e;
+    margin-bottom: 40px; }
   .notify-container .title {
     font-size: 24px;
     padding-bottom: 8px;
