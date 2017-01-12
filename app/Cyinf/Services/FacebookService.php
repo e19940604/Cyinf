@@ -192,16 +192,25 @@ class FacebookService
 
         if( ($index = array_search( $todayWeek , $courseDay ) )!== false  ){
             $courseTime = $courseTime[$index];
-            $courseStartTime = $this->course_start_map[ min( str_split( $courseTime ))];
-            $courseLatestTime = $this->course_end_map[ max( str_split( $courseTime ) ) ];
-            
+            $str_split = str_split( $courseTime );
+            if( $str_split == ['B','5'] ){
+                $courseStartTime = $this->course_start_map[ 'B'];
+                $courseLatestTime = $this->course_end_map[ '5' ];
+            } else if( in_array( ['A','B'] , $str_split ) ){
+                $courseStartTime = $this->course_start_map[ 'A'];
+                $courseLatestTime = $this->course_end_map[ 'B' ];
+            } else {
+                $courseStartTime = $this->course_start_map[ min( $str_split)];
+                $courseLatestTime = $this->course_end_map[ max( $str_split ) ];
+            }
+            \Log::info( $courseStartTime . '-' . $courseLatestTime);
             if( Carbon::now()->between( Carbon::createFromFormat("H:i" , $courseStartTime ) , Carbon::createFromFormat("H:i" , $courseLatestTime )) ){
                 foreach( $students as $student ){
                     $sender_info = (empty($sender->stu_id)) ? 'Cyinf' : $sender->stu_id;
                     $notification = $this->notificationRepository->create( $student->stu_id , $sender_info , $course->id , $content , $type );
-                    if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
+                    /*if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
                         $this->sendFBNotification($student, $notification);
-                    }
+                    }*/
 
                     if( $student->device_token && $this->checkConfig( $student , $type ) ){
                         $optionBuiler = new OptionsBuilder();
