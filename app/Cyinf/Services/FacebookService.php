@@ -190,18 +190,18 @@ class FacebookService
         $courseDay = explode(",", $course->time1 );
         $courseTime = explode(",", $course->time2 );
 
-        //if( ($index = array_search( $todayWeek , $courseDay ) )!== false  ){
-            //$courseTime = $courseTime[$index];
-            //$courseStartTime = $this->course_start_map[ min( str_split( $courseTime ))];
-            //$courseLatestTime = $this->course_end_map[ max( str_split( $courseTime ) ) ];
+        if( ($index = array_search( $todayWeek , $courseDay ) )!== false  ){
+            $courseTime = $courseTime[$index];
+            $courseStartTime = $this->course_start_map[ min( str_split( $courseTime ))];
+            $courseLatestTime = $this->course_end_map[ max( str_split( $courseTime ) ) ];
             
-            //if( Carbon::now()->between( Carbon::createFromFormat("H:i" , $courseStartTime ) , Carbon::createFromFormat("H:i" , $courseLatestTime )) ){
+            if( Carbon::now()->between( Carbon::createFromFormat("H:i" , $courseStartTime ) , Carbon::createFromFormat("H:i" , $courseLatestTime )) ){
                 foreach( $students as $student ){
                     $sender_info = (empty($sender->stu_id)) ? 'Cyinf' : $sender->stu_id;
                     $notification = $this->notificationRepository->create( $student->stu_id , $sender_info , $course->id , $content , $type );
-                    /*if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
+                    if( $student->FB_conn  && $this->checkConfig( $student , $type ) ) {
                         $this->sendFBNotification($student, $notification);
-                    }*/
+                    }
 
                     if( $student->device_token && $this->checkConfig( $student , $type ) ){
                         $optionBuiler = new OptionsBuilder();
@@ -223,14 +223,14 @@ class FacebookService
                         $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
                     }
                 }
-            /*}
+            }
             else{
                 throw new \Exception("目前非上課時間");
-            }*/
-        /*}
+            }
+        }
         else{
             throw new \Exception("目前非上課時間");
-        }*/
+        }
     }
 
     private function checkConfig( $student , $type ){
